@@ -11,11 +11,15 @@ public class ConversationManager
     public Coroutine process = null;
     public bool isRunning => process != null;
 
+    private LogicalLineManager logicalLineManager;
+
     public TextArchitect architect = null;
     public bool userPrompt = false;
     public ConversationManager(TextArchitect architect){
         this.architect = architect;
         dialogSystem.onUserPromptNext += OnUserPromptNext;
+
+        logicalLineManager = new LogicalLineManager();
     }
 
     public void OnUserPromptNext(){
@@ -25,7 +29,7 @@ public class ConversationManager
     public Coroutine StartConversation(List<string> conversation){
         StopConversation();
 
-        process = dialogSystem.StartCoroutine(RunningCoroutine(conversation));
+        process = dialogSystem.StartCoroutine(RunningConversation(conversation));
 
         return process;
     }
@@ -38,28 +42,30 @@ public class ConversationManager
         process = null;
     }
 
-    public IEnumerator RunningCoroutine(List<string> conversation){
+    public IEnumerator RunningConversation(List<string> conversation){
         for(int i = 0; i < conversation.Count; i++){
             if(string.IsNullOrWhiteSpace(conversation[i])) //Passer les lignes vides
                 continue;
 
             DialogLine line = DialogParser.Parse(conversation[i]);
 
-            if(line.hasDialog){ //Afficher le dialogue
-                yield return LineRunDialog(line);
+            if(logicalLineManager.TryGetLogic(line, out Coroutine logic)){
+                yield return logic;
+            } else {
+                if(line.hasDialog) //Afficher le dialogue
+                    yield return LineRunDialog(line);
+                
+                //Debug.Log("Line.hasCommands : " + line.hasCommands + ((line.hasCommands)? " : " + line.commandData.commands[0].name : ""));
+
+                if(line.hasCommands)
+                    yield return LineRunCommands(line);
+
+                if(line.hasDialog){
+                    yield return WaitForUserInput();
+                    CommandManager.instance.StopAllProcesses();
+                }
             }
-
-            //Debug.Log("Line.hasCommands : " + line.hasCommands + ((line.hasCommands)? " : " + line.commandData.commands[0].name : ""));
-
-            if(line.hasCommands){
-                yield return LineRunCommands(line);
-            }
-
-            if(line.hasDialog){
-                yield return WaitForUserInput();
-
-                CommandManager.instance.StopAllProcesses();
-            }
+            
         }
     }
 

@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class DialogData
 {
+    public string rawData {get; private set;} = string.Empty;
     public List<DialogSegment> segments;
     public const string segmentIdentifierPattern = @"\{[ca]\}|\{w[ca]\s\d*\.?\d*\}";
 
     public DialogData(string rawDialog){
+        this.rawData = rawDialog;
         segments = RipSegments(rawDialog);
     }
 

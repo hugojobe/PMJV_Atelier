@@ -13,7 +13,7 @@ public class DialogParser : MonoBehaviour
 
         (string speaker, string dialog, string commands) = RipContent(rawLine);
 
-        return new DialogLine(speaker, dialog, commands);
+        return new DialogLine(rawLine, speaker, dialog, commands);
     }
 
     public static (string, string, string) RipContent(string rawLine){

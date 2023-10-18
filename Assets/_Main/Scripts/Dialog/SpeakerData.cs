@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class SpeakerData
 {
+    public string rawData {get; private set;} = string.Empty;
     public string name, castingName;
     public string displayName => castingName != string.Empty ? castingName : name;
     public Vector2 displayPosition;
@@ -36,6 +37,7 @@ public class SpeakerData
     }
     
     public SpeakerData(string rawSpeaker){
+        rawData = rawSpeaker;
         rawSpeaker = ProcessKeywords(rawSpeaker);
 
         string pattern = @$"{DISPLAY_NAME_ID}|{DISPLAY_POSITION_ID}|{DISPLAY_EXPRESSION_ID.Insert(DISPLAY_EXPRESSION_ID.Length-1, @"\")}";

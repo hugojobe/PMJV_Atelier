@@ -1,5 +1,7 @@
 wait(1)
 
+input "hi"
+
 playmusic(Happy)
 SetBackground(BG1)
 ShowDialog()
