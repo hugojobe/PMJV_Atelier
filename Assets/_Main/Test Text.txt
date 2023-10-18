@@ -1,0 +1,18 @@
+wait(1)
+
+playmusic(Happy)
+SetBackground(BG1)
+ShowDialog()
+
+CreateCharacter(Personnage1 -e true)
+Personnage1 "Salut !"
+
+Hide(Personnage1)
+[wait]HideDialog()
+playmusic(Upbeat)
+[wait]SetBackground(BG3)
+
+Show(Personnage1)
+[wait]ShowDialog()
+Personnage1 "Oh c'est joli"
+
