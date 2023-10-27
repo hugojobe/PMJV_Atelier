@@ -71,7 +71,13 @@ public class DialogueSystem : MonoBehaviour
         return Say(conversation);
     }
 
-    public Coroutine Say(List<string> conversation){
+    public Coroutine Say(List<string> lines){
+        Conversation conversation = new Conversation(lines);
+        //Debug.Log($"Successfully created conversation {conversation} with {conversation.Count} lines");
+        return conversationManager.StartConversation(conversation);
+    }
+
+    public Coroutine Say(Conversation conversation){
         return conversationManager.StartConversation(conversation);
     }
 }

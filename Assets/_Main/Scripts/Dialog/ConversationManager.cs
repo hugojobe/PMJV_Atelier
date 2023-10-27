@@ -8,28 +8,41 @@ using UnityEngine.TextCore.Text;
 public class ConversationManager
 {
     private DialogueSystem dialogSystem => DialogueSystem.instance;
+
     public Coroutine process = null;
     public bool isRunning => process != null;
 
-    private LogicalLineManager logicalLineManager;
-
     public TextArchitect architect = null;
     public bool userPrompt = false;
+
+    private LogicalLineManager logicalLineManager;
+
+    public Conversation conversation => conversationQueue.IsEmpty() ? null : conversationQueue.top;
+    public int conversationProgress => (conversationQueue.IsEmpty())? -1 : conversationQueue.top.GetProgress();
+    private ConversationQueue conversationQueue;
+
     public ConversationManager(TextArchitect architect){
         this.architect = architect;
         dialogSystem.onUserPromptNext += OnUserPromptNext;
 
         logicalLineManager = new LogicalLineManager();
+
+        conversationQueue = new ConversationQueue();
     }
+
+    public void Enqueue(Conversation conversation) => conversationQueue.Enqueue(conversation);
+    public void EnqueuePriority(Conversation conversation) => conversationQueue.EnqueuePriority(conversation);
 
     public void OnUserPromptNext(){
         userPrompt = true;
     }
 
-    public Coroutine StartConversation(List<string> conversation){
+    public Coroutine StartConversation(Conversation conversation){
         StopConversation();
 
-        process = dialogSystem.StartCoroutine(RunningConversation(conversation));
+        Enqueue(conversation);
+
+        process = dialogSystem.StartCoroutine(RunningConversation());
 
         return process;
     }
@@ -42,18 +55,33 @@ public class ConversationManager
         process = null;
     }
 
-    public IEnumerator RunningConversation(List<string> conversation){
-        for(int i = 0; i < conversation.Count; i++){
-            if(string.IsNullOrWhiteSpace(conversation[i])) //Passer les lignes vides
-                continue;
+    public IEnumerator RunningConversation(){
+        while(!conversationQueue.IsEmpty()){
+            Conversation currentConversation = conversation;
 
-            DialogLine line = DialogParser.Parse(conversation[i]);
+            if(currentConversation.HasReachedEnd()){
+                conversationQueue.Dequeue();
+                continue;
+            }
+            
+            string rawLine = currentConversation.CurrentLine();
+
+            //Debug.Log($"Parsing line {rawLine}");
+
+            if(string.IsNullOrWhiteSpace(rawLine)){ //Passer les lignes vides
+                TryAdvanceConversation(currentConversation);
+                continue;
+            }
+
+            DialogLine line = DialogParser.Parse(rawLine);
 
             if(logicalLineManager.TryGetLogic(line, out Coroutine logic)){
                 yield return logic;
             } else {
-                if(line.hasDialog) //Afficher le dialogue
+                if(line.hasDialog){ //Afficher le dialogue
+                    //Debug.Log("Dialog detected in line");
                     yield return LineRunDialog(line);
+                }
                 
                 //Debug.Log("Line.hasCommands : " + line.hasCommands + ((line.hasCommands)? " : " + line.commandData.commands[0].name : ""));
 
@@ -65,7 +93,21 @@ public class ConversationManager
                     CommandManager.instance.StopAllProcesses();
                 }
             }
-            
+
+            TryAdvanceConversation(currentConversation);
+        }
+
+        process = null;
+    }
+
+    private void TryAdvanceConversation(Conversation conversation){
+        conversation.IncrementProgress();
+
+        if(conversation != conversationQueue.top)
+            return;
+
+        if(conversation.HasReachedEnd()){
+            conversationQueue.Dequeue();
         }
     }
 

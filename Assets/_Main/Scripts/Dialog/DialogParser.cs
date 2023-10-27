@@ -9,9 +9,11 @@ public class DialogParser : MonoBehaviour
     public const string commandRegexPattern = @"[\w\[\]]*[^\s]\(";
 
     public static DialogLine Parse(string rawLine){
-        //Debug.Log($"Parsing line - '{rawLine}'");
+        //Debug.Log($"Parsing line - '{rawLine}' started");
 
         (string speaker, string dialog, string commands) = RipContent(rawLine);
+
+        //Debug.Log($"Parsing result : '{speaker}' / '{dialog}' / '{commands}'");
 
         return new DialogLine(rawLine, speaker, dialog, commands);
     }

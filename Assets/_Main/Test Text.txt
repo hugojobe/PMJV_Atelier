@@ -1,7 +1,5 @@
 wait(1)
 
-input "hi"
-
 playmusic(Happy)
 SetBackground(BG1)
 ShowDialog()
@@ -9,12 +7,50 @@ ShowDialog()
 CreateCharacter(Personnage1 -e true)
 Personnage1 "Salut !"
 
-Hide(Personnage1)
-[wait]HideDialog()
-playmusic(Upbeat)
-[wait]SetBackground(BG3)
+choice "Où veux-tu aller ?"
+{
+    -En ville
+        Personnage1 "C'est parti !"
+        Hide(Personnage1)
+        [wait]HideDialog()
+        playmusic(Upbeat)
+        [wait] SetBackground(BG2)
+        Show(Personnage1)
+        ShowDialog()
+        Personnage1 "Oh c'est joli"
+    -Dans la grotte
+        Personnage1 "Let's go dans la grotte !"
+        Hide(Personnage1)
+        [wait]HideDialog()
+        playmusic(Upbeat)
+        [wait] SetBackground(BG3)
+        Show(Personnage1)
+        ShowDialog()
+        Personnage1 "Oh c'est joli"
+    -Je sais pas...
+        Personnage1 "Tu dois choisir !"
+        choice "Où veux-tu aller ?"
+        {
+            -En ville
+                Personnage1 "C'est parti !"
+                Hide(Personnage1)
+                [wait]HideDialog()
+                playmusic(Upbeat)
+                [wait] SetBackground(BG2)
+                Show(Personnage1)
+                ShowDialog()
+                Personnage1 "Oh c'est joli"
+            -Dans la grotte
+                Personnage1 "Let's go dans la grotte !"
+                Hide(Personnage1)
+                [wait]HideDialog()
+                playmusic(Upbeat)
+                [wait] SetBackground(BG3)
+                Show(Personnage1)
+                ShowDialog()
+                Personnage1 "Oh c'est joli"
+        }
+}
 
-Show(Personnage1)
-[wait]ShowDialog()
-Personnage1 "Oh c'est joli"
+Personnage1 "C'est la fin du voyage !"
 

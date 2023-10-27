@@ -11,7 +11,7 @@ public class ChoicePanel : MonoBehaviour
     private const float BUTTON_MIN_WIDTH = 50;
     private const float BUTTON_MAX_SIZE = 750;
     private const float BUTTON_WIDTH_PADDING = 25;
-    private const float BUTTON_HEIGHT_PER_LINE = 50f;
+    private const float BUTTON_HEIGHT_PER_LINE = 60f;
 
     public CanvasGroup cg;
     private List<Choicebutton> buttons = new List<Choicebutton>();
@@ -30,7 +30,7 @@ public class ChoicePanel : MonoBehaviour
     private bool isVisible => showingCoroutine != null || cg.alpha > 0;
     private float alpha {get {return cg.alpha;} set {cg.alpha = value;}}
 
-    private bool isWaitingOnUserChoice = false;
+    public bool isWaitingOnUserChoice = false;
 
     private void Awake() {
         if(instance == null) instance = this;
@@ -87,19 +87,20 @@ public class ChoicePanel : MonoBehaviour
 
         for (int i = 0; i < buttons.Count; i++){
             bool show = i < choices.Length;  
-            buttons[i].button.gameObject.SetActive(true);
+            buttons[i].button.gameObject.SetActive(show);
         }
 
         yield return new WaitForEndOfFrame();
 
         foreach(var button in buttons){
             int lines = button.title.textInfo.lineCount;
-            button.layout.preferredHeight = BUTTON_HEIGHT_PER_LINE + (lines*24);
+            button.layout.preferredHeight = BUTTON_HEIGHT_PER_LINE + (lines*25);
         }
     }
 
     public void Hide(){
         HidePanel();
+        SetInteractibleState(false);
     }
 
     private void AcceptAnswer(int index){
