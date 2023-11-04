@@ -1,0 +1,29 @@
+Characters :
+	Initialize a character :
+		CreateCharacter(<name> <arguments>)
+			-e <bool> : show the character (default: true)
+			-i <bool> : show the character instantly (default: false)
+	Move a character :
+		Move(<name> <arguments>)
+			-x <float> : the new x position
+			-y <float> : the new y position
+	Change character's sprite :
+		SetSprite(<name> <arguments>)
+			-i <bool> : change the sprite instantly (default: bool)
+			-spd <float> : the speed of the transition (default : 1)
+			-spr "<string>" : the name of the new sprite (default: "")
+	Hide one or multiple character :
+		Hide(<name,name,...> <arguments>)
+			-i <bool> : hide the characters instantly (default: false)
+			-spd <float> : the speed of the transition (default: 1)
+	Show one or multiple character :
+		Show(<name,name,...> <arguments>)
+			-i <bool> : hide the characters instantly (default: false)
+			-spd <float> : the speed of the transition (default: 1)
+
+Audio :
+	Play an sfx :
+		PlaySfx("<filePath>" <arguments>)
+			-v <float> :
+			-p <float> :
+			-l <bool>  :

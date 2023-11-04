@@ -35,11 +35,7 @@ choice "Où veux-tu aller ?"
                 Personnage1 "C'est parti !"
                 Hide(Personnage1)
                 [wait]HideDialog()
-                playmusic(Upbeat)
-                [wait] SetBackground(BG2)
-                Show(Personnage1)
-                ShowDialog()
-                Personnage1 "Oh c'est joli"
+                Load(-f "Texte2" -e true)
             -Dans la grotte
                 Personnage1 "Let's go dans la grotte !"
                 Hide(Personnage1)
@@ -52,5 +48,5 @@ choice "Où veux-tu aller ?"
         }
 }
 
-Personnage1 "C'est la fin du voyage !"
+Personnage1 "Fin du fichier 1"
 

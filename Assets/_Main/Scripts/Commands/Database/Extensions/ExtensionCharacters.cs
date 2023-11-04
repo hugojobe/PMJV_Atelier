@@ -28,7 +28,7 @@ public class ExtensionCharacters : CommandDatabaseExtension
         bool immediate = false;
 
         CommandParameters parameters = ConvertDataToParameters(data);
-        parameters.TryGetValue(PARAM_ENABLE, out enable, defaultValue: false);
+        parameters.TryGetValue(PARAM_ENABLE, out enable, defaultValue: true);
         parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
 
         Character character = CharacterManager.instance.CreateCharacter(characterName);

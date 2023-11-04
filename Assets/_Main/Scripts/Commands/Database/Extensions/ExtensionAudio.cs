@@ -56,7 +56,7 @@ public class ExtensionAudio : CommandDatabaseExtension
 
         CommandParameters parameters = ConvertDataToParameters(data);
 
-        filePath = FilePaths.ResourcesMusic + data[0];
+        filePath = FilePaths.resourcesMusic + data[0];
         parameters.TryGetValue(PARAM_VOLUME, out volume, defaultValue: 0f);
         parameters.TryGetValue(PARAM_VOLUMECAP, out volumeCap, defaultValue: 1);
         parameters.TryGetValue(PARAM_PITCH, out pitch, defaultValue: 1f);
