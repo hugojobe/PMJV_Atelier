@@ -1,5 +1,13 @@
 wait(1)
 
+$playerOx = 10
+
+<mainChar> "Hello ! J'ai $playerOx niveaux d'oxygène !"
+
+Le Voleur "Donne moi ton Ox ! {wa 1}"
+$playerOx -= 5
+<mainChar> "Oh non, il m'en reste seulement $playerOx..."
+
 playmusic(Happy)
 SetBackground(BG1)
 ShowDialog()

@@ -130,7 +130,7 @@ public class ConversationManager
         if(speakerData.makeCharacterEnter && (!character.isVisible && !character.isRevealing))
             character.Show();
 
-        dialogSystem.ShowSpeakerName(speakerData.displayName); //line.speakerData.finalName est le nom affiché à l'écran
+        dialogSystem.ShowSpeakerName(TagManagers.Inject(speakerData.displayName)); //line.speakerData.finalName est le nom affiché à l'écran
 
         DialogueSystem.instance.ApplySpeakerDataToDialogContainer(speakerData.displayName);
 
@@ -194,6 +194,8 @@ public class ConversationManager
     }
 
     IEnumerator BuildDialog(string dialog, bool append = false){
+        dialog = TagManagers.Inject(dialog);
+
         if(!append){
             architect.Build(dialog);
         } else {
