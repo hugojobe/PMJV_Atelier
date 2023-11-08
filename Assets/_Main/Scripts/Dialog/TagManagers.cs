@@ -3,17 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class TagManagers : MonoBehaviour
 {
-    public static readonly Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>(){
-        {"<mainChar>",      () => "MainCharacter"},
-        {"<playerOx>",      () => "15"}
+    public static Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>(){
+        {"<mainChar>",      () => VariableStore.TryGetValue("playerName", out object value)? value.ToString() : "Error getting the value of variable 'playerName'"},
+        {"<playerOx>",      () => VariableStore.TryGetValue("playerOx", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" }
     };
     private static readonly Regex tagRegex = new Regex("<\\w+>");
     private static readonly Regex endPhrase = new Regex("[.!?]+$");
 
+    public static bool AddTag(string tagName, string tagValue) {
+        tags.Add(tagName, () => tagValue); return true;
+    }
 
     public static string Inject(string text, bool injectTags = true, bool injectVariables = true){
         if(injectTags)
@@ -44,8 +48,8 @@ public class TagManagers : MonoBehaviour
 
         for(int i = matches.Count - 1; i >= 0; i--){
             Match match = matchesList[i];
-
-            string variableName = match.Value.TrimStart(VariableStore.VARIABLE_ID);
+            string variableName = match.Value.TrimStart(VariableStore.VARIABLE_ID, '!');
+            bool negate = variableName.StartsWith("!");
 
             string endPhraseBackup = string.Empty;
             if(endPhrase.IsMatch(variableName)){
@@ -56,6 +60,10 @@ public class TagManagers : MonoBehaviour
             if(!VariableStore.TryGetValue(variableName, out object variableValue)){
                 Debug.LogError($"Variable '{variableName}' not found in string assignement !");
                 continue;
+            }
+
+            if(negate && variableValue is bool) {
+                variableValue = !(bool)variableValue;
             }
 
             int lenghtToBeRemoved = (match.Index + match.Length > value.Length)? value.Length - match.Index : match.Length;

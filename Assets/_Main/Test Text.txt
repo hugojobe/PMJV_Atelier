@@ -1,12 +1,32 @@
 wait(1)
 
-$playerOx = 10
+$playerOx = 50
 
+if($playerOx > 10)
+{
+    "Pas assez d'ox pour démarrer les dialogues !"
+}
+else
+{
 <mainChar> "Hello ! J'ai $playerOx niveaux d'oxygène !"
 
 Le Voleur "Donne moi ton Ox ! {wa 1}"
-$playerOx -= 5
-<mainChar> "Oh non, il m'en reste seulement $playerOx..."
+choice "Combien en donner ?"
+{
+    -Donner 5 ox
+        $playerOx -= 5
+    -Donner tout
+        $playerOx -= $playerOx
+}
+
+if($playerOx <= 0)
+{
+    <mainChar> "Oh non, je n'ai plus d'ox..."
+}
+else
+{
+    <mainChar> "Oh, il ne m'en reste que $playerOx..."
+}
 
 playmusic(Happy)
 SetBackground(BG1)
@@ -56,5 +76,6 @@ choice "Où veux-tu aller ?"
         }
 }
 
-Personnage1 "Fin du fichier 1"
+}
 
+"Fin du fichier 1"
