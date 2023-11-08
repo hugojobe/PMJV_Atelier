@@ -57,8 +57,12 @@ public class CharacterSprite : Character
     }
 
     public Sprite GetSprite(string spriteName){
-        return Resources.Load<Sprite>($"{artAssetsDirectory}/{spriteName}");
-        
+        if(config.sprites.Count > 0){
+            if(config.sprites.TryGetValue(spriteName, out Sprite sprite))
+                return sprite;
+        }
+
+        return Resources.Load<Sprite>($"{artAssetsDirectory}/{spriteName}");  
     }
 
     public Coroutine TransitionSprite(Sprite sprite, float speed = 1){

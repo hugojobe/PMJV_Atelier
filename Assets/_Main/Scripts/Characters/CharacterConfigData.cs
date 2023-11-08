@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ public class CharacterConfigData
     public TMP_FontAsset nameFont;
     public TMP_FontAsset dialogFont;
     public float fontSize;
+
+    [SerializedDictionary("Path / ID", "Sprite")]
+    public SerializedDictionary<string, Sprite> sprites = new SerializedDictionary<string, Sprite>();
 
     public CharacterConfigData Copy(){
         CharacterConfigData result = new CharacterConfigData();

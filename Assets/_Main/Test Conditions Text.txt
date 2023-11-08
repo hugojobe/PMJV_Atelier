@@ -1,49 +1,7 @@
-$boolTrue = true
-$boolFalse = false
-$int1 = 1
-$int2 = 2
-$int3 = 3
-$int5 = 5
-$stringOne = "Hello"
-$stringTwo = "World"
-
-$playerName = "MainChar"
+$playerName = "MainCharUi"
 $playerOx = 10
 
-"# Variables test"
-"playerOx = $playerOx. Should be 10"
-"$playerName = \"<mainChar>\". This should be \"MainChar\""
-
-"# Test conditions"
-if($playerOx >= 10)
-{
-	"playerOx is >= 10. Should be true"
-}
-else
-{
-	"playerOx is not >= 10. This is an error"
-}
-
-if($boolTrue == $boolFalse)
-{
-	"boolTrue == boolFalse. This is an error"
-}
-else
-{
-	"boolTrue != boolFalse. This is nice"
-}
-
-if($stringOne == "Hello")
-{
-	"$stringOne == \"Hello\". This should be true"
-}
-else
-{
-	"$stringOne != \"Hello\". There is an error"
-}
-
-"# Testing operations"
-"playerOx = $playerOx. Should be 10"
-
-$playerOx -= 1
-"playerOx == $playerOx. Should be 10-1 = 9"
+CreateCharacter(Personnage1 -e true)
+$playerName "ui"
+SetSprite(Personnage1 -spr "ch 2")
+HideDialog()

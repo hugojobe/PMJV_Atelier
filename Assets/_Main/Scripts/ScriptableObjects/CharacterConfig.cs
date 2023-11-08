@@ -7,14 +7,14 @@ public class CharacterConfig : ScriptableObject
 {
     public CharacterConfigData[] characters;
 
-    public CharacterConfigData GetConfig(string characterName){
+    public CharacterConfigData GetConfig(string characterName, bool safe = true){
         characterName = characterName.ToLower();
 
         for(int i = 0; i < characters.Length; i++){
             CharacterConfigData data = characters[i];
 
             if(string.Equals(characterName, data.name.ToLower()) || string.Equals(characterName, data.alias.ToLower())){
-                return data.Copy();
+                return safe ? data.Copy() : data;
             }
         }
 

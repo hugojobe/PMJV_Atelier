@@ -31,12 +31,12 @@ public class VariableStore
     }
 
     public class Variable<T> : Variable {
-        private T value;
+        private object value;
 
-        private Func<T> getter;
-        private Action<T> setter;
+        private Func<object> getter;
+        private Action<object> setter;
 
-        public Variable(T defaultValue = default, Func<T> getter = null, Action<T> setter = null) {
+        public Variable(T defaultValue = default, Func<object> getter = null, Action<object> setter = null) {
             value = defaultValue;
 
             if(getter == null)
@@ -52,7 +52,7 @@ public class VariableStore
 
         public override object Get() => getter();
 
-        public override void Set(object newValue) => setter((T)newValue);
+        public override void Set(object newValue) => setter(newValue);
     }
 
     private static Dictionary<string, Database> databases = new Dictionary<string, Database>(){{DEFAULT_DATABASE_NAME, new Database(DEFAULT_DATABASE_NAME)}};
@@ -77,7 +77,7 @@ public class VariableStore
         return databases[name];
     }
 
-    public static bool CreateVariable<T>(string name, T defaultValue, Func<T> getter = null, Action<T> setter = null) {
+    public static bool CreateVariable<T>(string name, T defaultValue, Func<object> getter = null, Action<object> setter = null) {
         (string[] parts, Database db, string variableName) = ExtractInfo(name);
 
         if(db.variables.ContainsKey(variableName))
@@ -105,6 +105,8 @@ public class VariableStore
 
         if(!db.variables.ContainsKey(variableName))
             return false;
+
+        Debug.Log($"Setting value of '{name}' to '{value}'");
 
         db.variables[variableName].Set(value);
         return true;
