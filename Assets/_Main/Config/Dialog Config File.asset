@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterConfig: {fileID: 11400000, guid: 713a7daaf69ee2745b96b83086f28f48, type: 2}
   defautTextColor: {r: 1, g: 1, b: 1, a: 1}
-  defaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  defaultFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
   defaultFontSize: 28

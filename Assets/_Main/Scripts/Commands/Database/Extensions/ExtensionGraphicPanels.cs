@@ -89,7 +89,7 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
         if(blendTex != null)
             panel.Clear(transitionSpeed, blendTex, immediate);
         else
-            Debug.Log($"Clearing panel '{panelName}' with speed of '{transitionSpeed}'");
+            //Debug.Log($"Clearing panel '{panelName}' with speed of '{transitionSpeed}'");
             panel.Clear(transitionSpeed);
     }
 }

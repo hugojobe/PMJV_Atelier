@@ -9,8 +9,12 @@ using UnityEngine;
 public class TagManagers : MonoBehaviour
 {
     public static Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>(){
-        {"<mainChar>",      () => VariableStore.TryGetValue("playerName", out object value)? value.ToString() : "Error getting the value of variable 'playerName'"},
-        {"<playerOx>",      () => VariableStore.TryGetValue("playerOx", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" }
+        {"<soeur>",         () => VariableStore.TryGetValue("soeurName", out object value)? value.ToString() : "Error getting the value of variable 'playerName'"},
+        {"<frere>",         () => VariableStore.TryGetValue("frereName", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" },
+        {"<playerOx>",      () => VariableStore.TryGetValue("playerOx", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" },
+        {"<money>",         () => "<color=#F4A015><sprite tint=1 name=money></color>"},  
+        {"<risk>",         () => "<color=#FF3030><sprite tint=1 name=risk></color>"},  
+        {"<ox>",            () => "<color=#2BA7EE>ox</color>"} 
     };
     private static readonly Regex tagRegex = new Regex("<\\w+>");
     private static readonly Regex endPhrase = new Regex("[.!?]+$");

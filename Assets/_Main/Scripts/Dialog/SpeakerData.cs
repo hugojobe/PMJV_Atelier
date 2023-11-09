@@ -76,6 +76,7 @@ public class SpeakerData
                 string[] axis = displayPos.Split(AXISSEPARATOR, System.StringSplitOptions.RemoveEmptyEntries);
 
                 float.TryParse(axis[0], out displayPosition.x);
+                //Debug.Log("Moving character to " + axis[0]);
 
                 if(axis.Length > 1){
                     float.TryParse(axis[1], out displayPosition.y);

@@ -125,7 +125,7 @@ public class ConversationManager
     private void HandleSpeakerLogic(SpeakerData speakerData){
         bool characterMustBeCreated = (speakerData.makeCharacterEnter)? speakerData.isCastingPosition : speakerData.isCastingExpressions;
 
-        Character character = CharacterManager.instance.GetCharacter(speakerData.name, true); ///////////////////////////////////////////////////// was true
+        Character character = CharacterManager.instance.GetCharacter(speakerData.name, true);
 
         if(speakerData.makeCharacterEnter && (!character.isVisible && !character.isRevealing))
             character.Show();

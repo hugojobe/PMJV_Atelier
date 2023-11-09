@@ -106,7 +106,7 @@ public class VariableStore
         if(!db.variables.ContainsKey(variableName))
             return false;
 
-        Debug.Log($"Setting value of '{name}' to '{value}'");
+        //Debug.Log($"Setting value of '{name}' to '{value}'");
 
         db.variables[variableName].Set(value);
         return true;

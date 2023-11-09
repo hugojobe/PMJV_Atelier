@@ -10,6 +10,8 @@ public class DialogueSystem : MonoBehaviour
     public ConversationManager conversationManager;
     public TextArchitect architect;
 
+    public CanvasGroup blackOccluderCanvasGroup;
+
     public bool initialized = false;
 
     public bool isRunningConversation => conversationManager.isRunning;

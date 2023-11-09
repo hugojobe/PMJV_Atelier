@@ -13,17 +13,63 @@ MonoBehaviour:
   m_Name: Characters
   m_EditorClassIdentifier: 
   characters:
-  - name: Personnage1
-    alias: Personnage1
+  - name: Soeur
+    alias: Soeur
     characterType: 1
-    nameColor: {r: 0.1254902, g: 0.70569384, b: 0.9137255, a: 1}
-    dialogColor: {r: 0.71413314, g: 0.95146024, b: 0.9622642, a: 1}
-    nameFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    dialogFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    nameColor: {r: 0.95686275, g: 0.8784314, b: 0.22352941, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: ch 1
-        Value: {fileID: 21300000, guid: 7881e495e40beec4588a7dbed8ab07c0, type: 3}
-      - Key: ch 2
-        Value: {fileID: 21300000, guid: 71e7395918a8e4c41aba35ef33f05619, type: 3}
+      - Key: SPR1
+        Value: {fileID: 21300000, guid: 3b23fc1544cc1c04a8e593cbc3c5d87a, type: 3}
+  - name: Frere
+    alias: Frere
+    characterType: 1
+    nameColor: {r: 0.63529414, g: 0.8509804, b: 0.91764706, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: SPR1
+        Value: {fileID: 21300000, guid: 3b23fc1544cc1c04a8e593cbc3c5d87a, type: 3}
+  - name: Noble
+    alias: Noble
+    characterType: 1
+    nameColor: {r: 0.63529414, g: 0.8509804, b: 0.91764706, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: NOBLE
+        Value: {fileID: 21300000, guid: 8d29971476ff8ca4fbdb0b880b32fd25, type: 3}
+  - name: Autostoppeur
+    alias: Autostoppeur
+    characterType: 1
+    nameColor: {r: 0.8584906, g: 0.8181181, b: 0.7829002, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: AUTOSTOP
+        Value: {fileID: 21300000, guid: fcefb465970faef4ab8edde8fc5966a9, type: 3}
+  - name: Milicien
+    alias: Milicien
+    characterType: 1
+    nameColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: MILICIEN
+        Value: {fileID: 21300000, guid: 0fe5f7c4a987a9e468ef4632b042795a, type: 3}

@@ -1,0 +1,67 @@
+CreateCharacter(Noble -e false -i true)
+Move(Noble -x 0.15 -y 0 -i true)
+Move(Soeur -x 0.85 -y 0 -i true)
+
+ShowAll()
+Wait(1)
+ShowDialog()
+SetBackground(BG3)
+
+Show(Soeur)
+<soeur> "Punaise, je suis partie mais je dois encore me faire de l’argent rapide, je n’ai pas des masses sur moi.{c}Oh, cette personne à l’air fortunée!{c}<i>Sûrement une proie facile.</i>"
+<soeur> "<wave a=0.5 f=0.6>Bonjour Madame</wave>, je peux vous déposer quelque part si vous voulez, vous m’avez l’air paumée."
+Hide(Soeur), Show(Noble)
+Noble "Oh c’est pas vrai ! Qu’est-ce que tu me veux ?"
+Hide(Noble), Show(Soeur)
+<soeur> "Quoi ? Non je propose simplement..."
+Hide(Soeur), Show(Noble)
+Noble "Ne fais pas l’idiote, si tu me propose ton aide c’est que tu veux quelque chose en retour.{c}Donc sera quoi ?{wa 0.75}Argent {wa 0.75}, drogue {wa 0.75}, informations..."
+Hide(Noble), Show(Soeur)
+<soeur> "Argent..."
+Hide(Noble), Show(Soeur)
+Noble "Tu vois quand tu veux, c’était pas compliqué."
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Elle m’énerve déjà...</i>"
+<soeur> "Bon du coup où est-ce que vous allez ? Je vous déposerai rapidement."
+Hide(Soeur), Show(Noble)
+Noble "Ne soit pas ridicule ! Je n’ai pas besoin de ton aide pour aller où je veux aller et puis tu penses vraiment que je vais monter dans cette poubelle qui sert de vaisseau ? {c} Pathétique."
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Je vais péter un câble...</i>"
+Hide(Soeur), Show(Noble)
+Noble "Mais si tu tiens tant que ça à mon argent je peux t’en donner contre un petit service..."
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Je le sens mal...</i>"
+Hide(Soeur), Show(Noble)
+Noble "Lèche mes pieds et tu seras payée <shake a=0.35>hahaha</shake>."
+Hide(Noble), Show(Soeur)
+<soeur> "Ca y est je sens que je vais la tuer...{c}Réfléchit, j’ai besoin de cet argent mais je n’ai pas envie de lécher des pieds !"
+Hide(Soeur), Show(Noble)
+
+choice "Alors ?"
+{
+	-Accepter
+		Hide(Noble), Show(Soeur)
+		<soeur> "J’arrive pas à croire que je vais faire ça, à croire qu’on me veut du mal... {c}Très bien j’accepte."
+		Hide(Soeur), Show(Noble)
+		Noble "HA !{a} Pathétique de voir que tu es prête à faire ça pour de l’argent ! {a}Mais une promesse est une promesse, tiens, ton argent."
+		Hide(Noble)
+		"Vous gagnez 5<money>."
+		$playerMoney += 5
+	-Refuser
+		Hide(Noble), Show(Soeur)
+		<soeur> "Faut vraiment avoir un problème pour accepter ça ! {a}Donc merci mais non merci."
+		Hide(Soeur), Show(Noble)
+		Noble "Je vois que malgré ta situation tu as encore de l’estime pour toi-même. {a}Très bien tu n’auras pas l’agent."
+		Hide(Noble)
+}
+
+Je suis entouré de gens cinglé... une fois tout ça finit on pensera à partir loin d’ici mon frère et moi.
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+ShowDialog()
+"<i>Starting file 'AutoStop'</i>", Wait(2), Load(AutoStop)

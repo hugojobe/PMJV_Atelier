@@ -1,0 +1,59 @@
+$soeurName = "Soeurette"
+$frereName = "Frèro"
+
+$playerOx = 10
+$playerMoney = 0
+
+HideDialog()
+
+wait(1)
+
+CreateCharacter(Soeur -e false -i true)
+CreateCharacter(Frere -e false -i true)
+Move(Soeur -x 0.15 -y 0 -i true)
+Move(Frere -x 0.85 -y 0 -i true)
+
+ShowDialog()
+
+Show(Soeur)
+SetBackground(-img BG2)
+<soeur> "<color=#A2D9EA><frere></color> on ne peut pas continuer comme ça, on va finir par manquer de tout si ça continue."
+
+Hide(Soeur), Show(Frere)
+<frere> "<color=#F4E039><soeur></color> on est encore en vie grâce à mes décisions et on restera en vie, les choses s’arrangeront dès que mon état s’arrangera..."
+Hide(Frere), Show(Soeur)
+<soeur> "On n’aura peut-être jamais le luxe d’attendre ton rétablissement..."
+Hide(Soeur), Show(Frere)
+<frere> ".{wa 1}.{wa 1}."
+Hide(Frere), Show(Soeur)
+<soeur> "Écoute je te fais une proposition, donne-moi les clés du véhicule je fais une descente dans l’<incr a=0.5 f=-1><size=32><color=#F7281E>undergound</color></size></incr> et je récupère les bouteilles dont t’as besoin."
+Hide(Soeur), Show(Frere)
+<frere> "<shake a=0.5>NON !</shake> C’est trop dangereux on trouvera une solution le moment venant."
+Hide(Frere), Show(Soeur)
+<soeur> "On n’aura peut-être pas cette chance..."
+HideDialog()
+Move(Soeur -x -1 -i false)
+
+Wait(1.75)
+Hide(Soeur -i true)
+
+Wait(1)
+ShowDialog()
+"Le lendemain..."
+HideDialog()
+Wait(1)
+
+ShowDialog(), Show(Soeur)
+<soeur> "Ou Est-ce qu’il les a planqués... {a}Les voilà enfin, ne t’en fais pas frangin si tu n’agis pas alors je le ferai."
+Hide(soeur)
+"La <color=#F4E039>soeur</color> part tôt au matin sans éveiller les soupçons de son <color=#A2D9EA>frère</color> pour trouver les bouteilles d’Ox dont il a besoin."
+<soeur> "Allez, c’est l’heure..."
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+ShowDialog()
+"<i>Starting file 'Noble'</i>", Wait(2), Load(Noble)

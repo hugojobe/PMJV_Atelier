@@ -1,5 +1,0 @@
-playmusic(Upbeat)
-[wait] SetBackground(BG2)
-Show(Personnage1)
-ShowDialog()
-Personnage1 "Oh c'est joli"

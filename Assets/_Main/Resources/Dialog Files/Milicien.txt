@@ -1,0 +1,63 @@
+CreateCharacter(Milicien -e false -i true)
+Move(Soeur -x 0.15 -y 0 -i true)
+Move(Milicien -x 0.85 -y 0 -i true)
+
+Show(Milicien)
+Milicien "Contrôle, rangez-vous sur le bas caté s’il vous plait."
+Hide(Milicien), Show(Soeur)
+<soeur> "<i>Orgh c’est pas vrai.. {c}Ca va continuer longtemps les rencontres désagréables ?</i>"
+Milicien "Bonjour, désolé du dérangement, c’est juste un petit contrôle, pouvez-vous sortir du véhicule ?"
+Hide(Milicien), Show(Soeur)
+<soeur> "Désolé du dérangement ? S'il vous plait ? La milice c’est radoucie ou c’est la norme dans ce quartier ?"
+"La soeur sort du véhicule."
+<soeur> "<i>Il a pas l’air bien fort, en plus il se tient mal.{c}Je pourrais voler son arme...</i>"
+
+choice "Que faire ?"
+{
+	-Teter de voler son arme <color=#FF3030><sprite tint=1 name=risk></color>
+		<soeur> "Le risque est grands mais si j’y arrive ça pourrait m’être utile."
+		Hide(Soeur), Show(Milicien)
+		Milicien "Arh qu’est-ce que vous faites ?!"
+		Hide(Milicien)
+		"<i>QTE du milicien</i>"
+		choice "<color=\"FF0000\">DEBUG : RESULTAT DU QTE</color>"
+		{
+			-Réussite
+				Show(Soeur)
+				<soeur> "Reste où tu es, ne bouge pas d’un pouce !"
+				Hide(Soeur), Show(Milicien)
+				Milicien "Oui madame, désolé pour tout ça, je ne voulais pas vous offenser. Tenez, mon argent. Pitié me tuez pas !"
+				Hide(Milicien), Show(Soeur)
+				<soeur> "Wow c’était facile... Merci pour l’argent j’imagine. J’ai presque pitié pour toi"
+			-Défaite
+				Show(Soeur)
+				<soeur> "Merde tu parles de réflexes !"
+				Hide(Soeur), Show(Milicien)
+				Milicien "Non arrêtez s’il vous plait, me faite pas de mal, on peut s’arranger."
+				Hide(Milicien), Show(Soeur)
+				<soeur> "<i>Sérieusement, c’est moi qui suis dans la merde et c’est lui qui a peur... C’est ça la milice ?</i>{c}Donne-moi ton arme et ta thune sinon j’appelle mon frère !"
+				Hide(Soeur), Show(Milicien)
+				Milicien "Oui d’accord, tout ce que vous voulez, pitié n’appeler pas votre frère."
+		}
+
+		Hide(Milicien), Show(Soeur)
+		<soeur> "Essaye de passer une bonne journée, salut..."
+		"Vous avez gagné 3<money>."
+		$playerMoney += 3
+		"Vous avez perdu 1 <ox>."
+		$playerOx += 1
+		"Vous avez agné une arme."
+		$hasWeapon = true
+
+	-Ne rien faire
+		<soeur> "C’est juste un contrôle et je suis en ordre. Pas besoin de prendre des risques inutiles..."
+
+}
+
+Hide(Milicien), Hide(Soeur)
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
