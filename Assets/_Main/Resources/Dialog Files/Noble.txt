@@ -47,6 +47,7 @@ choice "Alors ?"
 		Hide(Noble)
 		"Vous gagnez 5<money>."
 		$playerMoney += 5
+		$helpedNoble = true
 	-Refuser
 		Hide(Noble), Show(Soeur)
 		<soeur> "Faut vraiment avoir un problème pour accepter ça ! {a}Donc merci mais non merci."

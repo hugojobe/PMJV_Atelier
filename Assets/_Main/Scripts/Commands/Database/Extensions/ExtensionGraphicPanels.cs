@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+using Object = UnityEngine.Object;
 
 public class ExtensionGraphicPanels : CommandDatabaseExtension
 {
@@ -25,7 +27,7 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
 
         string blendTexName = "";
         string pathToGraphic = "";
-        Texture graphic = null;
+        Object graphic = null;
         Texture blendTex = null;
         GraphicLayer layer = null;
 
@@ -39,8 +41,13 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
 
         GraphicPanel panel = GraphicPanelManager.instance.GetPanel(panelName);
         if(panel == null) yield break;
+        
+        pathToGraphic = FilePaths.backgroundImages + imageName;
 
-        graphic = Resources.Load<Texture>(FilePaths.backgroundImages + imageName);
+        graphic = Resources.Load<Texture>(pathToGraphic);
+
+        if(graphic == null)
+            graphic = Resources.Load<VideoClip>(pathToGraphic);
 
         if(graphic == null){
             Debug.LogError($"Graphic '{imageName}' not found at path '{pathToGraphic}'");
@@ -53,12 +60,15 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
 
         layer = panel.GetLayer(0, true);
 
-        pathToGraphic = FilePaths.backgroundImages + imageName;
-
-        if(blendTex != null)
-            yield return layer.SetTexture(graphic, transitionSpeed, blendTex, pathToGraphic, immediate);
-        else
-            yield return layer.SetTexture(graphic, transitionSpeed, filePath: pathToGraphic, immediate: immediate);
+        if (blendTex != null){
+            yield return graphic is Texture
+                ? layer.SetTexture(graphic as Texture, transitionSpeed, blendTex, pathToGraphic, immediate)
+                : layer.SetVideo(graphic as VideoClip, transitionSpeed, false, blendTex, pathToGraphic, immediate);
+        } else {
+            yield return graphic is Texture
+                ? layer.SetTexture(graphic as Texture, transitionSpeed, filePath: pathToGraphic, immediate: immediate)
+                : layer.SetVideo(graphic as VideoClip, transitionSpeed, false, filePath: pathToGraphic, immediate: immediate);
+        }
     }
 
     private static IEnumerator ClearLayer(string[] data){

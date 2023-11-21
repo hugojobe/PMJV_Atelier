@@ -12,7 +12,7 @@ Show(Soeur)
 Autostoppeur as ??? "Hé !"
 <soeur> "Qu’est-ce que vous voulez ?"
 Hide(Soeur), Show(Autostoppeur)
-Autostoppeur "Merci de t’être arrêté petite...{c}S’il te plaît Est-ce que tu peux me déposer dans l’hôpital de <color=#F771D9>Sky City</color>, je dois y être au plus vite et mon véhicule est en panne."
+Autostoppeur "Merci de t’être arrêtée petite...{c}S’il te plaît Est-ce que tu peux me déposer dans l’hôpital de <color=#F771D9>Sky City</color>, je dois y être au plus vite et mon véhicule est en panne."
 Hide(Autostoppeur), Show(Soeur)
 <soeur> "Et merde... C’est un grand détoure par rapport à la ou je dois aller."
 Hide(Soeur), Show(Autostoppeur)

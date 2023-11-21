@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class GraphicLayer
 {
@@ -25,8 +26,28 @@ public class GraphicLayer
         return CreateGraphic(tex, transitionSpeed, filePath, blendingTexture: blendingTexture, immediate: immediate);
     }
 
-    private Coroutine CreateGraphic(Texture graphicData, float transitionSpeed, string filePath, Texture blendingTexture = null, bool immediate = false){
-        GraphicObject newGraphic = new GraphicObject(this, filePath, graphicData, immediate);
+    public Coroutine SetVideo(string filePath, float transitionSpeed = 1, Texture blendingTexture = null, bool useAudio = false, bool immediate = false) {
+        VideoClip clip = Resources.Load<VideoClip>(filePath);
+
+        if(clip == null){
+            Debug.LogError($"Can't find clip at path '{filePath}'");
+            return null;
+        }
+
+        return SetVideo(clip, transitionSpeed, useAudio, blendingTexture, filePath, immediate);
+    }
+
+    public Coroutine SetVideo(VideoClip clip, float transitionSpeed = 1, bool useAudio = false, Texture blendingTexture = null, string filePath = "", bool immediate = false){
+        return CreateGraphic(clip, transitionSpeed, filePath, blendingTexture, useAudio, immediate: immediate);
+    }
+
+    private Coroutine CreateGraphic<T>(T graphicData, float transitionSpeed, string filePath, Texture blendingTexture = null, bool useAudio = false, bool immediate = false){
+        GraphicObject newGraphic = null;
+
+        if(graphicData is Texture)
+            newGraphic = new GraphicObject(this, filePath, graphicData as Texture, immediate);
+        else if(graphicData is VideoClip)
+            newGraphic = new GraphicObject(this, filePath, graphicData as VideoClip, useAudio, immediate);
 
         if(currentGraphic != null && !oldGraphics.Contains(currentGraphic))
             oldGraphics.Add(currentGraphic);

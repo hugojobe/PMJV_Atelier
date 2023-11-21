@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class GraphicPanel
     public string panelName;
     public GameObject rootPanel;
     public List<GraphicLayer> layers = new List<GraphicLayer>();
+
+    public bool isClear => layers == null || layers.Count == 0 || layers.All(layer => layer.currentGraphic == null);
 
     public GraphicLayer GetLayer(int layerDepth, bool createIfDoaesNotExists = false){
         for(int i = 0; i < layers.Count; i++){

@@ -24,6 +24,8 @@ public abstract class Character
 
     public virtual bool isVisible {get; set;}
 
+    public Vector2 targetPosition {get; private set;}
+
     public Character(string name, CharacterConfigData config, GameObject prefab){
         this.name = name;
         displayName = name;
@@ -92,6 +94,8 @@ public abstract class Character
 
         root.anchorMin = minAnchorTarget;
         root.anchorMax = maxAnchorTarget;
+
+        targetPosition = position;
     }
 
     public virtual Coroutine MoveToPosition(Vector2 position, float speed = 2, bool smooth = false){
@@ -103,6 +107,8 @@ public abstract class Character
 
         moving = manager.StartCoroutine(MovingToPosition(position, speed, smooth));
 
+        targetPosition = position;
+        
         return moving;
     }
 

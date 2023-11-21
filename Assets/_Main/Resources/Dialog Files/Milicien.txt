@@ -2,10 +2,16 @@ CreateCharacter(Milicien -e false -i true)
 Move(Soeur -x 0.15 -y 0 -i true)
 Move(Milicien -x 0.85 -y 0 -i true)
 
+ShowAll()
+Wait(1)
+ShowDialog()
+SetBackground(BG3)
+
 Show(Milicien)
 Milicien "Contrôle, rangez-vous sur le bas caté s’il vous plait."
 Hide(Milicien), Show(Soeur)
-<soeur> "<i>Orgh c’est pas vrai.. {c}Ca va continuer longtemps les rencontres désagréables ?</i>"
+<soeur> "<i>Orgh c’est pas vrai.. </i>{c}<i>Ca va continuer longtemps les rencontres désagréables ?</i>"
+Hide(Soeur), Show(Milicien)
 Milicien "Bonjour, désolé du dérangement, c’est juste un petit contrôle, pouvez-vous sortir du véhicule ?"
 Hide(Milicien), Show(Soeur)
 <soeur> "Désolé du dérangement ? S'il vous plait ? La milice c’est radoucie ou c’est la norme dans ce quartier ?"
@@ -15,12 +21,12 @@ Hide(Milicien), Show(Soeur)
 choice "Que faire ?"
 {
 	-Teter de voler son arme <color=#FF3030><sprite tint=1 name=risk></color>
-		<soeur> "Le risque est grands mais si j’y arrive ça pourrait m’être utile."
+		<soeur> "Le risque est grand mais si j’y arrive ça pourrait m’être utile."
 		Hide(Soeur), Show(Milicien)
 		Milicien "Arh qu’est-ce que vous faites ?!"
 		Hide(Milicien)
 		"<i>QTE du milicien</i>"
-		choice "<color=\"FF0000\">DEBUG : RESULTAT DU QTE</color>"
+		choice "<color=#FF0000>DEBUG : RESULTAT DU QTE</color>"
 		{
 			-Réussite
 				Show(Soeur)
@@ -51,6 +57,8 @@ choice "Que faire ?"
 
 	-Ne rien faire
 		<soeur> "C’est juste un contrôle et je suis en ordre. Pas besoin de prendre des risques inutiles..."
+		Hide(Soeur), Show(Milicien)
+		Milicien "Merci de m’avoir accordé du temps, vous pouvez y aller. Encore désolé du temps perdu."
 
 }
 
@@ -61,3 +69,5 @@ ClearBackground()
 Wait(1)
 HideAll()
 
+ShowDialog()
+"<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)

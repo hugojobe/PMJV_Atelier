@@ -35,7 +35,7 @@ public class AudioChannel
             return existingtrack;
         }
 
-        AudioTrack track = new AudioTrack(clip, loop, startingVolume, volumeCap, pitch, this, AudioManager.instance.musicMixer);
+        AudioTrack track = new AudioTrack(clip, loop, startingVolume, volumeCap, pitch, this, AudioManager.instance.musicMixer, filePath);
         track.Play();
 
         SetAsActiveTrack(track);

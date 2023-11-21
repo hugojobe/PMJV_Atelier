@@ -16,7 +16,7 @@ Move(Frere -x 0.85 -y 0 -i true)
 ShowDialog()
 
 Show(Soeur)
-SetBackground(-img BG2)
+SetBackground(-img BG1)
 <soeur> "<color=#A2D9EA><frere></color> on ne peut pas continuer comme ça, on va finir par manquer de tout si ça continue."
 
 Hide(Soeur), Show(Frere)
@@ -44,9 +44,9 @@ HideDialog()
 Wait(1)
 
 ShowDialog(), Show(Soeur)
-<soeur> "Ou Est-ce qu’il les a planqués... {a}Les voilà enfin, ne t’en fais pas frangin si tu n’agis pas alors je le ferai."
+<soeur> "Où est-ce qu’il les a planqués... {a}Les voilà enfin, ne t’en fais pas frangin si tu n’agis pas alors je le ferai."
 Hide(soeur)
-"La <color=#F4E039>soeur</color> part tôt au matin sans éveiller les soupçons de son <color=#A2D9EA>frère</color> pour trouver les bouteilles d’Ox dont il a besoin."
+"La <color=#F4E039>soeur</color> part tôt au matin sans éveiller les soupçons de son <color=#A2D9EA>frère</color> pour trouver les bouteilles d’<ox> dont il a besoin."
 <soeur> "Allez, c’est l’heure..."
 
 HideDialog()

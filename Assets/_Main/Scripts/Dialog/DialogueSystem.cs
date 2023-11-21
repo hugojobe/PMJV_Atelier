@@ -64,6 +64,7 @@ public class DialogueSystem : MonoBehaviour
             dialogContainer.nameContainer.Show(speakerName);
         } else {
             HideSpeakerName();
+            dialogContainer.nameContainer.nameText.text = "";
         }
     }
     public void HideSpeakerName() => dialogContainer.nameContainer.Hide();

@@ -14,6 +14,8 @@ public class FilePaths
     
     public static readonly string resourcesDialogFiles = $"Dialog Files/";
 
+    public static readonly string resourcesFont = $"Fonts/";
+
     public static string GetPathToResource(string defaultPath, string resourceName) {
         if(resourceName.StartsWith("~/")) {
             return resourceName.Substring(2);
