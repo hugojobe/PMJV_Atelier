@@ -24,7 +24,7 @@ MonoBehaviour:
     sprites:
       _serializedList:
       - Key: SPR1
-        Value: {fileID: 21300000, guid: 3b23fc1544cc1c04a8e593cbc3c5d87a, type: 3}
+        Value: {fileID: 21300000, guid: 5fe16a2e7d566d945b491123bac49338, type: 3}
   - name: Frere
     alias: Frere
     characterType: 1

@@ -5,7 +5,7 @@ Move(Soeur -x 0.85 -y 0 -i true)
 ShowAll()
 Wait(1)
 ShowDialog()
-SetBackground(BG3)
+SetBackground(Noble)
 
 Show(Soeur)
 <soeur> "Punaise, je suis partie mais je dois encore me faire de l’argent rapide, je n’ai pas des masses sur moi.{c}Oh, cette personne à l’air fortunée!{c}<i>Sûrement une proie facile.</i>"
@@ -45,7 +45,7 @@ choice "Alors ?"
 		Hide(Soeur), Show(Noble)
 		Noble "HA !{a} Pathétique de voir que tu es prête à faire ça pour de l’argent ! {a}Mais une promesse est une promesse, tiens, ton argent."
 		Hide(Noble)
-		"Vous gagnez 5<money>."
+		narrator "Vous gagnez 5<money>."
 		$playerMoney += 5
 		$helpedNoble = true
 	-Refuser
@@ -54,6 +54,7 @@ choice "Alors ?"
 		Hide(Soeur), Show(Noble)
 		Noble "Je vois que malgré ta situation tu as encore de l’estime pour toi-même. {a}Très bien tu n’auras pas l’agent."
 		Hide(Noble)
+		$helpedNoble = false
 }
 
 Je suis entouré de gens cinglé... une fois tout ça finit on pensera à partir loin d’ici mon frère et moi.
@@ -65,4 +66,4 @@ Wait(1)
 HideAll()
 
 ShowDialog()
-"<i>Starting file 'AutoStop'</i>", Wait(2), Load(AutoStop)
+narrator "<i>Starting file 'AutoStop'</i>", Wait(2), Load(AutoStop)

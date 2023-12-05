@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
@@ -48,5 +49,51 @@ public class FileManager : MonoBehaviour
         }
 
         return lines;
+    }
+
+    public static bool TryCreateDirectoryFromPath(string path) {
+        if(Directory.Exists(path) || File.Exists(path))
+            return false;
+
+        if(path.Contains(".")){
+            path = Path.GetDirectoryName(path);
+
+            if(Directory.Exists(path))
+                return true;
+        }
+
+        if(path == string.Empty)
+            return false;
+
+        try {
+            Directory.CreateDirectory(path);
+            return true;
+        } catch (System.Exception e){
+            Debug.LogError($"Could not create directory ! {e}");
+            return false;
+        }
+    }
+
+    public static void Save(string filePath, string JSonData) {
+        if(!TryCreateDirectoryFromPath(filePath)) {
+            Debug.LogError($"FAILED TO SAVE FILE '{filePath}'");
+            return;
+        }
+
+        StreamWriter sw = new StreamWriter(filePath);
+        sw.Write(JSonData);
+        sw.Close();
+
+        Debug.Log($"Saved data to file '{filePath}'");
+    }
+
+    public static T Load<T>(string filePath) {
+        if(File.Exists(filePath)) {
+            string JSONData = File.ReadAllLines(filePath)[0];
+            return JsonUtility.FromJson<T>(JSONData);
+        } else {
+            Debug.LogError($"Error - File does not exists! '{filePath}'");
+            return default(T);
+        }
     }
 }

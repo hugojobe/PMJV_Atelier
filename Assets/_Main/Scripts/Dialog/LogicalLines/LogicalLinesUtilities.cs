@@ -19,10 +19,10 @@ public static class LogicalLinesUtilities
         private const char ENCAPSULATION_START = '{';
         private const char ENCAPSULATION_END = '}';
 
-        public static EncapsulatedData RipEncapsulationData(Conversation conversation, int startingIndex, bool ripHeaderAndEncapsulators = false){
+        public static EncapsulatedData RipEncapsulationData(Conversation conversation, int startingIndex, bool ripHeaderAndEncapsulators = false, int parentStartingIndex = 0){
             int encapsulationDepth = 0;
 
-            EncapsulatedData data = new EncapsulatedData{ lines = new List<string>(), startingIndex = startingIndex, endingIndex = 0};
+            EncapsulatedData data = new EncapsulatedData{ lines = new List<string>(), startingIndex = (startingIndex + parentStartingIndex), endingIndex = 0};
 
             for(int i = startingIndex; i <conversation.Count; i++){
                 string line = conversation.GetLines()[i];
@@ -37,7 +37,7 @@ public static class LogicalLinesUtilities
                 if(IsEncapsulationEnd(line)){
                     encapsulationDepth--;
                     if(encapsulationDepth == 0){
-                        data.endingIndex = i;
+                        data.endingIndex = (i + parentStartingIndex);
                         break;
                     }
                 }

@@ -10,13 +10,13 @@ wait(1)
 
 CreateCharacter(Soeur -e false -i true)
 CreateCharacter(Frere -e false -i true)
-Move(Soeur -x 0.15 -y 0 -i true)
-Move(Frere -x 0.85 -y 0 -i true)
+Move(Soeur -x 0.85 -y 0 -i true)
+Move(Frere -x 0.15 -y 0 -i true)
 
 ShowDialog()
 
 Show(Soeur)
-SetBackground(-img BG1)
+SetBackground(-img Intro)
 <soeur> "<color=#A2D9EA><frere></color> on ne peut pas continuer comme ça, on va finir par manquer de tout si ça continue."
 
 Hide(Soeur), Show(Frere)
@@ -28,25 +28,25 @@ Hide(Soeur), Show(Frere)
 Hide(Frere), Show(Soeur)
 <soeur> "Écoute je te fais une proposition, donne-moi les clés du véhicule je fais une descente dans l’<incr a=0.5 f=-1><size=32><color=#F7281E>undergound</color></size></incr> et je récupère les bouteilles dont t’as besoin."
 Hide(Soeur), Show(Frere)
-<frere> "<shake a=0.5>NON !</shake> C’est trop dangereux on trouvera une solution le moment venant."
+<frere> "<shake a=0.5>NON !</shake> C’est trop dangereux on trouvera une solution le moment venu."
 Hide(Frere), Show(Soeur)
 <soeur> "On n’aura peut-être pas cette chance..."
-HideDialog()
-Move(Soeur -x -1 -i false)
+Move(Soeur -x 1.35 -i false)
+(wait)HideDialog()
 
 Wait(1.75)
 Hide(Soeur -i true)
 
 Wait(1)
 ShowDialog()
-"Le lendemain..."
+narrator "Le lendemain..."
 HideDialog()
 Wait(1)
 
 ShowDialog(), Show(Soeur)
 <soeur> "Où est-ce qu’il les a planqués... {a}Les voilà enfin, ne t’en fais pas frangin si tu n’agis pas alors je le ferai."
 Hide(soeur)
-"La <color=#F4E039>soeur</color> part tôt au matin sans éveiller les soupçons de son <color=#A2D9EA>frère</color> pour trouver les bouteilles d’<ox> dont il a besoin."
+narrator "La <color=#F4E039>soeur</color> part tôt au matin sans éveiller les soupçons de son <color=#A2D9EA>frère</color> pour trouver les bouteilles d’<ox> dont il a besoin."
 <soeur> "Allez, c’est l’heure..."
 
 HideDialog()
@@ -56,4 +56,4 @@ Wait(1)
 HideAll()
 
 ShowDialog()
-"<i>Starting file 'Noble'</i>", Wait(2), Load(Noble)
+narrator "<i>Starting file 'Noble'</i>", Wait(2), Load(Noble)

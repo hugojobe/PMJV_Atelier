@@ -20,6 +20,7 @@ public class DialogueSystem : MonoBehaviour
 
     public delegate void DialogSystemEvent();
     public DialogSystemEvent onUserPromptNext;
+    public DialogSystemEvent onClear;
 
     public DialogContinuePrompt continuePrompt;
 
@@ -42,6 +43,20 @@ public class DialogueSystem : MonoBehaviour
 
     public void OnUserPromptNext(){
         onUserPromptNext?.Invoke();
+    }
+
+    public void OnSystemPromptClear() {
+        onClear?.Invoke();
+    }
+
+    public void OnStartViewingHistory() {
+        conversationManager.allowUserPrompt = false;
+        continuePrompt.Hide();
+    }
+
+    public void OnStopViewingHistry() {
+        conversationManager.allowUserPrompt = true;
+        continuePrompt.Show();
     }
 
     public void ApplySpeakerDataToDialogContainer(string speakerName){
@@ -74,8 +89,8 @@ public class DialogueSystem : MonoBehaviour
         return Say(conversation);
     }
 
-    public Coroutine Say(List<string> lines){
-        Conversation conversation = new Conversation(lines);
+    public Coroutine Say(List<string> lines, string filePath = ""){
+        Conversation conversation = new Conversation(lines, file:filePath);
         //Debug.Log($"Successfully created conversation {conversation} with {conversation.Count} lines");
         return conversationManager.StartConversation(conversation);
     }

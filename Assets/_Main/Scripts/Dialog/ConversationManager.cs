@@ -11,11 +11,14 @@ public class ConversationManager
 
     public Coroutine process = null;
     public bool isRunning => process != null;
+    public bool isOnLogicalLine {get; private set; } = false;
 
     public TextArchitect architect = null;
     public bool userPrompt = false;
 
     private LogicalLineManager logicalLineManager;
+
+    public bool allowUserPrompt = true;
 
     public Conversation conversation => conversationQueue.IsEmpty() ? null : conversationQueue.top;
     public int conversationProgress => (conversationQueue.IsEmpty())? -1 : conversationQueue.top.GetProgress();
@@ -30,11 +33,14 @@ public class ConversationManager
         conversationQueue = new ConversationQueue();
     }
 
+    public Conversation[] GetConversationQueue() => conversationQueue.GetReadonly;
+    
     public void Enqueue(Conversation conversation) => conversationQueue.Enqueue(conversation);
     public void EnqueuePriority(Conversation conversation) => conversationQueue.EnqueuePriority(conversation);
 
     public void OnUserPromptNext(){
-        userPrompt = true;
+        if(allowUserPrompt)
+            userPrompt = true;
     }
 
     public Coroutine StartConversation(Conversation conversation){
@@ -77,6 +83,7 @@ public class ConversationManager
             DialogLine line = DialogParser.Parse(rawLine);
 
             if(logicalLineManager.TryGetLogic(line, out Coroutine logic)){
+                isOnLogicalLine = true;
                 yield return logic;
             } else {
                 if(line.hasDialog){ //Afficher le dialogue
@@ -92,10 +99,13 @@ public class ConversationManager
                 if(line.hasDialog){
                     yield return WaitForUserInput();
                     CommandManager.instance.StopAllProcesses();
+
+                    dialogSystem.OnSystemPromptClear();
                 }
             }
 
             TryAdvanceConversation(currentConversation);
+            isOnLogicalLine = false;
         }
 
         process = null;
@@ -180,10 +190,16 @@ public class ConversationManager
     IEnumerator WaitForDialogSegmentSignalToBeTriggered(DialogData.DialogSegment segment){
         switch(segment.startSignal){
             case DialogData.DialogSegment.StartSignal.C:
+                yield return WaitForUserInput();
+                dialogSystem.OnSystemPromptClear();
+                break;
             case DialogData.DialogSegment.StartSignal.A:
                 yield return WaitForUserInput();
                 break;
             case DialogData.DialogSegment.StartSignal.WC:
+                yield return new WaitForSecondsRealtime(segment.signalDelay);
+                dialogSystem.OnSystemPromptClear();
+                break;
             case DialogData.DialogSegment.StartSignal.WA:
                 yield return new WaitForSecondsRealtime(segment.signalDelay);
                 break;

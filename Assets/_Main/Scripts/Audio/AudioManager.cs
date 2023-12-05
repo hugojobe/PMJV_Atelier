@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour
 
         if(c == null) return;
 
-        c.Stoptrack();
+        c.StopTrack();
     }
 
     public void StopTrack(string trackName){
@@ -108,7 +108,7 @@ public class AudioManager : MonoBehaviour
 
         foreach(AudioChannel channel in channels.Values){
             if(channel.activeTrack != null && channel.activeTrack.name.ToLower() == trackName){
-                channel.Stoptrack();
+                channel.StopTrack();
                 return;
             }
         }

@@ -48,13 +48,12 @@ choice "Que faire ?"
 
 		Hide(Milicien), Show(Soeur)
 		<soeur> "Essaye de passer une bonne journée, salut..."
-		"Vous avez gagné 3<money>."
+		narrator "Vous avez gagné 3<money>."
 		$playerMoney += 3
-		"Vous avez perdu 1 <ox>."
+		narrator "Vous avez perdu 1 <ox>."
 		$playerOx += 1
-		"Vous avez agné une arme."
+		narrator "Vous avez agné une arme."
 		$hasWeapon = true
-
 	-Ne rien faire
 		<soeur> "C’est juste un contrôle et je suis en ordre. Pas besoin de prendre des risques inutiles..."
 		Hide(Soeur), Show(Milicien)
@@ -70,4 +69,4 @@ Wait(1)
 HideAll()
 
 ShowDialog()
-"<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)
+narrator "<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)

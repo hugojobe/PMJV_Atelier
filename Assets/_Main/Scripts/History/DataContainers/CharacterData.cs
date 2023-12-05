@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -73,6 +74,40 @@ public class CharacterData
         }
 
         return characters;
+    }
+
+    public static void Apply(List<CharacterData> data) {
+        List<string> cache = new List<string>();
+
+        foreach(CharacterData characterData in data) {
+            Character character = CharacterManager.instance.GetCharacter(characterData.characterName, createIfDoesNotExists:true);
+            character.displayName = characterData.displayName;
+            
+            character.SetPosition(characterData.position);
+
+            character.isVisible = characterData.enabled;
+
+            if(character.config.characterType == Character.CharacterTypes.Sprite) {
+                SpriteData sd = JsonUtility.FromJson<SpriteData>(characterData.dataJSON);
+                CharacterSprite sc = character as CharacterSprite;
+                
+                var layer = sc.GetLayer();
+                if(layer.sprite != null && layer.sprite.name != sd.spriteName) {
+                    Sprite sprite = sc.GetSprite(sd.spriteName);
+                    if(sprite != null)
+                        sc.SetSprite(sprite);
+                    else
+                        Debug.Log($"History State could not load sprite '{sd.spriteName}'");
+                }
+            }
+
+            cache.Add(character.name);
+        }
+
+        foreach(Character character in CharacterManager.instance.characters.Values) {
+            if(!cache.Contains(character.name))
+                character.isVisible = false;
+        }
     }
 
     [System.Serializable]

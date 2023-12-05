@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -34,5 +37,39 @@ public class DialogueData
         data.speakerScale = nameText.fontSize;
 
         return data;
+    }
+
+    public static void Apply(DialogueData data) {
+        DialogueSystem ds = DialogueSystem.instance;
+
+        var dialogueText = ds.dialogContainer.dialogText;
+        var nameText = ds.dialogContainer.nameContainer.nameText;
+    
+        dialogueText.text = data.currentDialog;
+        dialogueText.maxVisibleCharacters = data.currentDialog.Length;
+
+        dialogueText.color = data.dialogColor;
+        dialogueText.fontSize = data.dialogScale;
+
+        nameText.text = data.currentSpeaker;
+        if(nameText.text != string.Empty)
+            ds.dialogContainer.nameContainer.Show();
+        else
+            ds.dialogContainer.nameContainer.Hide();
+        
+        nameText.color = data.speakerColor;
+        nameText.fontSize = data.speakerScale;
+
+        if(data.dialogFont != dialogueText.font.name) {
+            TMP_FontAsset fontAsset = HistoryCache.LoadFont(data.dialogFont);
+            if(fontAsset != null)
+                dialogueText.font = fontAsset;
+        }
+
+        if(data.dialogFont != nameText.font.name) {
+            TMP_FontAsset fontAsset = HistoryCache.LoadFont(data.speakerFont);
+            if(fontAsset != null)
+                nameText.font = fontAsset;
+        }
     }
 }

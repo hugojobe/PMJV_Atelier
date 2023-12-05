@@ -16,22 +16,27 @@ public class LL_Condition : ILogicalLine {
         Conversation currentConversation = DialogueSystem.instance.conversationManager.conversation;
         int currentProgress = DialogueSystem.instance.conversationManager.conversationProgress;
 
-        EncapsulatedData ifData = RipEncapsulationData(currentConversation, currentProgress, false);
+        EncapsulatedData ifData = RipEncapsulationData(currentConversation, currentProgress, false, parentStartingIndex:currentConversation.fileStartIndex);
         EncapsulatedData elseData = new EncapsulatedData();
         
         if(ifData.endingIndex + 1 < currentConversation.Count){
             string nextLine = currentConversation.GetLines()[ifData.endingIndex + 1].Trim();
             if(nextLine == ELSE){
-                elseData = RipEncapsulationData(currentConversation, ifData.endingIndex + 1, false);
+                elseData = RipEncapsulationData(currentConversation, ifData.endingIndex + 1, false, parentStartingIndex:currentConversation.fileStartIndex);
                 ifData.endingIndex = elseData.endingIndex;
             }
         }
         
-        currentConversation.SetProgress(ifData.endingIndex);
+        currentConversation.SetProgress(elseData.isNull? ifData.endingIndex : elseData.endingIndex);
 
         EncapsulatedData selData = conditionResult? ifData : elseData;
+
         if(!selData.isNull && selData.lines.Count > 0) {
-            Conversation newConversation = new Conversation(selData.lines);
+            //Remove the header and encapsulator lines from the conversation indexes
+            selData.startingIndex += 2; //Remove header and encpasulator
+            selData.endingIndex -= 1; //Remove end encapsulator
+
+            Conversation newConversation = new Conversation(selData.lines, file:currentConversation.file, fileStartIndex:selData.startingIndex, fileEndIndex:selData.endingIndex);
             DialogueSystem.instance.conversationManager.EnqueuePriority(newConversation);
         }
 

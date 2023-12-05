@@ -1,0 +1,23 @@
+$money = 50
+
+narrator "Begining test file"
+
+if($money >= 40)
+{
+	narrator "This is the first if !"
+
+	if($money >= 45)
+	{
+		narrator "Yay, my money is greater than 45 !"
+	}
+	else
+	{
+		narrator "Oh, my money is between 40 and 45."	
+	}
+
+	narrator "I hope this line get displayed"
+}
+else
+{
+	narrator "Oh no ! I have less than 40..."
+}

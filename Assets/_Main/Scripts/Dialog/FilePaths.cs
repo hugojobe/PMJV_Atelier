@@ -4,6 +4,9 @@ public class FilePaths
 {
     public static readonly string root = $"{Application.dataPath}/gameData/";
 
+    //Runtime paths
+    public static readonly string gameSaves = $"{runtimePath}Saves";
+
     //Resources paths
     public static readonly string backgroundImages = "BG Images/";
     public static readonly string blendTexs = "Transition Effects/";
@@ -22,5 +25,15 @@ public class FilePaths
         }
 
         return defaultPath + resourceName;
+    }
+
+    public static string runtimePath {
+        get {
+            #if UNITY_EDITOR
+                return "Assets/appdata/";
+            #else
+                return Application.persistentDataPath + "/appdata/";
+            #endif
+        }
     }
 }

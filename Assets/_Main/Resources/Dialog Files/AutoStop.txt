@@ -5,7 +5,7 @@ Move(Autostoppeur -x 0.85 -y 0 -i true)
 ShowAll()
 Wait(1)
 ShowDialog()
-SetBackground(BG1)
+SetBackground(Desert)
 
 Show(Soeur)
 <soeur> "Quoi encore... bon voyons voir ce qu’il veut."
@@ -27,13 +27,14 @@ choice "Qu'est-ce que je dois faire ?"
 		<soeur> "Bon d’accord, je vais vous déposer là-bas. {c}Juste faites pas n’importe quoi. Si vous tentez quoi que ce soit ça finira mal..."
 		Hide(Soeur), Show(Autostoppeur)
 		Autostoppeur "Merci, vraiment vous me sauvez tenez voici un peu d’argent pour compenser le voyage."
-		"Vous gagnez 3<money>."
+		narrator "Vous gagnez 3<money>."
 		$playerMoney += 3
 		Hide(Autostoppeur)
 		HideDialog()
 		Wait(1)
 		ShowDialog()
-		"Vous perdez 2 <ox>."
+		narrator "Vous perdez 2 <ox>."
+		$playerOx -= 2
 		HideDialog()
 		Wait(1)
 		ShowDialog()
@@ -47,7 +48,7 @@ choice "Qu'est-ce que je dois faire ?"
 		HideAll()
 
 		ShowDialog()
-		"<i>Starting file 'Milicien'</i>", Wait(2), Load(Milicien)
+		narrator "<i>Starting file 'Milicien'</i>", Wait(2), Load(Milicien)
 	-Refuser
 		$helpedAutoStopper = false
 		<soeur> "Qu’est ce qui me prouve que tu dois aller là-bas ? {c}Tu pourrais très bien me poignarder par derrière ou pire, donc non démerdez vous pour vos problème !"
@@ -63,5 +64,6 @@ choice "Qu'est-ce que je dois faire ?"
 		HideAll()
 
 		ShowDialog()
-		"<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)
+		$hasWeapon = false
+		narrator "<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)
 }

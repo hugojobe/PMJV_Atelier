@@ -10,6 +10,7 @@ public class GraphicLayer
     public Transform panel;
     public GraphicObject currentGraphic = null;
     private List<GraphicObject> oldGraphics = new List<GraphicObject>();
+    public string graphicName => currentGraphic.graphicName;
 
     public Coroutine SetTexture(string filePath, float transitionSpeed = 1, Texture blendingTexture = null, bool immediate = false){
         Texture tex = Resources.Load<Texture>(filePath);

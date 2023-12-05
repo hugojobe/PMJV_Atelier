@@ -16,6 +16,9 @@ public class PlayerInputManager : MonoBehaviour
 
     private void InitializeActions(){
         actions.Add((input.actions["Next"], OnNext));
+        actions.Add((input.actions["HistoryForward"], OnHistoryForward));
+        actions.Add((input.actions["HistoryBack"], OnHistoryBack));
+        actions.Add((input.actions["HistoryLogs"], OnHistoryToggleLog));
     }
 
     private void OnEnable() {
@@ -36,5 +39,21 @@ public class PlayerInputManager : MonoBehaviour
 
     public void OnNext(){
         DialogueSystem.instance.OnUserPromptNext();
+    }
+
+    public void OnHistoryForward(InputAction.CallbackContext ctx){
+        HistoryManager.instance.GoForward();
+    }
+
+    public void OnHistoryBack(InputAction.CallbackContext ctx){
+        HistoryManager.instance.GoBack();
+    }
+
+    public void OnHistoryToggleLog(InputAction.CallbackContext ctx){
+        var logs = HistoryManager.instance.logManager;
+        if(!logs.isOpen)
+            logs.Open();
+        else
+            logs.Close();
     }
 }
