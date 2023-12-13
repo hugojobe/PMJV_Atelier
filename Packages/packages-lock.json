@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.sohne.colorblindness": {
+      "version": "https://github.com/SOHNE/Colorblindness.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "4.10.0-preview"
+      },
+      "hash": "5bedd7c104dc8ad83ed2a06c5f98c829173bea30"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.5",
       "depth": 1,

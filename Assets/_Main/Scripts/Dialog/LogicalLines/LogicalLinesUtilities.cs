@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class LogicalLinesUtilities
@@ -172,7 +171,9 @@ public static class LogicalLinesUtilities
         public static readonly string REGEX_CONDITIONAL_OPERATORS = @"(==|!=|<=|>=|&&|\|\|)";
 
         public static bool EvaluateCondition(string condition) {
+            Debug.Log("RC : " + TagManagers.Inject(condition, true, false));
             condition = TagManagers.Inject(condition, injectTags: true, injectVariables: true);
+            Debug.Log("IC : " + condition);
 
             string[] parts = Regex.Split(condition, REGEX_CONDITIONAL_OPERATORS).Select(p => p.Trim()).ToArray();
 

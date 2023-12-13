@@ -1,11 +1,10 @@
 using UnityEngine;
-
 public class FilePaths
 {
-    public static readonly string root = $"{Application.dataPath}/gameData/";
+    public static readonly string root = $"{runtimePath}UserData/";
 
     //Runtime paths
-    public static readonly string gameSaves = $"{runtimePath}Saves";
+    public static readonly string gameSaves = $"{runtimePath}SavesData/";
 
     //Resources paths
     public static readonly string backgroundImages = "BG Images/";

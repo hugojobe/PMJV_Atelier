@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class TestDialogFiles : MonoBehaviour
 {
@@ -14,16 +13,16 @@ public class TestDialogFiles : MonoBehaviour
     }
 
     public void StartConversation(){
-        string fullPath = AssetDatabase.GetAssetPath(fileToRead);
+        /*string fullPath = AssetDatabase.GetAssetPath(fileToRead);
 
         int resourcesIndex = fullPath.IndexOf("Resources/");
         string relativePath = fullPath.Substring(resourcesIndex + 10);
 
         string filePath = Path.ChangeExtension(relativePath, null);
 
-        VNManager.instance.LoadFile(filePath);
+        LoadFile(filePath);
 
-        /*List<string> lines = FileManager.ReadTextAsset(fileToRead);
+        List<string> lines = FileManager.ReadTextAsset(fileToRead);
 
         foreach(string line in lines){
 
@@ -43,5 +42,18 @@ public class TestDialogFiles : MonoBehaviour
         }
 
         DialogueSystem.instance.Say(lines);*/
+    }
+
+    public void LoadFile(string filePath) {
+        List<string> lines = new List<string>();
+        TextAsset file = Resources.Load<TextAsset>(filePath);
+
+        try {
+            lines = FileManager.ReadTextAsset(file);
+        } catch { 
+            Debug.LogError($"Dialogue file at path 'Rsources/{filePath}' does not exist");   
+        }
+
+        DialogueSystem.instance.Say(lines, filePath);
     }
 }

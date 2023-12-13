@@ -1,0 +1,5 @@
+ShowAll()
+Wait(1)
+ShowDialog()
+
+narrator "Fin de la démo :("

@@ -1,0 +1,16 @@
+Hide(Soeur), Show(Marchand)
+Marchand "Pour qui tu te prends...{a} Je suis gentil alors je te conseille de te barrer vite d'ici gamine."
+Hide(Marchand), Show(Soeur)
+<soeur> "<i>Il a pas l'air de rigoler. En plus il est armé. Il a aussi sûrement des alliés armés pas loin pour le protéger à distance…</i>"
+<soeur> "Ok d’accord je m’en vais, essayons de rester calme."
+<soeur> "<i>Bordel c’était moins une, j’ai failli gâcher ma vie, et celle de mon frère.</i>"
+<soeur> "Je dois être plus prudente."
+<soeur> "Oh non, encore des problèmes avec ce vieux vaisseau..."
+
+Hide(Soeur)
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+SwitchToVesselMode(-f Fin -d 60)

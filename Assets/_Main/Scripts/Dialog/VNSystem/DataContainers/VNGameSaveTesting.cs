@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class VNGameSaveTesting : MonoBehaviour
 {
+    VNGameSave save;
+
     private void Start() {
         VNGameSave.activeFile = new VNGameSave();
     }
@@ -13,8 +15,11 @@ public class VNGameSaveTesting : MonoBehaviour
             VNGameSave.activeFile.Save();
         }
         else if(Input.GetKeyDown(KeyCode.L)) {
-            VNGameSave.activeFile = FileManager.Load<VNGameSave>($"{FilePaths.gameSaves}1{VNGameSave.FILE_TYPE}");
-            VNGameSave.activeFile.Load();
+            try{
+                save = VNGameSave.Load($"{FilePaths.gameSaves}1{VNGameSave.FILE_TYPE}", true);
+            } catch(System.Exception e) {
+                Debug.Log($"Could not load save file! {e}");
+            }
         }
     }
 }

@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using TextAsset = UnityEngine.TextAsset;
 
@@ -16,6 +14,8 @@ public class ExtensionGeneral : CommandDatabaseExtension
     private static string[] PARAM_IMMEDIATE => new string[]{"-i", "-immediate"};
     private static string[] PARAM_BLENDTEX => new string[]{"-bt", "-blendtex"};
     private static string[] PARAM_SPEED => new string[]{"-spd", "-speed"};
+    private static string[] PARAM_TIME => new string[]{"-d", "duration"};
+
     private const string MATERIAL_MAINTEX =  "_MainTex";
     private const string MATERIAL_BLENDTEX = "_BlendTex";
     private const string MATERIAL_BLEND =    "_Blend";
@@ -28,6 +28,7 @@ public class ExtensionGeneral : CommandDatabaseExtension
         database.AddCommand("hidedialog", new Func<IEnumerator>(HideDialog));
         database.AddCommand("hideall", new Func<string[], IEnumerator>(HideBG));
         database.AddCommand("showall", new Func<string[], IEnumerator>(ShowBG));
+        database.AddCommand("switchtovesselmode", new Func<string[], IEnumerator>(SwitchToVesselMode));
 
         database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
     }
@@ -124,5 +125,19 @@ public class ExtensionGeneral : CommandDatabaseExtension
                 yield return null;
             }
         }
+    }
+
+    private static IEnumerator SwitchToVesselMode(string[] data) {
+        VesselManager.instance.ChangeState(VesselState.IDLE);
+
+        string exitFile = string.Empty;
+        float phaseDuration;
+
+        CommandParameters parameters = ConvertDataToParameters(data);
+        parameters.TryGetValue(PARAM_FILEPATH, out exitFile);
+        parameters.TryGetValue(PARAM_TIME, out  phaseDuration);
+
+
+        yield return VesselManager.instance.EnterVesselMode(exitFile, phaseDuration);
     }
 }

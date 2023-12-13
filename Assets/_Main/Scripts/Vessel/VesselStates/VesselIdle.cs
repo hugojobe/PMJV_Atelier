@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class VesselIdle : VesselNode {
     private float waitTime, currentWaitTime;
 
     public override void OnStateEnter() {
+        foreach(var obj in VesselManager.instance.objectsToDisableInVesselMode) {
+            obj.SetActive(false);
+        }
+
         currentWaitTime = 0;
         waitTime = Random.Range(3f, 6f);
     }
@@ -24,6 +25,8 @@ public class VesselIdle : VesselNode {
     }
 
     public void SetProblem() {
+        if(!VesselManager.instance.canGenerateProblem) return;
+
         VesselManager.instance.ChangeState(VesselState.PROBLEM);
     }
 }

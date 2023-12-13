@@ -1,8 +1,6 @@
-$soeurName = "Soeurette"
-$frereName = "Frèro"
+$soeurName = "Odessa"
+$frereName = "Amos"
 
-$playerOx = 10
-$playerMoney = 0
 
 HideDialog()
 
@@ -24,7 +22,7 @@ Hide(Soeur), Show(Frere)
 Hide(Frere), Show(Soeur)
 <soeur> "On n’aura peut-être jamais le luxe d’attendre ton rétablissement..."
 Hide(Soeur), Show(Frere)
-<frere> ".{wa 1}.{wa 1}."
+<frere> "..."
 Hide(Frere), Show(Soeur)
 <soeur> "Écoute je te fais une proposition, donne-moi les clés du véhicule je fais une descente dans l’<incr a=0.5 f=-1><size=32><color=#F7281E>undergound</color></size></incr> et je récupère les bouteilles dont t’as besoin."
 Hide(Soeur), Show(Frere)
@@ -55,5 +53,4 @@ ClearBackground()
 Wait(1)
 HideAll()
 
-ShowDialog()
-narrator "<i>Starting file 'Noble'</i>", Wait(2), Load(Noble)
+Load(Autostop)

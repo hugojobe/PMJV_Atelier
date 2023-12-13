@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class TagManagers : MonoBehaviour
@@ -11,9 +10,11 @@ public class TagManagers : MonoBehaviour
     public static Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>(){
         {"<soeur>",         () => VariableStore.TryGetValue("soeurName", out object value)? value.ToString() : "Error getting the value of variable 'playerName'"},
         {"<frere>",         () => VariableStore.TryGetValue("frereName", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" },
-        {"<playerOx>",      () => VariableStore.TryGetValue("playerOx", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" },
+        {"<playerOx>",      () => VNGameSave.activeFile.playerOx.ToString() },
+        {"<playerMoney>",   () => VNGameSave.activeFile.playerMoney.ToString() }, 
+        {"<helpedAutostop>", () => VNGameSave.activeFile.helpedAutostop.ToString() },
         {"<money>",         () => "<color=#F4A015><sprite tint=1 name=money></color>"},  
-        {"<risk>",         () => "<color=#FF3030><sprite tint=1 name=risk></color>"},  
+        {"<risk>",          () => "<color=#FF3030><sprite tint=1 name=risk></color>"},  
         {"<ox>",            () => "<color=#2BA7EE>ox</color>"} 
     };
     private static readonly Regex tagRegex = new Regex("<\\w+>");

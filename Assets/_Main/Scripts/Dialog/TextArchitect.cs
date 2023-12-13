@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Net.Security;
 using TMPro;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class TextArchitect

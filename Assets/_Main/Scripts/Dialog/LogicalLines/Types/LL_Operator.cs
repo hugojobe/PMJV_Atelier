@@ -47,16 +47,17 @@ public class LL_Operator : ILogicalLine
                 VariableStore.TrySetValue(variable, value);
                 break;
             case "+=":
-                VariableStore.TrySetValue(variable, ConcatenateOrAdd(currentValue, value));
+                //VariableStore.TrySetValue(variable, ConcatenateOrAdd(currentValue, value));
+                VariableStore.TrySetValue(variable, Convert.ChangeType(Convert.ToDouble(currentValue) + Convert.ToDouble(value), currentValue.GetType()));
                 break;
             case "-=":
-                VariableStore.TrySetValue(variable, Convert.ToDouble(currentValue) - Convert.ToDouble(value));
+                VariableStore.TrySetValue(variable, Convert.ChangeType(Convert.ToDouble(currentValue) - Convert.ToDouble(value), currentValue.GetType()));
                 break;
             case "*=":
-                VariableStore.TrySetValue(variable, Convert.ToDouble(currentValue) * Convert.ToDouble(value));
+                VariableStore.TrySetValue(variable, Convert.ChangeType(Convert.ToDouble(currentValue) * Convert.ToDouble(value), currentValue.GetType()));
                 break;
             case "/=":
-                VariableStore.TrySetValue(variable, Convert.ToDouble(currentValue) / Convert.ToDouble(value));
+                VariableStore.TrySetValue(variable, Convert.ChangeType(Convert.ToDouble(currentValue) / Convert.ToDouble(value), currentValue.GetType()));
                 break;
             default:
                 Debug.LogError($"Invalid operator '{op}'");

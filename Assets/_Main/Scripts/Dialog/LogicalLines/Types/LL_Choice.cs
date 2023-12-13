@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using static LogicalLinesUtilities.Encapsulation;
 
 public class LL_Choice : ILogicalLine
@@ -59,7 +58,7 @@ public class LL_Choice : ILogicalLine
                 }
 
                 choiceIndex = i;
-                choice.title = line.Trim().Substring(1);
+                choice.title = TagManagers.Inject(line.Trim().Substring(1));
                 isFirstChoice = false;
                 continue;
             }

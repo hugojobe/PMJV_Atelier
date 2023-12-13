@@ -1687,7 +1687,9 @@ namespace Febucci.UI
                 }
             }
 
-            tmproText.UpdateVertexData();
+            try{
+                tmproText.UpdateVertexData();
+            } catch {}
         }
 
         #endregion

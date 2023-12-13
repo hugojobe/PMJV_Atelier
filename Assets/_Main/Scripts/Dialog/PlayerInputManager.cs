@@ -42,18 +42,22 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     public void OnHistoryForward(InputAction.CallbackContext ctx){
-        HistoryManager.instance.GoForward();
+        if(VesselManager.instance.currentStateDisplay == VesselState.VN)
+            HistoryManager.instance.GoForward();
     }
 
     public void OnHistoryBack(InputAction.CallbackContext ctx){
-        HistoryManager.instance.GoBack();
+        if(VesselManager.instance.currentStateDisplay == VesselState.VN)
+            HistoryManager.instance.GoBack();
     }
 
     public void OnHistoryToggleLog(InputAction.CallbackContext ctx){
-        var logs = HistoryManager.instance.logManager;
-        if(!logs.isOpen)
-            logs.Open();
-        else
-            logs.Close();
+        if(VesselManager.instance.currentStateDisplay == VesselState.VN){
+            var logs = HistoryManager.instance.logManager;
+            if(!logs.isOpen)
+                logs.Open();
+            else
+                logs.Close();
+        }
     }
 }

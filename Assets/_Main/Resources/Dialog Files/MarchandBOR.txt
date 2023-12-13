@@ -1,0 +1,24 @@
+if(<playerMoney> >= 30)
+{
+	$playerMoney -= 30
+	<soeur> "Je vais vous prendre l’objet rare et un peu d’essence."
+	Hide(Soeur), Show(Marchand)
+	Marchand "Je vois que t’as l’oeil... J’espère que t’as l’argent qui va avec."
+	Hide(Marchand), Show(Soeur)
+	<soeur> "Tenez l’argent. J’espère que je vais aller loin avec ça..."
+	narrator "Vous perdez 30 <money>"
+	<soeur> "Oh non, encore des problèmes avec ce vieux vaisseau..."
+
+	Hide(Soeur)
+	HideDialog()
+	Wait(1)
+	ClearBackground()
+	Wait(1)
+	HideAll()
+	SwitchToVesselMode(-f Fin -d 60)
+}
+else
+{
+	<soeur> "Oh, je n'ai que <playerMoney> <money>. Je crois que ce ne sera pas suffisant..."
+	Load(MarchandRien)
+}

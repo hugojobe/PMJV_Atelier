@@ -15,6 +15,8 @@ public class DialogParser : MonoBehaviour
 
         //Debug.Log($"Parsing result : '{speaker}' / '{dialog}' / '{commands}'");
 
+        commands = TagManagers.Inject(commands);
+
         return new DialogLine(rawLine, speaker, dialog, commands);
     }
 

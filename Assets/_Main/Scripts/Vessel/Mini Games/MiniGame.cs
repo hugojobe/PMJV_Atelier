@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MiniGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public UnityAction onMiniGameComplete;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SolveProblem() {
+        VesselManager.instance.OnProblemSolved.Invoke();
+        Debug.Log("Problem Solved");
+        Destroy(this.gameObject);
     }
 }

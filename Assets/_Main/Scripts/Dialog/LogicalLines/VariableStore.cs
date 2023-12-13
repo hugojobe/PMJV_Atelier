@@ -1,12 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static VariableStore;
 
 public class VariableStore
 {
@@ -55,7 +51,7 @@ public class VariableStore
         public override void Set(object newValue) => setter(newValue);
     }
 
-    private static Dictionary<string, Database> databases = new Dictionary<string, Database>(){{DEFAULT_DATABASE_NAME, new Database(DEFAULT_DATABASE_NAME)}};
+    public static Dictionary<string, Database> databases = new Dictionary<string, Database>(){{DEFAULT_DATABASE_NAME, new Database(DEFAULT_DATABASE_NAME)}};
     private static Database defaultDatabase => databases[DEFAULT_DATABASE_NAME];
 
     public static bool CreateDatabase(string name) {
@@ -165,7 +161,7 @@ public class VariableStore
         foreach(KeyValuePair<string, Variable> dbEntry in database.variables) {
             string variableName = dbEntry.Key;
             object variableValue = dbEntry.Value.Get();
-            sb.AppendLine($"\t<color=#FFB145>Variable [{variableName}]</color> = <color=#FFD220>{variableValue}</color>");
+            sb.AppendLine($"\t<color=#FFB145>Variable [{variableName} : {variableValue.GetType()}]</color> = <color=#FFD220>{variableValue}</color>");
         }
 
         Debug.Log(sb.ToString());

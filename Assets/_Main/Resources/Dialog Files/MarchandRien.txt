@@ -1,0 +1,13 @@
+<soeur> "Finalement j’ai rien à prendre, désolé du dérangement."
+Hide(Soeur), Show(Marchand)
+Marchand "Reviens quand tu te seras décidé la prochaine fois."
+Hide(Marchand), Show(Soeur)
+<soeur> "Oh non, encore des problèmes avec ce vieux vaisseau..."
+
+Hide(Soeur)
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+SwitchToVesselMode(-f Fin -d 60)

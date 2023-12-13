@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering.Universal;
 
 public class AudioManager : MonoBehaviour
 {
     private const string SFX_PARENT_NAME = "SFX";
     private const string SFX_NAME_FORMAT = "SFX - [{0}]";
+
+    public const string MUSIC_VOLUME_PARAMETER_NAME = "MusicVolume";
+    public const string SFX_VOLUME_PARAMETER_NAME = "SFXVolume";
 
     public static AudioManager instance {get; private set;}
 
@@ -16,6 +18,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioMixerGroup musicMixer;
     public AudioMixerGroup sfxMixer;
+
+    public AnimationCurve audioFalloffCurve;
 
     private Transform sfxRoot;
 

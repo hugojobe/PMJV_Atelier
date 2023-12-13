@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.VersionControl;
+using System.Text;
 using UnityEngine;
 
 public class FileManager : MonoBehaviour
 {
+    private const string KEY = "EYEKEY";
+
     public static List<string> ReadTextFile(string filePath, bool includeBlakLines = true){
         if(filePath.StartsWith('/'))
             filePath = FilePaths.root + filePath;
@@ -52,8 +53,8 @@ public class FileManager : MonoBehaviour
     }
 
     public static bool TryCreateDirectoryFromPath(string path) {
-        if(Directory.Exists(path) || File.Exists(path))
-            return false;
+        /*if(Directory.Exists(path) || File.Exists(path))
+            return false;*/
 
         if(path.Contains(".")){
             path = Path.GetDirectoryName(path);
@@ -74,26 +75,55 @@ public class FileManager : MonoBehaviour
         }
     }
 
-    public static void Save(string filePath, string JSonData) {
+    public static void Save(string filePath, string JSonData, bool encrypt = false) {
         if(!TryCreateDirectoryFromPath(filePath)) {
             Debug.LogError($"FAILED TO SAVE FILE '{filePath}'");
             return;
         }
 
-        StreamWriter sw = new StreamWriter(filePath);
-        sw.Write(JSonData);
-        sw.Close();
+        if(encrypt){
+            byte[] dataBytes = Encoding.UTF8.GetBytes(JSonData);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(KEY);
+            byte[] encryptedBytes = XOR(dataBytes, keyBytes);
+
+            try{File.Delete(filePath); } catch { }
+            File.WriteAllBytes(filePath, encryptedBytes);
+        } else {
+            StreamWriter sw = new StreamWriter(filePath, false);
+            sw.Write(JSonData);
+            sw.Close();
+        }
 
         Debug.Log($"Saved data to file '{filePath}'");
     }
 
-    public static T Load<T>(string filePath) {
+    public static T Load<T>(string filePath, bool encrypt = false) {
         if(File.Exists(filePath)) {
-            string JSONData = File.ReadAllLines(filePath)[0];
-            return JsonUtility.FromJson<T>(JSONData);
+            if(encrypt) {
+                byte[] encrpytedBytes = File.ReadAllBytes(filePath);
+                byte[] keyBytes = Encoding.UTF8.GetBytes(KEY);
+                byte[] decryptedBytes = XOR(encrpytedBytes, keyBytes);
+
+                string stringData = Encoding.UTF8.GetString(decryptedBytes);
+
+                return JsonUtility.FromJson<T>(stringData);
+            } else {
+                string JSONData = File.ReadAllLines(filePath)[0];
+                return JsonUtility.FromJson<T>(JSONData);
+            }
         } else {
             Debug.LogError($"Error - File does not exists! '{filePath}'");
             return default(T);
         }
+    }
+
+    private static byte[] XOR(byte[] input, byte[] key) {
+        byte[] output = new byte[input.Length];
+
+        for(int i = 0; i < input.Length; i++) {
+            output[i] = (byte)(input[i] ^ key[i % key.Length]);
+        }
+
+        return output;
     }
 }

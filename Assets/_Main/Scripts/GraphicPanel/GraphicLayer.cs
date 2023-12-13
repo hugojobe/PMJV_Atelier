@@ -64,7 +64,9 @@ public class GraphicLayer
 
     public void DestroyOldGraphics(){
         foreach(GraphicObject g in oldGraphics)
-            Object.Destroy(g.renderer.gameObject);
+            try{
+                Object.Destroy(g.renderer.gameObject);
+            } catch {}
 
         oldGraphics.Clear();
     }

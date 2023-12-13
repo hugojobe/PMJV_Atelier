@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Authentication.ExtendedProtection;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class CommandDatabaseExtensionExamples : CommandDatabaseExtension

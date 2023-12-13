@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,54 @@ public class VNGameSave
     public static VNGameSave activeFile = null;
 
     public const string FILE_TYPE = ".eyesave";
-    public const string SCREENSHOT_FILE_TYPE = "jpg";
-    public const bool ENCRYPT_FILES = false;
+    public const string SCREENSHOT_FILE_TYPE = ".jpg";
+    public const bool ENCRYPT_FILES = true;
 
-    public string filPath => $"{FilePaths.gameSaves}{slotNumber}{FILE_TYPE}";
+    public string filePath => $"{FilePaths.gameSaves}{slotNumber}{FILE_TYPE}";
     public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{SCREENSHOT_FILE_TYPE}";
 
-    public string playerName;
+    public int playerMoney = 7;
+    public int playerOx = 10;
+    public bool helpedAutostop = false;
+
     public int slotNumber = 1;
 
+    public bool newGame = true;
     public string[] activeConversation;
     public HistoryState activeState;
     public HistoryState[] historyLogs;
+    public VNVariablesData[] variables;
+
+    public string timestamp;
+
+    public static VNGameSave Load(string filePath, bool activateOnLoad = false) {
+        VNGameSave save = FileManager.Load<VNGameSave>(filePath, ENCRYPT_FILES);
+
+        if(activateOnLoad){
+            activeFile = save;
+            save.Activate();
+        }
+
+        return save;
+    }
 
     public void Save() {
+        activeFile.newGame = false;
+
         activeState = HistoryState.Capture();
         historyLogs = HistoryManager.instance.history.ToArray();
         activeConversation = GetConversationData();
+        variables = GetVariableData();
+
+        timestamp = DateTime.Now.ToString("dd/mm/yy HH:MM:ss");
 
         string saveJSON = JsonUtility.ToJson(this);
-        FileManager.Save(filPath, saveJSON);
+        FileManager.Save(filePath, saveJSON, ENCRYPT_FILES);
+
+        ScreenshotMaster.CaptureScreenshot(VNManager.instance.mainCamera, Screen.width, Screen.height, 0.25f, screenshotPath);
     }
 
-    public void Load() {
+    public void Activate() {
         if(activeState != null)
             activeState.Load();
 
@@ -39,6 +65,7 @@ public class VNGameSave
         HistoryManager.instance.logManager.Clear();
         HistoryManager.instance.logManager.Rebuild();
 
+        SetVariableData();
         SetConversationData();
 
         DialogueSystem.instance.continuePrompt.Hide();
@@ -110,6 +137,55 @@ public class VNGameSave
                 Debug.LogError($"Encountered error while extracting saved conversation data! {e}");
                 continue;
             }
+        }
+    }
+
+    public VNVariablesData[] GetVariableData() {
+        List<VNVariablesData> retData = new List<VNVariablesData>();
+
+        foreach(var database in VariableStore.databases.Values) {
+            foreach(var variable in database.variables) {
+                VNVariablesData variablesData = new VNVariablesData();
+                variablesData.name = $"{database.name}.{variable.Key}";
+                string val = $"{variable.Value.Get()}";
+                variablesData.value = val;
+                variablesData.type = (val == string.Empty)? "System.String" : variable.Value.Get().GetType().ToString();
+                retData.Add(variablesData);
+            }
+        }
+
+        return retData.ToArray();
+    }
+
+    public void SetVariableData() {
+        foreach(var variable in variables) {
+            string value = variable.value;
+
+            switch(variable.type) {
+                case "System.Boolean":
+                    if(bool.TryParse(value, out bool bout)){
+                        VariableStore.TrySetValue(variable.name, bout);
+                        continue;
+                    }
+                    break;
+                case "System.Int32":
+                    if(int.TryParse(value, out int iout)){
+                        VariableStore.TrySetValue(variable.name, iout);
+                        continue;
+                    }
+                    break;
+                case "System.Single":
+                    if(float.TryParse(value, out float fout)){
+                        VariableStore.TrySetValue(variable.name, fout);
+                        continue;
+                    }
+                    break;
+                default:
+                    VariableStore.TrySetValue(variable.name, value);
+                    continue;
+            }
+
+            Debug.Log($"Could not interpret variable type '{variable.type}' for variable '{variable.name}'");
         }
     }
 }

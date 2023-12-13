@@ -3,67 +3,58 @@ Move(Soeur -x 0.15 -y 0 -i true)
 Move(Autostoppeur -x 0.85 -y 0 -i true)
 
 ShowAll()
+SetBackground(-img Desert)
 Wait(1)
 ShowDialog()
-SetBackground(Desert)
 
+narrator "Quelqu'un lui fait déjà signe de se stopper..."
+
+<soeur> "Vraiment… Je viens à peine de partir et je dois déjà m'arrêter…{a} Bon voyons voir ce qu’il veut."
 Show(Soeur)
-<soeur> "Quoi encore... bon voyons voir ce qu’il veut."
-Autostoppeur as ??? "Hé !"
 <soeur> "Qu’est-ce que vous voulez ?"
 Hide(Soeur), Show(Autostoppeur)
-Autostoppeur "Merci de t’être arrêtée petite...{c}S’il te plaît Est-ce que tu peux me déposer dans l’hôpital de <color=#F771D9>Sky City</color>, je dois y être au plus vite et mon véhicule est en panne."
+Autostoppeur "Merci de t’être arrêtée petite...{c}S’il te plaît Est-ce que tu peux me déposer dans l’hôpital de <color=#F771D9>Sky City</color>, je dois y être au plus vite et mon véhicule est en panne.""
 Hide(Autostoppeur), Show(Soeur)
-<soeur> "Et merde... C’est un grand détoure par rapport à la ou je dois aller."
+<soeur> "Et merde... c’est un grand détoure par rapport à la ou je dois aller."
 Hide(Soeur), Show(Autostoppeur)
 Autostoppeur "S’il vous plait je dois vraiment y aller, ma fille est mourante et je dois absolument la rejoindre à l’hôpital."
 Hide(Autostoppeur), Show(Soeur)
-<soeur> "Merde qu’est ce qui me dit que c’est vrai ce qu’il raconte..{c}Il pourrait très bien être aussi bizarre que l’autre noble{a} ou pire... En plus je risque de perde de l’<ox>"
+<soeur> "<i>Qu’est ce qui me dit que c’est vrai ce qu’il raconte, il pourrait très bien être aussi bizarre que les crack head du coin ou pire... En plus je risque de perdre de l’<ox></i>"
 
-choice "Qu'est-ce que je dois faire ?"
+choice "Que faire ?"
 {
-	-Accepter
-		$helpedAutoStopper = true
-		<soeur> "Bon d’accord, je vais vous déposer là-bas. {c}Juste faites pas n’importe quoi. Si vous tentez quoi que ce soit ça finira mal..."
-		Hide(Soeur), Show(Autostoppeur)
-		Autostoppeur "Merci, vraiment vous me sauvez tenez voici un peu d’argent pour compenser le voyage."
-		narrator "Vous gagnez 3<money>."
-		$playerMoney += 3
-		Hide(Autostoppeur)
-		HideDialog()
-		Wait(1)
-		ShowDialog()
-		narrator "Vous perdez 2 <ox>."
+	-Accepter <risk>
+		$playerMoney += 25
 		$playerOx -= 2
+		$helpedAutostop = true
+		<soeur> "Bon d’accord, je vais vous déposer là-bas. Juste faites pas n’importe quoi si vous tentez quoi que ce soit ça finira mal..."
+		Hide(Soeur), Show(Autostoppeur)
+		Autostoppeur "Merci, vraiment vous me sauvez, tenez voici un peu d’argent pour compenser le voyage."
+		Hide(Autostoppeur)
+		narrator "Vous gagnez 25 <money>"
+		narrator "Vous perdez 2 <ox>"
 		HideDialog()
-		Wait(1)
+		wait(2)
 		ShowDialog()
 		Show(Soeur)
-		<soeur> "Voilà on est arrivé, vous avez intérêt à parler de moi à votre fille, ça lui fera une bonne histoire."
-		Hide(Soeur)
-		HideDialog()
-		Wait(1)
-		ClearBackground()
-		Wait(1)
-		HideAll()
-
-		ShowDialog()
-		narrator "<i>Starting file 'Milicien'</i>", Wait(2), Load(Milicien)
+		<soeur> "Voilà on est arrivé. Vous avez intérêt à parler de moi à votre fille, ça lui fera une bonne histoire."
 	-Refuser
-		$helpedAutoStopper = false
-		<soeur> "Qu’est ce qui me prouve que tu dois aller là-bas ? {c}Tu pourrais très bien me poignarder par derrière ou pire, donc non démerdez vous pour vos problème !"
+		<soeur> "Qu’est ce qui me prouve que tu dois aller là-bas ? Tu pourrais très bien me poignarder par derrière ou pire. {a}Donc non démerdez vous pour vos problème"
 		Hide(Soeur), Show(Autostoppeur)
-		Autostoppeur "Va te faire foutre ! Je te souhaite que du malheur !"
+		Autostoppeur "Va te faire foutre, je te souhaite que du malheur."
 		Hide(Autostoppeur), Show(Soeur)
-		<soeur> "M’en fou démerdez vous dans vos problèmes !"
-		Hide(Soeur)
-		HideDialog()
-		Wait(1)
-		ClearBackground()
-		Wait(1)
-		HideAll()
-
-		ShowDialog()
-		$hasWeapon = false
-		narrator "<i>Starting file 'Marchand'</i>", Wait(2), Load(Marchand)
+		<soeur> "M’en fou démerdez vous dans vos problèmes."
+		
 }
+
+Hide(Soeur), Hide(Autostoppeur)
+narrator "La <color=#F4E039>soeur</color> continue son chemin et arrive à l'entrée d’une ville qui est assez bien réputée."
+
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(Marchand)
