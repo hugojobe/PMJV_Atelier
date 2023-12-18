@@ -34,7 +34,7 @@ choice "Voulez-vous acheter quelque chose ?"
 {
 	-Acheter
 		Load(MarchandBOR)
-	-Voler <risk>
+	-Voler
 		Load(MarchandVoler)
 	-Partir
 		Load(MarchandRien)

@@ -8,8 +8,8 @@ using UnityEngine;
 public class TagManagers : MonoBehaviour
 {
     public static Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>(){
-        {"<soeur>",         () => VariableStore.TryGetValue("soeurName", out object value)? value.ToString() : "Error getting the value of variable 'playerName'"},
-        {"<frere>",         () => VariableStore.TryGetValue("frereName", out object value)? value.ToString() : "Error getting the value of variable 'playerOx'" },
+        {"<soeur>",         () => VNGameSave.activeFile.soeurName },
+        {"<frere>",         () => VNGameSave.activeFile.frereName },
         {"<playerOx>",      () => VNGameSave.activeFile.playerOx.ToString() },
         {"<playerMoney>",   () => VNGameSave.activeFile.playerMoney.ToString() }, 
         {"<helpedAutostop>", () => VNGameSave.activeFile.helpedAutostop.ToString() },

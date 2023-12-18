@@ -1,3 +1,5 @@
+StopMusic(0)
+
 ShowAll()
 Wait(1)
 ShowDialog()

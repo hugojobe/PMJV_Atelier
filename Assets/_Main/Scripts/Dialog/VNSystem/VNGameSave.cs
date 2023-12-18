@@ -16,6 +16,8 @@ public class VNGameSave
     public string filePath => $"{FilePaths.gameSaves}{slotNumber}{FILE_TYPE}";
     public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{SCREENSHOT_FILE_TYPE}";
 
+    public string soeurName = "Odessa";
+    public string frereName = "Amos";
     public int playerMoney = 7;
     public int playerOx = 10;
     public bool helpedAutostop = false;

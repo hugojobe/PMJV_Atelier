@@ -28,6 +28,7 @@ public class ProblemSpawner : MonoBehaviour, IPointerClickHandler
         hasProblemMark = true;
         problemMark.SetActive(true);
         VesselManager.instance.activeProblem = this;
+        AudioManager.instance.PlaySoundEffect(FilePaths.resourcesSFX + "VesselProblem", 1.5f);
     }
 
     public void OnProblemSolved() {

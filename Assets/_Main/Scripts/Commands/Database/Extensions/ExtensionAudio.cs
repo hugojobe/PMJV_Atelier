@@ -61,7 +61,10 @@ public class ExtensionAudio : CommandDatabaseExtension
 
         AudioClip clip = Resources.Load<AudioClip>(filePath);
 
-        if(clip == null) return;
+        if(clip == null){
+            Debug.Log("Track not found");
+            return;    
+        }
 
         AudioManager.instance.PlayTrack(clip, channel: channel, loop: loop, startingVolume: volume, volumeCap: volumeCap, pitch, filePath); 
     }

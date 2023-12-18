@@ -137,6 +137,8 @@ public class ExtensionGeneral : CommandDatabaseExtension
         parameters.TryGetValue(PARAM_FILEPATH, out exitFile);
         parameters.TryGetValue(PARAM_TIME, out  phaseDuration);
 
+        AudioManager.instance.StopTrack(1);
+        AudioManager.instance.PlayTrack(FilePaths.resourcesMusic + "Vessel", channel: 0);
 
         yield return VesselManager.instance.EnterVesselMode(exitFile, phaseDuration);
     }

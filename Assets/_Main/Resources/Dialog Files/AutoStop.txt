@@ -2,6 +2,8 @@ CreateCharacter(Autostoppeur -e false -i true)
 Move(Soeur -x 0.15 -y 0 -i true)
 Move(Autostoppeur -x 0.85 -y 0 -i true)
 
+PlayMusic(Desert -ch 0 -l true)
+
 ShowAll()
 SetBackground(-img Desert)
 Wait(1)
@@ -23,7 +25,7 @@ Hide(Autostoppeur), Show(Soeur)
 
 choice "Que faire ?"
 {
-	-Accepter <risk>
+	-Accepter
 		$playerMoney += 25
 		$playerOx -= 2
 		$helpedAutostop = true
@@ -39,6 +41,7 @@ choice "Que faire ?"
 		Show(Soeur)
 		<soeur> "Voilà on est arrivé. Vous avez intérêt à parler de moi à votre fille, ça lui fera une bonne histoire."
 	-Refuser
+		$helpedAutostop = false
 		<soeur> "Qu’est ce qui me prouve que tu dois aller là-bas ? Tu pourrais très bien me poignarder par derrière ou pire. {a}Donc non démerdez vous pour vos problème"
 		Hide(Soeur), Show(Autostoppeur)
 		Autostoppeur "Va te faire foutre, je te souhaite que du malheur."

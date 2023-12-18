@@ -75,6 +75,8 @@ public class VNMenuManager : MonoBehaviour
     }
 
     public void OnHome() {
+        AudioManager.instance.StopTrack(0);
+        AudioManager.instance.StopTrack(1);
         VNConfiguration.activeConfig.Save();
         SceneManager.LoadScene("Menu");
     }
