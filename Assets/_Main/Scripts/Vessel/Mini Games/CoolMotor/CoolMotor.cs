@@ -19,6 +19,7 @@ public class CoolMotor : MiniGame
     private Vector2 originalPos;
     
     private void Start() {
+        base.Start();
         originalPos = rect.localPosition;
     }
 

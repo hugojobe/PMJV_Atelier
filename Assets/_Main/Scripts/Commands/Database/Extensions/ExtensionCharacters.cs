@@ -18,6 +18,7 @@ public class ExtensionCharacters : CommandDatabaseExtension
         database.AddCommand("createcharacter", new Action<string[]>(CreateCharacter));
         database.AddCommand("show", new Func<string[], IEnumerator>(ShowAll));
         database.AddCommand("hide", new Func<string[], IEnumerator>(HideAll));
+        database.AddCommand("hideallchar", new Func<string[], IEnumerator>(HideAllChar));
         database.AddCommand("move", new Func<string[], IEnumerator>(MoveCharacter));
         database.AddCommand("setsprite", new Func<string[], IEnumerator>(SetSprite));
     }
@@ -120,6 +121,38 @@ public class ExtensionCharacters : CommandDatabaseExtension
             if(character != null)
                 characters.Add(character);
         }
+
+        if(characters.Count == 0)
+            yield break;
+
+        CommandParameters parameters = ConvertDataToParameters(data);
+
+        parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, false);
+        parameters.TryGetValue(PARAM_SPEED, out speed, defaultValue: 1f);
+
+        foreach(Character character in characters){
+            if(immediate)
+                character.isVisible = false;
+            else
+                character.Hide(speed);
+        }
+
+
+        if(!immediate){
+            CommandManager.instance.AddTerminationActionToCurrentProcess(() => {
+                foreach(Character character in characters)
+                    character.isVisible = false;    
+            });
+
+            while(characters.Any(c => c.isHiding))
+                yield return null;
+        }
+    }
+
+    public static IEnumerator HideAllChar(string[] data) {
+        List<Character> characters = CharacterManager.instance.characters.Values.Where(c => c.isVisible == true).ToList();
+        bool immediate = false;
+        float speed = 1f;
 
         if(characters.Count == 0)
             yield break;

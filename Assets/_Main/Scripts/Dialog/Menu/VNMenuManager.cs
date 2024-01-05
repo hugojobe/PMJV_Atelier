@@ -40,7 +40,7 @@ public class VNMenuManager : MonoBehaviour
     private void OpenPage(MenuPage page) {
         if(page == null) return;
 
-        Debug.Log($"Opening page '{page.name}'");
+        //Debug.Log($"Opening page '{page.name}'");
 
         if(activePage != null && activePage != page)
             activePage.Close();

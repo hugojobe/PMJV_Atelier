@@ -16,6 +16,8 @@ public class Throttle : MiniGame
 
 
     private void Start() {
+        base.Start();
+
         targetValue = Random.Range(0, 51);
         do {
             throttleslider.value = Random.Range(0, 51);

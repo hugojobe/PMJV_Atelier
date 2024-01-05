@@ -18,8 +18,11 @@ public class VNGameSave
 
     public string soeurName = "Odessa";
     public string frereName = "Amos";
+    public int pPlayerOx = 10;
     public int playerMoney = 7;
-    public int playerOx = 10;
+    public int playerOx {get{return pPlayerOx; } set{pPlayerOx = Clamp(value);}}
+
+    public bool soeurMorteAller = false;
     public bool helpedAutostop = false;
 
     public int slotNumber = 1;
@@ -31,6 +34,10 @@ public class VNGameSave
     public VNVariablesData[] variables;
 
     public string timestamp;
+
+    private int Clamp(int value) {
+        return Mathf.Clamp(value, 0, 10);
+    }
 
     public static VNGameSave Load(string filePath, bool activateOnLoad = false) {
         VNGameSave save = FileManager.Load<VNGameSave>(filePath, ENCRYPT_FILES);

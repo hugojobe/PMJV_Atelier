@@ -69,7 +69,7 @@ public class ExtensionAudio : CommandDatabaseExtension
         AudioManager.instance.PlayTrack(clip, channel: channel, loop: loop, startingVolume: volume, volumeCap: volumeCap, pitch, filePath); 
     }
 
-    private static void StopMusic(string data){
+    public static void StopMusic(string data){
         if(int.TryParse(data, out int channel)){
             AudioManager.instance.StopTrack(channel);
         } else {

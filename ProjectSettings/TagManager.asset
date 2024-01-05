@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MovableConnector
+  - Leaf
+  - MoveableconnectorToRemove
+  - Note
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,9 @@ public class VNManager : MonoBehaviour
     public Camera mainCamera;
 
     public TextMeshProUGUI oxText, moneyText;
+    public Animator vesselAnimator;
+
+    public bool isInLoseState;
 
     private void Awake() {
         instance = this;
@@ -35,6 +38,10 @@ public class VNManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F5)) {
             VariableStore.PrintAllVariables();
         }
+
+        if(VNGameSave.activeFile.pPlayerOx <= 0 && !isInLoseState) {
+            //Lose();
+        }
     }
 
     private void LoadGame() {
@@ -46,4 +53,26 @@ public class VNManager : MonoBehaviour
             VNGameSave.activeFile.Activate();
         }
     }
+
+    /*public void KillSoeur() {
+        Lose(Prota.soeur);
+    }
+
+    private void Lose(Prota prota) {
+        isInLoseState = true;
+
+        switch(prota){
+            case Prota.soeur:
+                LoadDialogFile("LoseSoeur");
+                break;
+            case Prota.frere:
+                break;
+        }
+    }*/
+
+    private void LoadDialogFile(string fileName) {
+        ExtensionGeneral.LoadNewDialogueFile(new string[] {fileName});
+    }
+
+    enum Prota {soeurAller, soeurRetour, frere}
 }

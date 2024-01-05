@@ -25,7 +25,7 @@ public class CanvasGroupManager
     }
 
     public IEnumerator ShowOrHideCoroutine(float targetAlpha){
-        Debug.Log($"Showing or hiding '{rootCG.name}'");
+        //Debug.Log($"Showing or hiding '{rootCG.name}'");
         CanvasGroup self = rootCG;
 
         while(self.alpha != targetAlpha){

@@ -20,9 +20,10 @@ public class VesselProblem : VesselNode {
     }
 
     public override void OnStateUpdate() {
+        if(VesselManager.instance.canLoseGame)
         currentProblemTimer += Time.deltaTime;
 
-        if(currentProblemTimer >= problemTimer ) {
+        if(currentProblemTimer >= problemTimer && VesselManager.instance.canLoseGame) {
             currentProblemTimer = 0;
             ProblemNotSolved();
         }
@@ -36,7 +37,7 @@ public class VesselProblem : VesselNode {
         VesselManager.instance.ChangeState(VesselState.IDLE);
     }
 
-    public void ProblemNotSolved() {
+    public static void ProblemNotSolved() {
         VesselManager.instance.damageVolume.SetTrigger("Damage");
         VesselManager.instance.vesselOxText.GetComponent<Animator>().SetTrigger("Hit");
 
@@ -51,7 +52,7 @@ public class VesselProblem : VesselNode {
         VesselManager.instance.OnProblemSolved.Invoke();
     }
 
-    public IEnumerator ScreenShake() {
+    public static IEnumerator ScreenShake() {
         Vector2 originalPos = VesselManager.instance.transform.localPosition;
         float time = 0;
         float shakeDuration = 0.15f;

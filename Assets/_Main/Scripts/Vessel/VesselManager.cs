@@ -37,6 +37,10 @@ public class VesselManager : MonoBehaviour
 
     public TextMeshProUGUI vesselOxText;
 
+    public bool canLoseGame;
+
+    public Coroutine vesselModeCoroutine;
+
     private void Awake() {
         if(instance == null) instance = this;
         ChangeState(VesselState.VN);
@@ -118,6 +122,18 @@ public class VesselManager : MonoBehaviour
         if(currentState is VesselProblem) return false;
 
         return true;
+    }
+
+    public void Reset() {
+        canGenerateProblem = false;
+
+        activeProblem?.openMinigame?.SolveProblem();
+
+        ChangeState(VesselState.VN);
+
+        foreach(var obj in objectsToDisableInVesselMode) {
+            obj.SetActive(true);
+        }
     }
 }
 

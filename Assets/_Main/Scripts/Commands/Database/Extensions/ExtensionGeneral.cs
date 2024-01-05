@@ -29,6 +29,7 @@ public class ExtensionGeneral : CommandDatabaseExtension
         database.AddCommand("hideall", new Func<string[], IEnumerator>(HideBG));
         database.AddCommand("showall", new Func<string[], IEnumerator>(ShowBG));
         database.AddCommand("switchtovesselmode", new Func<string[], IEnumerator>(SwitchToVesselMode));
+        database.AddCommand("hidevessel", new Action(HideVessel));
 
         database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
     }
@@ -40,6 +41,8 @@ public class ExtensionGeneral : CommandDatabaseExtension
         CommandParameters parameters = ConvertDataToParameters(data);
         parameters.TryGetValue(PARAM_FILEPATH, out filePath);
         parameters.TryGetValue(PARAM_ENQUEUE, out enqueue, defaultValue: false);
+
+        Debug.Log("FilePath : " + filePath);
 
         TextAsset file = Resources.Load<TextAsset>(FilePaths.GetPathToResource(FilePaths.resourcesDialogFiles, filePath));
 
@@ -67,7 +70,7 @@ public class ExtensionGeneral : CommandDatabaseExtension
         yield return DialogueSystem.instance.dialogContainer.Show();
     }
 
-    private static IEnumerator HideDialog(){
+    public static IEnumerator HideDialog(){
         yield return DialogueSystem.instance.dialogContainer.Hide();
     }
 
@@ -87,7 +90,7 @@ public class ExtensionGeneral : CommandDatabaseExtension
         yield return null;
     }
 
-    private static IEnumerator HideBG(string[] data){
+    public static IEnumerator HideBG(string[] data){
         bool immediate = false;
         float speed = 1f;
         float target = 0f;
@@ -141,5 +144,10 @@ public class ExtensionGeneral : CommandDatabaseExtension
         AudioManager.instance.PlayTrack(FilePaths.resourcesMusic + "Vessel", channel: 0);
 
         yield return VesselManager.instance.EnterVesselMode(exitFile, phaseDuration);
+    }
+
+    private static void HideVessel() {
+        VesselManager.instance.animator.SetTrigger("VN");
+        VesselManager.instance.Reset();
     }
 }

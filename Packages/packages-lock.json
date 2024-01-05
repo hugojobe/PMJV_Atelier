@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "ca.tim-cstj.export-project-to-zip": {
+      "version": "file:ca.tim-cstj.export-project-to-zip",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.sohne.colorblindness": {
       "version": "https://github.com/SOHNE/Colorblindness.git#upm",
       "depth": 0,

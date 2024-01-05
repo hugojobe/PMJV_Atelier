@@ -15,6 +15,8 @@ public class TVCurve : MiniGame
     public float lastSliderValue;
 
     private void Start() {
+        base.Start();
+
         tvAngle = Random.Range(0, 126);
         tvCurve.uvRect = new Rect(tvAngle*2 / 360, 0f, 1f, 1f);
 

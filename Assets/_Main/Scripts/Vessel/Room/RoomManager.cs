@@ -30,9 +30,9 @@ public class RoomManager : MonoBehaviour, IPointerClickHandler
     }
 
     private void Update() {
-        if(isZoomed && !VesselManager.instance.isInMinigame && Input.GetKeyDown(KeyCode.Escape)){
+        /*if(isZoomed && !VesselManager.instance.isInMinigame && Input.GetKeyDown(KeyCode.Escape)){
             ZoomOutRoom();
-        }
+        }*/
 
         problemMark.gameObject.SetActive(hasProbemInside && !vesselManager.hasAnyRoomZoomed);
     }
@@ -45,10 +45,11 @@ public class RoomManager : MonoBehaviour, IPointerClickHandler
     public void OnProblemSolved() {
         vesselManager.OnProblemSolved -= OnProblemSolved;
         hasProbemInside = false;
+        Invoke("ZoomOutRoom", 1f);
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if(isZoomed || VesselManager.instance.hasAnyRoomZoomed) return;
+        if(isZoomed || VesselManager.instance.hasAnyRoomZoomed || !hasProbemInside) return;
         VesselManager.instance.animator.SetTrigger($"Room{roomIndex}");
         VesselManager.instance.zoomedRoomManager = this;
     }
