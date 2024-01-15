@@ -1,0 +1,8 @@
+if($soeurMorteAuRetour == True)
+{
+	Load(BrasDroitFrereAvecSoeur)
+}
+else
+{
+	Load(BrasDroitFrereSansSoeur)
+}

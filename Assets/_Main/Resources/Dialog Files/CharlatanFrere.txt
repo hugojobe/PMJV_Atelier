@@ -1,0 +1,59 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(Charlatan -x 0.75 -y 0 -i true)
+
+PlayMusic(Charlatan -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Charlatan)
+Wait(1)
+ShowDialog()
+
+Charlatan as ??? "Ehh ! Stop, arrête-toi !"
+
+Show(Frere)
+<frere> "Bonjour Madame. J’aurai besoin de votre aide. Je cherche quelqu’un, une fille d’environ 1m60, sale caractère, cheveux bleus. Vous ne l’auriez pas vue ?"
+Hide(Frere), Show(Charlatan)
+SetSprite(Charlatan -spr 3)
+Charlatan "T’es au courant que ta description correspond à des milliers de personnes ?"
+Hide(Charlatan), Show(Frere)
+<frere> "Argh j’ai pas le temps pour ces conneries, c’est ma petite sœur. Elle avait un vieux vaisseau quand elle est partie."
+Hide(Frere), Show(Charlatan)
+Charlatan "AAAHHH, maintenant que j’y penses, il me semble avoir vu une personne correspodant à ta description. Mais je ne sais plus où... Il y a surement une solution pour me rafraîchir la mémoire."
+Hide(Charlatan), Show(Frere)
+SetSprite(Frere -spr 2)
+<frere> "<i>L’enfoirée... Elle veut de l’argent en échange de l’info..."
+
+choice "Que faire ?"
+{
+	-Payer
+		$playerMoney -= 15
+		<frere> "Tiens, prends. Tu te rappelles, c'est bon ?"
+		Hide(Frere)
+		narrator "Vous perdez 15 <money>"
+		Show(Charlatan)
+		SetSprite(Charlatan -spr 1)
+		Charlatan "Oui, ça m’aide beaucoup l’ami, hehe. Je l’ai vu prendre ce chemin, mais fais gaffe c’est une zone dangereuse."
+		Hide(Charlatan), Show(Frere)
+		<frere> "Vaut mieux pour toi que ce soit vrai..."
+		SetSprite(Frere -spr 1)
+		Load(CharlatanChemin)
+
+	-Abandonner
+		SetSprite(Frere -spr 1)
+		<frere> "Mouais... Tu sais quoi, va chercher un doc pour tes problèmes de mémoire."
+		Hide(Frere), Show(Charlatan)
+		SetSprite(Charlatan -spr 1)
+		Charlatan "C’est toi qui vois. Bonne chance !"
+		Hide(Charlatan), Show(Frere)
+		<frere> "Mouais, au revoir."
+
+		Hide(Frere)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		Load(VieuxFrere)
+}
+

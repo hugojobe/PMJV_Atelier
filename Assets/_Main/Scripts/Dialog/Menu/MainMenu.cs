@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour {
     private void Start() {
         mainCG = new CanvasGroupManager(mainPanel, this);
         AudioManager.instance.PlayTrack(menuMusic, channel:0, startingVolume:1);
+
+        Application.targetFrameRate = 1000;
     }
 
     public void StartNewGame() {

@@ -1,0 +1,25 @@
+Show(Milicien)
+Milicien "Maintenant que vous le dites, oui, j’ai croisé une gamine..."
+SetSprite(Milicien -spr 3)
+Milicien "Attendez, ne me dites pas que vous êtes le frère de cette fille..."
+SetSprite(Milicien -spr 2)
+Milicien "Non, s’il vous plaît ne me faites pas de mal, pitié !"
+Hide(Milicien), Show(Frere)
+<frere> "Calmez-vous et expliquez-moi tout."
+Hide(Frere), Show(Milicien)
+Milicien "Cette gamine m’a menacé d'envoyer son frère pour me faire du mal."
+Milicien "En plus de ça elle m’a volé mon arme de service. Elle est partie dans cette direction c’est tout ce que je sais."
+Milicien "Par pitié, ne me faite pas de mal..."
+Hide(Milicien), Show(Frere)
+<frere> "<i>Wow, elle a fait ça ma soeur... Et ça a marché en plus. C’est vraiment ça la milice ?"
+<frere> "Ok, je vois, merci. Renforce-toi un peu, c’est assez pathétique de te voir comme ça."
+Hide(Frere)
+SetSprite(Milicien -spr 1)
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(VisionnaireFrere)

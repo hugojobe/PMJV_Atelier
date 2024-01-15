@@ -1,0 +1,8 @@
+choice "Que décidez-vous ?"
+{
+	-Payer (Impossible)
+		<soeur> "Malhereusement, ça ne sera pas possible..."
+		Load(MafiaNoWeapon)
+	-Accepter
+		Load(MafiaOR)
+}

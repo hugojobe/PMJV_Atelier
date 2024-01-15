@@ -1,0 +1,43 @@
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Autostoppeur -x 0.25 -y 0 -i true)
+
+PlayMusic(Autostop -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Desert)
+Wait(1)
+ShowDialog()
+
+Show(Soeur)
+<soeur> "<i>Mais c’est..."
+Hide(Soeur), Show(Autostoppeur)
+
+if($helpedAutostop == true)
+{
+	Autostoppeur "Oh c’est toi. Comment vas-tu vas ? Encore merci de m’avoir déposé. Grâce à toi ma fille a pu récupérer les médicaments dont elle avait besoin."
+	Hide(Autostoppeur), Show(Soeur)
+	<soeur> "Tant mieux pour vous alors. Bon je dois pas rester longtemps, je dois vite rentrer chez moi. Vous ne connaissez pas un meilleur chemin pour aller dans cette zone ?"
+	Hide(Soeur), Show(Autostoppeur)
+	Autostoppeur "Oui bien sûr. Prends cette rue là, c’est une zone neutre et c’est un raccourci vers ta destination."
+	Hide(Autostoppeur), Show(Soeur)
+	<soeur> "Merci beaucoup pour votre aide ! Je parlerai de vous à mon frère."
+	Load(End1)
+}
+else
+{
+	SetSprite(Autstoppeur -spr 3)
+	Autostoppeur "C’est toi ! À cause de toi ma fille est morte !"
+	Hide(Autostoppeur), Show("Soeur")
+	<soeur> "Désolé pour votre perte mais j’ai pas le temps pour ces conneries."
+	Hide(Soeur), Show(Autostoppeur)
+	Autostoppeur "Ces conneries tu dis ? Très bien. Si tu le vois comme ça, je n’aurai aucun regret pour mon action."
+	Hide(Autostoppeur), Hide(Soeur)
+	narrator "L’autostoppeur sort une arme et tire sur <soeur>. Il laisse la fille mourir."
+	Kill()
+}
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()

@@ -1,0 +1,43 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(Vieux -x 0.75 -y 0 -i true)
+
+PlayMusic(Vieux -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Desert)
+Wait(1)
+ShowDialog()
+
+Vieux as ??? "Eh... S’il vous plaît..."
+
+Show(Vieux)
+<frere> "C'est à moi que le vieux parle ?"
+Hide(Frere), Show(Vieux)
+Vieux as ??? "S’il vous plait, j’ai besoin d’aide... J’aurai besoin d’une bouteille d’oxygène... Je suis à court..."
+Hide(Vieux), Show(Frere)
+<frere> "<i>C’est bien à moi qu’il parlait..."
+<frere> "Désolé, vieil homme. je suis aussi à court d’oxygène. Je ne peux pas vous aider..."
+Hide(Frere), Show(Vieux)
+Vieux as ??? "Vous n’auriez pas un peu d’argent alors ? Pour que je puisse acheter des vivres pour mes proches. S’il vous plaît."
+Hide(Vieux), Show(Frere)
+<frere> "Je ne peux pas le laisser comme ça... C’est juste un vieil homme."
+<frere> "Je n’ai pas grand-chose, mais je peux déjà vous donner ça."
+$playerMoney -= 4
+narrator "Vous perdez 4 <money>"
+Hide(Frere), Show(Vieux)
+Vieux as ??? "Merci ! Merci beaucoup Monsieur !"
+Hide(Vieux), Show(Frere)
+<frere> "Avant qu’on se quitte, vous n’auriez pas vu une petite fille, 1m60, cheveux noirs ? C’est ma petite soeur et je la recherche."
+Hide(Frere), Show(Vieux)
+Vieux as ??? "J’ai récemment croisé de loin une jeune fille de votre description. Je l’ai vu se diriger vers l’Underground mais je ne l’ai toujours pas vu revenir, donc elle y est sûrement encore."
+Hide(Vieux), Show(Frere)
+<frere> "Je vois. Merci monsieur. Je sais où aller maintenant."
+Hide(Frere)
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(MilicienFrere)

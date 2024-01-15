@@ -1,0 +1,55 @@
+Show(Frere)
+SetSprite(Frere -spr 2)
+<frere> "<i>Merde foutu corps, j’y étais presque..."
+Hide(Frere), Show(Milicien)
+SetSprite(Frere -spr 1)
+Milicien "Non, arrêtez ! Ne bougez plus ! Restez où vous êtes... Ou je tire !"
+
+choice "Que décidez-vous ?"
+{
+	-Le calmer
+		Hide(Milicien), Show(Frere)
+		<frere> "Ok ok... Je reste où je suis. On peut régler ça tranquillement, sans violence."
+		Hide(Frere), Show(Milicien)
+		Milicien "Je ne veux pas vous faire de mal... Pitié, ne faites rien qui me fasse regretter..."
+		Hide(Milicien), Show(Frere)
+		<frere> "Ouais, je vois ça : tu veux pas faire de mal. On peut s’arranger."
+		<frere> "Écoute, on peut très bien oublier ce qui vient de se produire et chacun continuer son chemin."
+		Hide(Frere), Show(Milicien)
+		Milicien "Je suis désolé. Je voulais pas vous tenir en joue. Je voulais même pas faire ce métier de base, mon père m’a forcé pour m’endurcir..."
+		Hide(Milicien), Show(Frere)
+		<frere> "<i>Oh bordel, dans quelle merde je me suis mis... Je dois maintenant jouer les nounous."
+		<frere> "Bon écoute, je vois que la vie est dure pour toi mais ça va aller. Tu ne dois rien à ton père, donc tu peux partir à n’importe quel moment et faire la vie que tu veux."
+		Hide(Frere), Show(Milicien)
+		Milicien "Merci l’ami... Vous avez peut-être raison. Merci pour vos mots."
+		Hide(Milicien), Show(Frere)
+		<frere> "Ouais, il y a pas de quoi..."
+		Hide(Frere), Show(Milicien)
+		Milicien "J’ai bien vu une gamine tout à l'heure. Je l’ai vue partir par là."
+		Milicien "J’ai menti juste pour essayer d’être respecté. Désolé monsieur."
+		Milicien "Vu votre condition, elle est surement allé vers l'Underground. Je vous conseille de passer par ce chemin, c’est plus rapide."
+		Hide(Milicien), Show(Frere)
+		<frere> "Merci."
+		<frere> "Il m’appelle Monsieur maintenant... Vraiment, je suis tombé en face de quelle genre de victime..."
+		Hide(Frere)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		
+		Load(VisionnaireFrere)
+	-Ne rien faire
+		Hide(Milicien), Show(Frere)
+		SetSprite(Frere -spr 2)
+		<frere> "<i>Merde, je dois absolument partir de là. Je ne peux risquer mon temps..."
+		SetSprite(Frere -spr 1)
+		<frere> "Bon, écoute moi. Je ne vais pas te faire de mal alors arrête de pointer cette arme sur moi et tout se passera bien pour toi."
+		Hide(Frere), Show(Milicien)
+		Milicien "Non ! Arrêtez ou je tire !"
+		Hide(Milicien)
+		wait(1)
+		narrator "Le coup de feu part et touche fatalement le frère."
+		End(4)
+}

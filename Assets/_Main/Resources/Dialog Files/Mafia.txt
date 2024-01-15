@@ -1,0 +1,39 @@
+CreateCharacter(Mafieux -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Mafieux -x 0.25 -y 0 -i true)
+
+PlayMusic(Mafia -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Noble)
+Wait(1)
+ShowDialog()
+
+narrator "La soeur se gare et descend du véhicule pour finalement rentrer dans l'Underground"
+Show(Soeur)
+<soeur> "Bonjour... On m’a dit que je pouvais trouver des bouteilles d’ox pas chère chez vous. Je suis venu pour en acheter."
+Hide(Soeur), Show(Mafieux)
+Mafieux as ??? "On t’as bien renseigné... Mais d’habitude mes clients sont des adultes et pas des foutus gamines..."
+Mafieux as ??? "Je n’ai pas de temps à perdre avec toi.{a}Alors parle et vite..."
+Hide(Mafieux), Show(Soeur)
+<soeur> "Comme je l’ai dit, je suis là pour acheter des bouteilles d’ox. J’en ai besoin pour sauver mon frère."
+<soeur> "C’est quoi votre prix pour 5 bouteilles ?"
+Hide(Soeur), Show(Mafieux)
+Mafieux as ??? "500 <money> pour 1 bouteille, rien de plus, rien de moins."
+Hide(Mafieux), Show(Soeur)
+<soeur> "Quoi ? C'est encore plus cher que sur le commerce légal. On m’avait dit que c’était moins cher chez vous..."
+Hide(Soeur), Show(Mafieux)
+Mafieux as ??? "Tu sais ce qu’on dit : les rumeurs, ça varient d’une personne à l’autre."
+Mafieux as ??? "Mais je suis réglo, donc je vais te faire un prix d’ami."
+Mafieux as ??? "Tu me donnes ton vaisseau et un objet de valeur."
+Hide(Mafieux), Show(Soeur)
+<soeur> "<i>Un prix d’ami tu parles ! Mon retour va être plus compliqué..."
+
+if($hasWeapon == true)
+{
+	Load(MafiaWeapon)
+}
+else
+{
+	Load(MafiaNoWeapon)
+}

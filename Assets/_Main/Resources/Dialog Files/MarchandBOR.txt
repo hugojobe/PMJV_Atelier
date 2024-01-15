@@ -1,12 +1,17 @@
 if(<playerMoney> >= 30)
 {
 	$playerMoney -= 30
+	$hasObjetRare = true
+
 	<soeur> "Je vais vous prendre l’objet rare et un peu d’essence."
 	Hide(Soeur), Show(Marchand)
+	SetSprite(Marchand -spr 2)
 	Marchand "Je vois que t’as l’oeil... J’espère que t’as l’argent qui va avec."
 	Hide(Marchand), Show(Soeur)
+	SetSprite(Marchand -spr 1)
 	<soeur> "Tenez l’argent. J’espère que je vais aller loin avec ça..."
 	narrator "Vous perdez 30 <money>"
+	narrator "Vous obtenez l'objet rare."
 	<soeur> "Oh non, encore des problèmes avec ce vieux vaisseau..."
 
 	Hide(Soeur)
@@ -15,7 +20,7 @@ if(<playerMoney> >= 30)
 	ClearBackground()
 	Wait(1)
 	HideAll()
-	SwitchToVesselMode(-f Fin -d 60)
+	SwitchToVesselMode(-f Milicien -d 60)
 }
 else
 {

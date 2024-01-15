@@ -6,10 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
+    public static PlayerInputManager instance;
     private PlayerInput input;
     private List<(InputAction action, Action<InputAction.CallbackContext> command)> actions = new List<(InputAction action, Action<InputAction.CallbackContext> command)>();
 
+    public bool canUserPromptNext = true;
+
     private void Awake() {
+        if(instance == null) 
+            instance = this;
+
         input = GetComponent<PlayerInput>();
         InitializeActions();
     }
@@ -34,10 +40,18 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     public void OnNext(InputAction.CallbackContext ctx){
+        #if UNITY_EDITOR
+        #else
+            if(!canUserPromptNext) return;
+        #endif
         DialogueSystem.instance.OnUserPromptNext();
     }
 
     public void OnNext(){
+        #if UNITY_EDITOR
+        #else
+            if(!canUserPromptNext) return;
+        #endif
         DialogueSystem.instance.OnUserPromptNext();
     }
 

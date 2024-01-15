@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -43,7 +44,7 @@ public class CharacterManager : MonoBehaviour
 
     public Character CreateCharacter(string characterName, bool revealAfterCreation = false){
         if(characters.ContainsKey(characterName.ToLower())){
-            Debug.LogWarning($"A character named '{characterName}' already exists. Did not created this character");
+            Debug.Log($"A character named '{characterName}' already exists. Did not created this character");
             return null;
         }
 
@@ -56,6 +57,7 @@ public class CharacterManager : MonoBehaviour
         if(revealAfterCreation)
             character.Show();
 
+        if(character == null) Debug.Log("<color=red>Character is null</color>");
         return character;
     }
 
@@ -96,6 +98,18 @@ public class CharacterManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.F6)) {
+            StringBuilder sb = new StringBuilder();
+
+            foreach(Character character in characters.Values) {
+                sb.AppendLine($"Name : {character.name}, visible : {character.isVisible}, object : {character}");
+            }
+
+            Debug.Log(sb.ToString());
+        }
     }
 
     public class CharacterInfo{

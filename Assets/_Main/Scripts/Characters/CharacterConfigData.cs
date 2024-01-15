@@ -32,6 +32,8 @@ public class CharacterConfigData
         result.dialogColor = new Color(dialogColor.r, dialogColor.g, dialogColor.b);
 
         result.fontSize = fontSize;
+
+        result.sprites = sprites;
     
         return result;
     }
@@ -53,6 +55,8 @@ public class CharacterConfigData
             result.dialogColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b);
 
             result.fontSize = DialogueSystem.instance.config.defaultFontSize;
+
+            result.sprites = new SerializedDictionary<string, Sprite>();
     
             return result;
         }

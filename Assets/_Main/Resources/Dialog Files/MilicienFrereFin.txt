@@ -1,0 +1,32 @@
+choice "Que faire ?"
+{
+	-Tuer
+		<frere> "Désolé, mais tu as vu mon visage. Ca n'a rien de personnel."
+		Hde(Frere)
+		narrator "Le frère tue le milicien pour empêcher le signalement."
+		narrator "<frere> part dans en direction de l’Underground"
+		
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		$milicienTue = true
+
+		Load(VisionnaireFrere)
+	-Epargner
+		<frere> "<i>Je ne suis pas un tueur. Je ne peux pas lui faire ça. Il a surement une famille aussi."
+		Hide(Frere)
+		narrator "<frere> part dans en direction de l’Underground"
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		$milicienTue = false
+
+		Load(VisionnaireFrere)
+}

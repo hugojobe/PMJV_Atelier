@@ -12,10 +12,10 @@ public class TagManagers : MonoBehaviour
         {"<frere>",         () => VNGameSave.activeFile.frereName },
         {"<playerOx>",      () => VNGameSave.activeFile.playerOx.ToString() },
         {"<playerMoney>",   () => VNGameSave.activeFile.playerMoney.ToString() }, 
-        {"<helpedAutostop>", () => VNGameSave.activeFile.helpedAutostop.ToString() },
+        {"<helpedAutostop>",() => VNGameSave.activeFile.helpedAutostop.ToString() },
         {"<money>",         () => "<color=#F4A015><sprite tint=1 name=money></color>"},  
         {"<risk>",          () => "<color=#FF3030><sprite tint=1 name=risk></color>"},  
-        {"<ox>",            () => "<color=#2BA7EE>ox</color>"} 
+        {"<ox>",            () => "<color=#2BA7EE>ox</color>"},
     };
     private static readonly Regex tagRegex = new Regex("<\\w+>");
     private static readonly Regex endPhrase = new Regex("[.!?]+$");

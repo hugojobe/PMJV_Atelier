@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - name: Soeur
-    alias: Soeur
+    alias: soeur
     characterType: 1
     nameColor: {r: 0.95686275, g: 0.8784314, b: 0.22352941, a: 1}
     dialogColor: {r: 1, g: 1, b: 1, a: 1}
@@ -23,10 +23,14 @@ MonoBehaviour:
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: SPR1
+      - Key: 1
         Value: {fileID: 21300000, guid: 5fe16a2e7d566d945b491123bac49338, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 6e24328622ce5804d8ab9053b47f2bc4, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: 97e4484b17919da4bb2178a1ee0d77d8, type: 3}
   - name: Frere
-    alias: Frere
+    alias: frere
     characterType: 1
     nameColor: {r: 0.63529414, g: 0.8509804, b: 0.91764706, a: 1}
     dialogColor: {r: 1, g: 1, b: 1, a: 1}
@@ -35,10 +39,14 @@ MonoBehaviour:
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: SPR1
-        Value: {fileID: 21300000, guid: 3b23fc1544cc1c04a8e593cbc3c5d87a, type: 3}
+      - Key: 1
+        Value: {fileID: 21300000, guid: 5b6930182e90e6c49a95554bf036a32a, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 0538821bae3572c498cb1948399f5b89, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: cce3c9765b80c5141b3826e24c4facbf, type: 3}
   - name: Autostoppeur
-    alias: Autostoppeur
+    alias: autostoppeur
     characterType: 1
     nameColor: {r: 0.8584906, g: 0.8181181, b: 0.7829002, a: 1}
     dialogColor: {r: 1, g: 1, b: 1, a: 1}
@@ -47,22 +55,46 @@ MonoBehaviour:
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: AUTOSTOP
+      - Key: 1
         Value: {fileID: 21300000, guid: fcefb465970faef4ab8edde8fc5966a9, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 8c67245c980a972498b84979d75cf18a, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: 307a81908bc235d4fb5fff6aac5aa774, type: 3}
   - name: Milicien
-    alias: Milicien
+    alias: milicien
     characterType: 1
-    nameColor: {r: 1, g: 1, b: 1, a: 1}
+    nameColor: {r: 0.91764706, g: 0.70355195, b: 0.63529414, a: 1}
     dialogColor: {r: 1, g: 1, b: 1, a: 1}
     nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
     dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: MILICIEN
+      - Key: 1
         Value: {fileID: 21300000, guid: 0fe5f7c4a987a9e468ef4632b042795a, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 8bbd3d7bc25a8374b8f0e35b9bcf4fd0, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: 687f504beafc21144a2d7e12f046ee87, type: 3}
+  - name: Marchand
+    alias: marchand
+    characterType: 1
+    nameColor: {r: 0.8773585, g: 0.80506134, b: 0.7490655, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: e17c1ab849929dc4aa19a2bcefedb03d, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 773dd5b729edc6f4cb835b8e002782cb, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: a6867b2ea4bdea4419013a8030998197, type: 3}
   - name: Noble
-    alias: Noble
+    alias: noble
     characterType: 1
     nameColor: {r: 0.63529414, g: 0.8509804, b: 0.91764706, a: 1}
     dialogColor: {r: 1, g: 1, b: 1, a: 1}
@@ -71,5 +103,97 @@ MonoBehaviour:
     fontSize: 28
     sprites:
       _serializedList:
-      - Key: NOBLE
+      - Key: 1
         Value: {fileID: 21300000, guid: 8d29971476ff8ca4fbdb0b880b32fd25, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 26732360aa61c504290c15381bc257fb, type: 3}
+  - name: Guide
+    alias: guide
+    characterType: 1
+    nameColor: {r: 0.82684237, g: 0.91764706, b: 0.63529414, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: c2ca516da15aee14daaba6fc7ac83c47, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 1c4bbaafa6b2b0e48bfe0abbca02fa3f, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: 1d51605f2d111dc459e7b99ad2654257, type: 3}
+  - name: Charlatan
+    alias: charlatan
+    characterType: 1
+    nameColor: {r: 0.91764706, g: 0.63529414, b: 0.90390366, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: 23588901d2381354baefb5149b65aa99, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: a28ee925508c4fe4f9730bbd09449c7b, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: 5bb0a59e20f4fae4ab29bb1a341d3cc5, type: 3}
+  - name: Mafieux
+    alias: mafieux
+    characterType: 1
+    nameColor: {r: 0.9056604, g: 0.45710218, b: 0.48264483, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: f6e9c250cdb5d1b409782349cfe2acf3, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 7a774589a98f3804ebf545147bb58cbe, type: 3}
+  - name: Visionnaire
+    alias: visionnaire
+    characterType: 1
+    nameColor: {r: 0.90588236, g: 0.6459537, b: 0.45882353, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: 7f0f050283e28c142b671dc083a35c1d, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 74c29c815ed32f14ca3554149ded391d, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: ce2700cad97c0f84d85f7add92ce1521, type: 3}
+  - name: BD
+    alias: bd
+    characterType: 1
+    nameColor: {r: 0.6595133, g: 0.6416874, b: 0.990566, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: 7acbe48804c9ef941890999923f73a1a, type: 3}
+      - Key: 2
+        Value: {fileID: 21300000, guid: 9c87a17c77b417143804d7ff636a8b3b, type: 3}
+      - Key: 3
+        Value: {fileID: 21300000, guid: d8652b1d3bea5ce4f829dbf8ffdc1eed, type: 3}
+  - name: Vieux
+    alias: vieux
+    characterType: 1
+    nameColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+    dialogColor: {r: 1, g: 1, b: 1, a: 1}
+    nameFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    dialogFont: {fileID: 11400000, guid: 4681cbb6c6405c8498f3e9dcc230beb9, type: 2}
+    fontSize: 28
+    sprites:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 21300000, guid: a7e7f3721ee3c134ab072b07f83cfd58, type: 3}

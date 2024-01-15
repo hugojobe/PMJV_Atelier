@@ -1,0 +1,41 @@
+CreateCharacter(Milicien -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Milicien -x 0.25 -y 0 -i true)
+
+PlayMusic(Milicien -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Ruelle)
+Wait(1)
+ShowDialog()
+
+narrator "Quelqu'un lui fait déjà signe de se stopper..."
+
+Show(Milicien)
+Milicien "Contrôle rangez-vous sur le bas côté s’il vous plaît."
+Hide(Milicien), Show(Soeur)
+<soeur> "Orgh c’est pas vrai ça va continuer longtemps les rencontres désagréables ?"
+Hide(Soeur), Show(Milicien)
+Milicien "Bonjour désolé du dérangement c’est juste un petit contrôle, pouvez-vous sortir du véhicule."
+Hide(Milicien), Show(Soeur)
+<soeur> "<i>Désolé du dérangement ? S'il vous plaît ? La milice c’est radoucie ou c’est la norme dans ce quartier ?"
+<soeur> "<i>Il a pas l’air bien fort. En plus il se tient mal..."
+<soeur> "<i>Je pourrais voler son arme..."
+
+choice "Que faire ?"
+{
+	-Tenter de voler l'arme
+		Load(MilicienQTE)
+	-Ne rien faire
+		<soeur> "C’est juste un contrôle et je suis en ordre. Pas besoin de prendre des risques inutiles..."
+		
+		Hide(Soeur), Hide(Milicien)
+		
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		SwitchToVesselMode(-f Noble -d 60)
+}

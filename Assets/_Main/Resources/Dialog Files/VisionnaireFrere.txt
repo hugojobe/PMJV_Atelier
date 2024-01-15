@@ -1,0 +1,68 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(Guide -x 0.75 -y 0 -i true)
+
+PlayMusic(Guide -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Visionnaire)
+Wait(1)
+ShowDialog()
+
+Show(Frere)
+<frere> "Excuse-moi, j’ai besoin d’infos. Je cherche ma soeur, elle a disparu de la maison depuis ce matin et elle est sûrement passée par là."
+Hide(Frere), Show(Guide)
+SetSprite(Visionnaire -spr 3)
+Guide "Disparue depuis ce matin ? T’es sûr que c’est pas juste elle qui a fugué pour plus te revoir, haha."
+Hide(Guide), Show(Frere)
+SetSprite(Frere -spr 2)
+<frere> "Qu’est-ce que tu viens de dire là ?"
+Hide(Frere), Show(Guide)
+SetSprite(Visionnaire -spr 2)
+Guide "C’est bon calme toi, je rigole. Elle ressemble à quoi ta soeur ?"
+Hide(Guide), Show(Frere)
+SetSprite(Frere -spr 1)
+<frere> "Très drôle... Elle a les cheveux bleus, elle fait 1m60, elle a un petit vaisseau pour l’aider dans ses déplacements."
+Hide(Frere), Show(Guide)
+Guide "Oh cette fille-là. Je lui ai proposé mon aide pour la guider."
+Guide "Elle voulait aller dans l'Underground mais je n’ai vu personne revenir depuis longtemps, donc prépare toi au pire."
+Hide(Guide), Show(Frere)
+<frere> "D’accord je vois. Je te dois combien pour les infos ?"
+Hide(Frere), Show(Guide)
+SetSprite(Visionnaire -spr 2)
+Guide "Laisse, c’est bon. Si ça peut t’aider à trouver ta soeur c’est cool. Mais je te préviens, je ne sais ce qui s'est passé là-bas."
+Hide(Guide), Show(Frere)
+<frere> "Ouais je vois... Merci beaucoup !"
+Hide(Frere)
+HideDialog()
+
+wait(2)
+
+ShowDialog()
+
+if($milicienTue)
+{
+	narrator "Après beaucoup de recherche, <frere> touche bientôt son but..."
+	narrator "Il s’approche de l'Underground par derrière, pour être discret. Mais il ne lui reste plus beaucoup de temps à vivre."
+	Show(Frere)
+	<frere> "Merde mes jambes me lâches. J’ai plus beaucoup de temps..."
+	<frere> "Je dois continuer ! Allez encore un petit effort..."
+	Hide(Frere)
+	narrator "Le frère arrive à rassembler ses dernières forces pour se relever. Mais il tombe nez à nez avec le cadavre de sa sœur."
+	narrator "Il s’allonge auprès d’elle sans rien dire et il finit par fermer les yeux."
+	Load(End3)
+}
+else
+{
+	narrator "Après beaucoup de recherche, <frere> touche bientôt son but..."
+	narrator "Soudain, un garde de la milice fait irruption au bout de la ruelle."
+	Show(Frere)
+	<frere> "Merde... J’aurai dû le tuer, il n’aurait jamais donné l’alerte. Je vais perdre du temps avec tout ça."
+	<frere> "Je pourrais prendre ce chemin là. Ca m’a l’air en sécurité."
+	Hide(Frere)
+	narrator "<frere> est obligé de faire un grand détour."
+	narrator "A force de chaner de ruelles, il s'est perdu."
+	Show(Frere)
+	<frere> "Je suis désolé petite soeur, je n’aurais pas pu te retrouver au final..."
+	Hide(Frere)
+	Load(End4)
+}

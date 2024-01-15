@@ -1,8 +1,0 @@
-HideDialog()
-HideVessel()
-ClearBackground()
-HideAll()
-HideAllChar()
-StopMusic(1)
-
-

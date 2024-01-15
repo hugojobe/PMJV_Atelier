@@ -1,0 +1,52 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(BD -x 0.75 -y 0 -i true)
+
+PlayMusic(BD -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img BD)
+Wait(1)
+ShowDialog()
+
+Show(Frere)
+<frere> "Bordel, faut que je fasse gaffe où je marche... Si je me fais remarquer c’est la fin."
+BD as ??? "<shake>GRENAAADE"
+<frere> "Faut que je dégage !"
+
+QTE "12"
+{
+	-W
+		Hide(Frere)
+		HideDialog()
+
+		wait(2)
+
+		Show(Frere)
+		ShowDialog()
+
+		<frere> "Eh, vous ! Vous n'auriez pas vu une petite fille récemment ? On m’a dit d’aller vous trouver car on vous aurait vu avec."
+		Hide(Frere), Show(BD)
+		SetSprite(BD -spr 2)
+		BD as ??? "Commence déjà par me respecter et tout se passera bien... Donc, pourquoi tu viens me faire chier ?"
+		Hide(BD), Show(Frere)
+		SetSprite(Frere -spr 3)
+		<frere> "Je viens de te le dire. Si je viens vers toi, c’est parce que ma frere a été vue la dernière fois avec toi."
+		Hide(Frere), Show(BD)
+		SetSprite(Frere -spr 1)
+		BD as ??? "Ah oui cette gamine... Je lui avais demandé un service, mais elle a refusé. Heureusement qu’un autre l’a fait..."
+		SetSprite(BD -spr 3)
+		BD as ??? "Je te dirais bien ce qui lui est arrivé, mais sans compensation..."
+		Hide(BD), Show(Frere)
+		SetSrpite(Frere -spr 3)
+		<frere> "Argh, bordel ! Tenez, votre argent ! Maintenant dites moi où elle est !"
+		$playerMoney -= 5
+		Hide(Frere)
+		narrator "Vous perdez 5 <money>."
+		SetSprite(Frere -spr 1)
+		Load(BrasDroitFrereQTE)
+	-L
+		SetSprite(BD -spr 2)
+		narrator "La grenade atterit à côté du frère, et explose."
+		narrator "<frere> a échoué. Sa soeur restera disparue."
+		Load(End4)
+}

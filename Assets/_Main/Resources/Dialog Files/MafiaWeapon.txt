@@ -1,0 +1,19 @@
+choice "Que décidez-vous ?"
+{
+	-Payer (Impossible)
+		<soeur> "Malhereusement, ça ne sera pas possible..."
+		Load(MafiaWeapon)
+	-Accepter
+		Load(MafiaOR)
+	-Menacer
+		<soeur> "Ou alors... Je vous prends les bouteilles, vous me laissez partir et personne ne meurt !"
+		Hide(Soeur), Show(Mafieux)
+		SetSprite(Mafieux -spr 2)
+		Mafieux as ??? "Tu te ramènes, dans ma base, et tu penses pouvoir me dépouiller ?"
+		Mafieux as ??? "Je ne sais pas si tu as remarqué, petite, mais t’es encerclé par mes gars."
+		Hide(Mafieux), Show(Soeur)
+		<soeur> "Alors tu mourras avant moi... Même si mon objectif n'est pas rempli, ton empire va en prendre un sacré coup !"
+		SetSprite(Mafieux -spr 1)
+		Load(MafiaQTE)
+
+}

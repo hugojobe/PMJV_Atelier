@@ -1,0 +1,54 @@
+Hide(Milicien), Show(Soeur)
+<soeur> "<i>Le risque est grand mais si j’y arrive ça pourrait m’être utile."
+Hide(Soeur), Show(Milicien)
+Milicien "Arh, qu’est-ce que vous faites ?"
+
+QTE "11"
+{
+	- W
+		Hide(Milicien), Show(Soeur)
+		<soeur> "Reste ou tu es ! Ne bouge pas d’un pouce !"
+		Hide(Soeur), Show(Milicien)
+		SetSprite(Milicien -spr 3)
+		Milicien "Oui madame, désolé pour tout ça, je voulais pas vous offenser ! Tenez mon argent !"
+		SetSprite(Milicien -spr 2)
+		Milicien "Pitié me tuez pas !"
+		Hide(Milicien), Show(Soeur)
+		<soeur> "Wow c’était facile..."
+		<soeur> "Merci pour l’argent j’imagine. J’ai presque pitié pour toi..."
+	- L
+		Hide(Milicien), Show(Soeur)
+		<soeur> "Merde tu parles de réflexes !"
+		Hide(Soeur), Show(Milicien)
+		SetSprite(Milicien -spr 3)
+		Milicien "Non arrêtez s’il vous plaît ! Me faite pas de mal, on peut s’arranger."
+		Hide(Milicien), Show(Soeur)
+		<soeur> "<i>Sérieusement, c’est moi qui suis dans la merde et c’est lui qui a peur... C’est ça la milice ?"
+		<soeur> "Donne-moi ton arme et ta thune sinon j’appelle mon frère !"
+		Hide(Soeur), Show(Milicien)
+		SetSprite(Milicien -spr 2)
+		Milicien "Oui d’accord, tout ce que vous voulez."
+		Milicien "Pitié, n'appelez pas votre frère !"
+}
+
+SetSprite(Milicien -spr 1)
+Hide(Milicien), Show(Soeur)
+<soeur> "Essaye de passer une bonne journée. Salut..."
+Hide(Soeur)
+
+$playerMoney += 15
+$hasWeapon = true
+$hasArgentMilicien = true
+narrator "Vous gagnez 15 <money>"
+narrator "Vous gagnez une <color=#F7281E>arme</color>"
+
+Hide(Soeur)
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Hide(Soeur), Hide(Milicien)
+
+SwitchToVesselMode(-f Noble -d 60)

@@ -1,0 +1,58 @@
+CreateCharacter(Vieux -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Vieux -x 0.25 -y 0 -i true)
+
+PlayMusic(Vieux -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Desert)
+Wait(1)
+ShowDialog()
+
+Vieux as ??? "Eh... Vous... S’il vous plaît..."
+
+Show(Soeur)
+<soeur> "Oh non..."
+Hide(Soeur), Show(Vieux)
+Vieux "S’il vous plait... Je suis à court d’oxygène... J’ai besoin d’une bouteille..."
+Hide(Vieux)
+
+choice "Que faire ?"
+{
+	-Donner une bouteille
+		Show(Soeur)
+		<soeur> "J'en ai besoin aussi, mais tiens. Avec ça tu tiendras plus ou moins 6 mois. Mais je peux pas faire plus désolée."
+		Hide(Soeur), Show(Vieux)
+		Vieux "Merci beaucoup. Je n’oublierai jamais votre geste. Si je peux vous aider dans l’immédiat, dans la limite du possible, dites le moi."
+		Hide(Vieux), Show(Soeur)
+		<soeur> "Si vous pouviez m’indiquer un meilleur chemin pour atteindre cette zone, sans passer par le champ de bataille, ce serait bien."
+		Hide(Soeur), Show(Vieux)
+		Vieux "Oui, je peux faire ça. Je vous marque le chemin sur ma carte. Voilà, avec ça votre trajet se fera en sécurité..."
+		Hide(Vieux), Show(Soeur)
+		<soeur> "Merci le vieux, je n’oublierai pas ton action non plus, reste en sécurité maintenant."
+		Hide(Soeur)
+
+		$vieuxMort = false
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		
+		Load(End1)
+	-Partir
+		Show(Soeur)
+		<soeur> "Non, désolée. Je n’ai rien à te donner. J’ai besoin de ces bouteilles pour ma famille."
+		Hide(Soeur), Show(Vieux)
+		Vieux "S’il vous plaît, les temps sont durs. J'ai du mal à me déplacer. Juste une bouteille, pitié."
+		Hide(Vieux), Show(Soeur)
+		<soeur> "Je ne peux pas... Je suis désolée..."
+		Hide(Soeur), Show(Vieux)
+		Vieux "Eh bien, vous n’aurez pas le choix de tout de façon..."
+		Hide(Vieux)
+		narrator "Il sort un couteau de sa poche et menace la sœur. Il se jeter sur elle pour essayer de voler ses affaires."
+		$vieuxMort = true
+		Load(VieuxDefence)
+
+}

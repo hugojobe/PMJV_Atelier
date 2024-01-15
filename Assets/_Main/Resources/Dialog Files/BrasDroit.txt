@@ -1,0 +1,58 @@
+CreateCharacter(BD -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(BD -x 0.25 -y 0 -i true)
+
+PlayMusic(BD -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img BD)
+Wait(1)
+ShowDialog()
+
+Show(BD)
+BD as ??? "Hé toi ! Viens ici ! J’ai un job pour toi."
+Hide(BD), Show(Soeur)
+<soeur> "Qu’est-ce que vous voulez au juste ?"
+Hide(Soeur), Show(BD)
+SetSprite(BD -spr 2)
+BD as ??? "Fais attention à la manière dont tu parles, je suis membre de l’Underground."
+Hide(BD), Show(Soeur)
+<soeur> "Désolé pour mon impolitesse."
+Hide(Soeur), Show(BD)
+SetSprite(BD -spr 3)
+BD as ??? "Tu fais bien de t’excuser. Bon je vais pas passer par 4 chemins, j’ai besoin de toi pour récupérer des informations cruciales sur un gang rival."
+BD as ??? "Vu que t’es petite tu pourras mieux te faufiler."
+Hide(BD), Show(Soeur)
+<soeur> "Quoi ?! Mais..."
+Hide(Soeur), Show(BD)
+SetSprite(BD -spr 2)
+BD as ??? "C’était pas une proposition. Tu vas exécuter les ordres sauf si tu veux y passer."
+Hide(BD)
+narrator "La soeur ne voulant pas faire le sale boulot, joue le tout pour le tout et pars en courant, espérant pouvoir la fuir."
+
+QTE "10"
+{
+	-W
+		narrator "La mafieuse tire sur la sœur, qui se met rapidement à couvert derrière un bâtiment avant de s'enfuir."
+		<soeur> "Elle m’a vraiment tiré dessus... Je dois vite partir de là."
+		Hide(Soeur)
+		narrator "La soeur arrive a semer la mafieuse. Après plusieurs minutes de marche, elle finit par faire une rencontre inattendue."
+		
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		SetSprite(BD -spr 1)
+		
+		$BDKilledSoeur = false
+
+		Load(AutostopRetour)
+	-L
+		narrator "La mafieuse tire sur <soeur> et la touche en pleine tête. La soeur succombe à la balle, perdant tragiquement la vie."
+		$BDKilledSoeur = true
+		Kill()
+
+		SetSprite(BD -spr 1)
+}

@@ -1,0 +1,27 @@
+PlayMusic(House -ch 0 -l true)
+
+ShowAll()
+Wait(1)
+ShowDialog()
+
+narrator "La soeur arrive en face de sa maison."
+
+SetBackground(-img Intro)
+
+Show(Soeur)
+
+<soeur> "Fréro, je suis de retour ! J’ai des tas de chose à te raconter..."
+
+Hide(Soeur)
+HideDialog()
+
+SetBackground(End1-1)
+wait(2)
+SetBackground(End1-2)
+wait(2)
+SetBackground(End1-3)
+wait(2)
+SetBackground(End1-4)
+wait(4)
+
+End(1)

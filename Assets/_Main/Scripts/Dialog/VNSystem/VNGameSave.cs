@@ -1,7 +1,9 @@
+using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,7 +13,7 @@ public class VNGameSave
 
     public const string FILE_TYPE = ".eyesave";
     public const string SCREENSHOT_FILE_TYPE = ".jpg";
-    public const bool ENCRYPT_FILES = true;
+    public const bool ENCRYPT_FILES = false;
 
     public string filePath => $"{FilePaths.gameSaves}{slotNumber}{FILE_TYPE}";
     public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{SCREENSHOT_FILE_TYPE}";
@@ -22,8 +24,19 @@ public class VNGameSave
     public int playerMoney = 7;
     public int playerOx {get{return pPlayerOx; } set{pPlayerOx = Clamp(value);}}
 
-    public bool soeurMorteAller = false;
+
+    public bool estAuRetour = false;
+    public bool playingSoeur = true;
+    public bool soeurMorteAuRetour = false;
+    public bool trouveSoeur;
+
     public bool helpedAutostop = false;
+    public bool hasObjetRare = false;
+    public bool hasArgentMilicien = false;
+    public bool hasWeapon = false;
+    public bool BDKillSoeur = false;
+    public bool vieuxMort = false;
+    public bool milicienMort = false;
 
     public int slotNumber = 1;
 
@@ -32,6 +45,9 @@ public class VNGameSave
     public HistoryState activeState;
     public HistoryState[] historyLogs;
     public VNVariablesData[] variables;
+
+    public List<string> charKeys = new List<string>();
+    public List<CharacterSprite> charValues = new List<CharacterSprite>();
 
     public string timestamp;
 
@@ -58,7 +74,14 @@ public class VNGameSave
         activeConversation = GetConversationData();
         variables = GetVariableData();
 
-        timestamp = DateTime.Now.ToString("dd/mm/yy HH:MM:ss");
+        foreach(KeyValuePair<string, Character> pair in CharacterManager.instance.characters){
+            if(pair.Value is CharacterSprite){
+                charKeys.Add(pair.Key);
+                charValues.Add(pair.Value as CharacterSprite);
+            }
+        }
+
+        timestamp = DateTime.Now.ToString("dd/MM/yy HH:mm:ss");
 
         string saveJSON = JsonUtility.ToJson(this);
         FileManager.Save(filePath, saveJSON, ENCRYPT_FILES);
@@ -69,6 +92,16 @@ public class VNGameSave
     public void Activate() {
         if(activeState != null)
             activeState.Load();
+
+        Dictionary<string, Character> chars = new Dictionary<string, Character>();
+        for(int i = 0; i < charKeys.Count; i++) {
+            chars.Add(charKeys[i], charValues[i]);
+        }
+
+        foreach(CharacterSprite character in chars.Values) {
+            CharacterSprite newChar = CharacterManager.instance.GetCharacter(character.name.ToLower(), true) as CharacterSprite;
+            newChar.SetPosition(character.targetPosition);
+        }
 
         HistoryManager.instance.history = historyLogs.ToList();
         HistoryManager.instance.logManager.Clear();

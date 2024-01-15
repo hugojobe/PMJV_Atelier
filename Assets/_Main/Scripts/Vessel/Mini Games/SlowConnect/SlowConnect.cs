@@ -13,6 +13,7 @@ public class SlowConnect : MiniGame
 
     private Coroutine noteCoroutine = null;
     public GameObject overspeedNoteObject;
+    private AudioSource sfx;
 
     private void Start() {
         base.Start();
@@ -49,6 +50,9 @@ public class SlowConnect : MiniGame
     }
 
     public IEnumerator ShowOverspeedNote() {
+        if(!sfx)
+            sfx = AudioManager.instance.PlaySoundEffect("TooFast", volume:0.4f);
+
         overspeedNoteObject.SetActive(true);
         yield return new WaitForSecondsRealtime(1.25f);
         overspeedNoteObject.SetActive(false);

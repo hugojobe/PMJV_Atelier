@@ -14,6 +14,7 @@ public class CharacterConfig : ScriptableObject
             CharacterConfigData data = characters[i];
 
             if(string.Equals(characterName, data.name.ToLower()) || string.Equals(characterName, data.alias.ToLower())){
+                //Debug.Log($"Found data for character '{characterName}' with sprite list of length '{data.sprites.Count}'");
                 return safe ? data.Copy() : data;
             }
         }

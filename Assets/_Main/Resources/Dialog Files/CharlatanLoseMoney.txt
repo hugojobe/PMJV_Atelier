@@ -1,0 +1,31 @@
+if($playerMoney >= 21)
+{
+	$playerMoney -= 20
+	narrator "Vous perdez 20 <money>. Il vous reste $playerMoney <money>."
+}
+else
+{
+	narrator "Vous perdez $playerMoney <money>. Il ne vous reste rien."
+	$playerMoney = 0
+}
+
+Hide(Charlatan), Show(Soeur)
+<soeur> "<i>Bordel, pourquoi ça tombe sur moi ce genre de chose... En plus ce jour ci ! Pourquoi ça m’arrive à moi ?"
+<soeur> "<i>Allez, calme toi tu vas y arriver ! Tu y es presque !"
+<soeur> "<i>Ton frère va vivre !"
+Hide(Soeur)
+HideDialog()
+wait(1.5)
+ShowDialog()
+Show(Soeur)
+<soeur> "<i>Ça y est. On y est enfin."
+
+Hide(Soeur)
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(Mafia)

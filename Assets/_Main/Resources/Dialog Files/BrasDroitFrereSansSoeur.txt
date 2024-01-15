@@ -1,0 +1,58 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(BD -x 0.75 -y 0 -i true)
+
+PlayMusic(BD -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img BD)
+Wait(1)
+ShowDialog()
+
+Show(Frere)
+SetSprite(Frere -spr 3)
+<frere> "C’est pas vrai, j’ai l’impression qu’elle m’a envoyé dans la gueule du loup."
+SetSprite(Frere -spr 1)
+<frere> "<i>Je pourrais demander de l’aide à cette personne."
+<frere> "Eh vous ! Vous pouvez m’aider ? Je cherche ma petite soeur vous ne l’auriez pas vue ?"
+Hide(Frere), Show(BD)
+BD as ??? "Non, jamais vu de gamine passer par ici. Je m’en souviendrai."
+BD as ??? "Autre chose ou t’as encore des questions ?"
+Hide(BD), Show(Frere)
+<frere> "Ok, je vois. Non j’en ai fini..."
+Hide(Frere), Show(BD)
+BD as ??? "Parfait, maintenant on va passer aux choses sérieuses, tu vas m'aider."
+BD as ??? "Je dois récupérer un document important dans la zone d’où tu viens. C’est dans le bâtiment là-bas, normalement."
+Hide(BD), Show(Frere)
+SetSprite(Frere -spr 3)
+<frere> "Minute. J’ai pas le temps pour t’aider, et je vais clairement pas retourner dans cette zone de guerre."
+Hide(Frere), Show(BD)
+BD as ??? "Tu me dois bien ça, je t’ai aidé."
+Hide(BD), Show(Frere)
+<frere> "Et si je ne le fais pas..."
+Hide(Frere), Show(BD)
+BD as ??? "Sale gosse ! Est-ce que tu sais qui je suis ? Je suis la bras droit du gros mafieux de l’Underground !"
+BD as ??? "Je t’ai rendu un service, alors tu me rends la pareille, à moins que tu aies un souhait de mort !"
+Hide(BD), Show(Frere)
+SetSprite(Frere -spr 1)
+<frere> "Bon ok, c’est quoi comme document..."
+Hide(Frere), Show(BD)
+BD as ??? "Tu comprends vite, c’est bien ça. Le document est dans une enveloppe rouge avec le logo de la mafia rivale. Donne-moi le document et tout se passera bien."
+Hide(BD), Show(Frere)
+<frere> "Mouais, je reviens tout de suite..."
+SetSprite(Frere -spr 3)
+<frere> "<i>Merde, avec eux pas moyen de s’enfuir. Ils ont des yeux partout..."
+Hide(Frere), HideDialog()
+
+wait(2)
+
+Show(Frere)
+ShowDialog()
+
+<frere> "<i>Ok, j’y suis enfin. Maintenant, la clef... C’est calme, beaucoup trop calme..."
+Hide(Frere), Show(BD as ???)
+BD as ??? "<shake>OK LES GARS, TIREZ !"
+
+Hide(Frere), Hide(BD)
+narrator "Le frère se met à couvert, mais il n’a pas été assez rapide. Une balle le touche fatalement. C'était un piège."
+Load(End4)
+

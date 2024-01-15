@@ -17,10 +17,14 @@ public class CanvasGroupManager
     }
 
     public void Show() {
+        rootCG.interactable = true;
+        rootCG.blocksRaycasts = true;
         executorScript.StartCoroutine(ShowOrHideCoroutine(1f));
     }
 
     public void Hide() {
+        rootCG.interactable = false;
+        rootCG.blocksRaycasts = false;
         executorScript.StartCoroutine(ShowOrHideCoroutine(0f));
     }
 

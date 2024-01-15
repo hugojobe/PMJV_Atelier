@@ -1,0 +1,79 @@
+CreateCharacter(Charlatan -e false -i true)
+Move(Soeur -x 0.25 -y 0 -i true)
+Move(Charlatan -x 0.75 -y 0 -i true)
+
+PlayMusic(Charlatan -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Charlatan)
+Wait(1)
+ShowDialog()
+
+Charlatan as ??? "Ehh ! Stop, arrête-toi !"
+
+narrator "La soeur frêne brutalement pour éviter l’obstacle. "
+
+Show(Soeur)
+<soeur> "Bordel, c’est quoi votre problème à vous mettre devant les gens comme ça ?"
+<soeur> "Tu veux quoi ?"
+Hide(Soeur), Show(Charlatan)
+Charlatan as ??? "Mes excuses petite, je vais prendre un peu de ton temps hehe."
+Charlatan as ??? "J’ai des choses intéressantes pour toi et ton vaisseau.{a}Tu te dirige vers l’underground n’est ce pas ?"
+Charlatan as ??? "T’aura besoin d’un permis pour y entrer."
+SetSprite(Charlatan -spr 3)
+Charlatan as ??? "Je peux t’en donner un si tu le souhaite."
+Hide(Charlatan), Show(Soeur)
+<soeur> "Louche. Je n’ai jamais entendu parler de ce permis."
+<soeur> "Je la sens pas. D’un autre coté si elle dit la vérité je serai dans la merde..."
+
+SetSprite(Charlatan -spr 1)
+
+choice "Que faire ?"
+{
+	-Accepter
+		<soeur> "Bon d’accord. Je vais prendre le permis."
+		Hide(Soeur), Show(Charlatan)
+		Charlatan as ??? "Ok génial ! Descend du véhicule et je te le donne. Tu peux me faire confiance, petite."
+		Hide(Charlatan), Show(Soeur)
+		<soeur> "Oh tu fais quoi avec ton arme ? Laisse-moi partir !"
+		Hide(Soeur), Show(Charlatan)
+		SetSprite(Charlatan -spr 2)
+		Charlatan "Donne-moi ton argent et tout se passera bien gamine. Je veux pas te blesser mais j’hésiterai pas si tu me force !"
+		Hide(Charlatan)
+		Load(CharlatanLoseMoney)
+		SetSprite(Charlatan -spr 1)
+	-Refuser
+		<soeur> "Merci, mais je me débrouillerai bien toute seule."
+		Hide(Soeur), Show(Charlatan)
+		Charlatan as ??? "Mais allez, t’en auras besoin. Accepte le permis c’est gratuit. Tu peux me faire confiance, je suis pas méchante."
+		SetSprite(Charlatan -spr 2)
+		Charlatan "Alors descends du véhicule !"
+		Hide(Charlatan), Show(Soeur)
+		<soeur> "Je vais pas tomber dans le panneau ! Alors lâche moi et va trouver d’autres pigeons ailleurs !"
+		Hide(Soeur), Show(Charlatan)
+		Charlatan "Je t’emmerde, sale gosse. Reviens là !"
+		Hide(Charlatan), Show(Soeur)
+
+		SetSprite(Charlatan -spr 1)
+		<soeur> "<i>Bordel, pourquoi ça tombe sur moi ce genre de chose... En plus ce jour ci ! Pourquoi ça m’arrive à moi ?"
+		<soeur> "<i>Allez, calme toi tu vas y arriver ! Tu y es presque !"
+		<soeur> "<i>Ton frère va vivre !"
+		Hide(Soeur)
+		HideDialog()
+		
+		wait(1.5)
+		
+		ShowDialog()
+		Show(Soeur)
+		
+		<soeur> "<i>Ça y est. On y est enfin."
+		
+		Hide(Soeur)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		Load(Mafia)
+}

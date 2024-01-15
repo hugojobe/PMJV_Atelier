@@ -1,6 +1,8 @@
 CreateCharacter(Marchand -e false -i true)
-Move(Soeur -x 0.15 -y 0 -i true)
-Move(Marchand -x 0.85 -y 0 -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Marchand -x 0.25 -y 0 -i true)
+
+PlayMusic(Marchand -ch 0 -l true)
 
 ShowAll()
 SetBackground(Desert)
@@ -19,14 +21,17 @@ if(<helpedAutostop> == True)
 else
 {
 	<soeur> "J’ai quasi rien sur moi bordel ça va être dur d’acheter ces bouteilles j’aurai peut-être du aider ce type… Non finalement j’ai bien fait…"
-	<soeur> "Je peux pas me permettre les détours j’ai une mission à accomplir."
-	<soeur> "Il y a peut-être un truc à bon prix chez ce marchand ambulant…"
+	<soeur> "Je peux pas me permettre les détours. J’ai une mission à accomplir."
+	<soeur> "Il y a peut-être un truc à bon prix chez ce marchand ambulant..."
 }
 
 <soeur> "Bonjour monsieur, je ne fais que passer."
 Hide(Soeur), Show(Marchand)
-Marchand "Bienvenue petite, qu’est-ce que je peux faire pour toi ?{a} Essence, pièce de vaisseau, objet rare j’ai tout ce qui peut aider."
+Marchand "Bienvenue petite, qu’est-ce que je peux faire pour toi ?"
+SetSprite(Marchand -spr 2)
+Marchand "Essence, pièce de vaisseau, objet rare j’ai tout ce qui peut aider."
 Hide(Marchand), Show(Soeur)
+SetSprite(Marchand -spr 1)
 <soeur> "Ca peut être pas mal, un peu d’essence ou autre...</i>" 
 <soeur> "L'objet rare peut être un bon moyen de se faire de l'argent en retour mais ça va coûter cher.</i>"
 
@@ -39,11 +44,3 @@ choice "Voulez-vous acheter quelque chose ?"
 	-Partir
 		Load(MarchandRien)
 }
-
-HideDialog()
-Wait(1)
-ClearBackground()
-Wait(1)
-HideAll()
-
-Load(Marchand)

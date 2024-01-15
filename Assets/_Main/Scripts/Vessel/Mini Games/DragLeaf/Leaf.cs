@@ -15,7 +15,7 @@ public class Leaf : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
-
+        AudioManager.instance.PlaySoundEffect("Leaf", 0.7f);
 	}
 
 	public void OnDrag(PointerEventData eventData) {

@@ -1,0 +1,55 @@
+Show(Frere)
+<frere> "<i>Ok on recommence l’interrogatoire..."
+Hide(Frere)
+
+choice "Que faire ?"
+{
+	-Menacer
+		narrator "Le frère menace et frappe le milicien avec l’arme pour le faire parler."
+		Show(Frere)
+		SetSprite(Frere -spr 2)
+		<frere> "Bon écoute, si tu veux vivre, t’as intérêt à tout me dire, ok ?"
+		Hide(Frere), Show(Milicien)
+		SetSprite(Milicien -spr 2)
+		Milicien "Pitié arrêtez ! Ca fait super mal ! Oui, oui j’ai bien vu une gamine..."
+		Hide(Milicien), Show(Frere)
+		<frere> "Ok on recommence... Dans quelle direction !"
+		Hide(Frere), Show(Milicien)
+		Milicien "Aïe ! Tu m’as cassé une côte, je pense… Elle a pris cette route là c’est tout ce que je sais."
+		Hde(Milicien)
+		narrator "Le frère le frappe encore."
+		Show(Frere)
+		<frere> "Tu te souviens d’autre chose, que t’aurais oublié ?"
+		Hide(Frere), Show(Milicien)
+		Milicien "Aïe ! Oui, désolé. Il y a des patrouilles là-bas à cette heure-ci. Tu risques d’être visible avec du sang sur tes poings."
+		Hide(Milicien), Show(Frere)
+		SetSprite(Frere -spr 1)
+		SetSprite(Milicien -spr 1)
+		<frere> "Merci des infos. Tu vois quand tu veux. Au moins le chemin sera plus simple."
+		<frere> "<i>Bon, maintenant je fais quoi de lui ? Il a vu mon visage. Ca risque d’être dur pour la suite s’il prévient une patrouille..."
+		Hide(Frere)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		
+		Load(MilicienFrereFin)
+	-Interroger
+		Show(Frere)
+		<frere> "Écoute, je veux juste que tu fasses travailler ta mémoire. La fille, tu l’as vraiment pas vue ? Oui ou non ?"
+		Hide(Frere), Show(Milicien)
+		Milicien "Oui, j’ai vu une gamine. Elle parlait de ramener son frère, ou un truc du genre. Je l’ai vue partir dans cette direction. Pitié, ne me faites pas de mal !"
+		Hide(Milicien), Show(Frere)
+		<frere> "Ok, merci. Bon, je garde ton arme. Il vaut mieux que je la garde plutôt que toi."
+		Hide(Frere)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		
+		Load(VisionnaireFrere)
+}

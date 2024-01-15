@@ -1,0 +1,30 @@
+$playerOx = 3
+$playerMoney = 35
+
+Move(Frere -x 0.25 -y 0 -i true)
+
+PlayMusic(House -l true -ch 0)
+
+ShowAll()
+SetBackground(-img Intro)
+Wait(1)
+ShowDialog()
+
+narrator "L’après-midi débute et <frere> n’a toujours pas revu sa sœur, il s’inquiète car le véhicule n’est plus là où il devrait être."
+
+Show(Frere)
+SetSprite(Frere -spr 2)
+<frere> "Ce n’est pas vrai, elle n’est quand même pas partie où je pense."
+SetSprite(Frere -spr 1)
+<frere> "Je ne peux quasi rien faire dans mon état. Je dois être prudent. Tu ne perds rien pour attendre."
+
+Hide(Frere)
+narrator "Le frère décide de partir de la maison en marchant et prend la route principale."
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(CharlatanFrere)

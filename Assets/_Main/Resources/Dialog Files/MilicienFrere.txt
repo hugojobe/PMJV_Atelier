@@ -1,0 +1,28 @@
+Move(Frere -x 0.25 -y 0 -i true)
+Move(Milicien -x 0.75 -y 0 -i true)
+
+PlayMusic(Milicien -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Ruelle)
+Wait(1)
+ShowDialog()
+
+Show(Frere)
+<frere> "<i>Ah super, une figure d’autorité. Il pourra peut-être m’aider, même si c’est un milicien."
+<frere> "Désolé de vous déranger, Monsieur. J’ai besoin de votre aide. Je cherche ma petite soeur. Elle est partie dans cette direction. Elle fait 1m60, cheveux noirs."
+<frere> "Vous ne l’auriez pas vue ?"
+Hide(Frere), Show(Milicien)
+SetSprite(Milicien -spr 3)
+Milicien "Argh, me faites pas peur comme ça s’il vous plait. Une petite fille vous dites ?"
+Hide(Milicien)
+SetSprite(Milicien -spr 1)
+narrator "Le frère tente d’être intimidant"
+
+QTE "9"
+{
+	-W
+		Load(MilicienFrereQTEWin)
+	-L
+		Load(MilicienFrereQTELose)
+}

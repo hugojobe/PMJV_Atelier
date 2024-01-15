@@ -13,6 +13,7 @@ public class TVCurve : MiniGame
     public float timeSinceLastTouched;
     public float timeRequiredWithoutValueChange;
     public float lastSliderValue;
+    public bool playedSFX;
 
     private void Start() {
         base.Start();
@@ -42,6 +43,10 @@ public class TVCurve : MiniGame
     public void CheckCorrespondance(float value) {
         if(value == tvAngle*2){
             playerSlider.interactable = false;
+            if(!playedSFX){
+                AudioManager.instance.PlaySoundEffect("TV", 0.5f);
+                playedSFX = true;
+            }
             SolveProblem();
         }
     }

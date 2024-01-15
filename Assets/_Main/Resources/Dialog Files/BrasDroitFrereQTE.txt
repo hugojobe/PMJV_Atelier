@@ -1,0 +1,65 @@
+if($BDKIlledSoeur == true)
+{
+	Show(BD)
+	BD as ??? "Si tu voyais ta tête... Je vais te faciliter la tâche : elle est dans le hall de ce bâtiment."
+	Hide(BD), Show(Frere)
+	<frere> "Comment tu sais si elle est toujours là ?"
+	Hide(Frere), Show(BD)
+	BD as ??? "C'est simple, je m’en suis assuré moi même."
+	Hide(BD)
+	narrator "Le frère est troublé par ce qu'il vient d'entendre et décide de partir rapidement voir sa soeur."
+	narrator "En entrant, tout ce qu’il trouve est le cadavre de sa soeur avec toute ses affaires sur elle."
+	narrator "Les bouteilles sont toujours là."
+	Show(Frere)
+	<frere> "Donc c’est bien ça qu’elle voulait dire par là..."
+	SetSprite(Frere -spr 3)
+	<frere> "Elle m’a privé de ma soeur. Ma seule famille !"
+	SetSprite(Frere -spr 1)
+	<frere> "<i>Merci d’avoir fait ce voyage pour moi, soeurette."
+	Hide(Frere)
+	narrator "Le frère se dirige vers l'inconnue et lui tire dessus à plusieurs reprises."
+	narrator "<frere> rentre chez lui avec sa soeur. Il a survécu."
+	
+	HideDialog()
+	Wait(1)
+	ClearBackground()
+	Wait(1)
+	HideAll()
+	
+	Load(End2)
+}
+else
+{
+	Show(BD)
+	BD as ??? "C’est bon pas besoin de t’énerver, hehe. Elle a pris cette direction la dernière fois que je l’ai vue."
+	BD as ??? "Si tu veux mon avis elle est surement morte..."
+	Hide(BD), Show(Frere)
+	SetSprite(Frere -spr 3)
+	<frere> "Je me passerai de ton avis, merci."
+	Hide(Frere), Show(BD)
+	BD as ??? "Comme tu veux. Maintenant, dégage de là !"
+	Hide(BD)
+
+	SetSprite(Frere -spr 1)
+
+	HideDialog()
+
+	wait(2)
+
+	ShowDialog()
+
+	narrator "Après beaucoup de recherches, <frere> finit par trouver sa soeur morte au sol."
+	narrator "Les bouteilles sont toujours là."
+	Show(Frere)
+	<frere> "<i>Je vais continuer à vivre pour te faire honneur, petite soeur. Merci pour ce que tu as fait."
+	Hide(Frere)
+	narrator "<frere> rentre chez lui avec sa soeur. Il a survécu."
+	HideDialog()
+	Wait(1)
+	ClearBackground()
+	Wait(1)
+	HideAll()
+
+	Load(End2)
+}
+

@@ -1,8 +1,8 @@
 CreateCharacter(Autostoppeur -e false -i true)
-Move(Soeur -x 0.15 -y 0 -i true)
-Move(Autostoppeur -x 0.85 -y 0 -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Autostoppeur -x 0.25 -y 0 -i true)
 
-PlayMusic(Desert -ch 0 -l true)
+PlayMusic(Autostop -ch 0 -l true)
 
 ShowAll()
 SetBackground(-img Desert)
@@ -11,8 +11,8 @@ ShowDialog()
 
 narrator "Quelqu'un lui fait déjà signe de se stopper..."
 
-<soeur> "Vraiment… Je viens à peine de partir et je dois déjà m'arrêter…{a} Bon voyons voir ce qu’il veut."
 Show(Soeur)
+<soeur> "Vraiment… Je viens à peine de partir et je dois déjà m'arrêter…{a} Bon voyons voir ce qu’il veut."
 <soeur> "Qu’est-ce que vous voulez ?"
 Hide(Soeur), Show(Autostoppeur)
 Autostoppeur "Merci de t’être arrêtée petite...{c}S’il te plaît Est-ce que tu peux me déposer dans l’hôpital de <color=#F771D9>Sky City</color>, je dois y être au plus vite et mon véhicule est en panne.""
@@ -37,27 +37,37 @@ choice "Que faire ?"
 		narrator "Vous perdez 2 <ox>"
 		HideDialog()
 		wait(2)
+		SetBackground(SkyCity)
 		ShowDialog()
 		Show(Soeur)
 		<soeur> "Voilà on est arrivé. Vous avez intérêt à parler de moi à votre fille, ça lui fera une bonne histoire."
+		Hide(Soeur), Hide(Autostoppeur)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		Load(Marchand)
 	-Refuser
 		$helpedAutostop = false
 		<soeur> "Qu’est ce qui me prouve que tu dois aller là-bas ? Tu pourrais très bien me poignarder par derrière ou pire. {a}Donc non démerdez vous pour vos problème"
 		Hide(Soeur), Show(Autostoppeur)
+		SetSprite(Autostoppeur -spr 2)
 		Autostoppeur "Va te faire foutre, je te souhaite que du malheur."
 		Hide(Autostoppeur), Show(Soeur)
 		<soeur> "M’en fou démerdez vous dans vos problèmes."
+		Hide(Soeur), Hide(Autostoppeur)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		SetSprite(Autostoppeur -spr 1)
+
+		Load(Marchand)
 		
 }
-
-Hide(Soeur), Hide(Autostoppeur)
-narrator "La <color=#F4E039>soeur</color> continue son chemin et arrive à l'entrée d’une ville qui est assez bien réputée."
-
-
-HideDialog()
-Wait(1)
-ClearBackground()
-Wait(1)
-HideAll()
-
-Load(Marchand)

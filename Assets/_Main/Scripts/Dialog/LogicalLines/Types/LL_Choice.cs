@@ -96,6 +96,7 @@ public class LL_Choice : ILogicalLine
 
         choice.resultLines.Add(line);
     }
+
     private bool IsChoiceStart (string line) => line.Trim().StartsWith(CHOICE_IDENTIFIER);
 
     private struct Choice{

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class Character
 {
     public string name = "";
@@ -22,7 +23,7 @@ public abstract class Character
 
     public virtual bool isVisible {get; set;}
 
-    public Vector2 targetPosition {get; private set;}
+    public Vector2 targetPosition;
 
     public Character(string name, CharacterConfigData config, GameObject prefab){
         this.name = name;
@@ -56,6 +57,7 @@ public abstract class Character
     public void UpdateTextCustomizationsOnScreen() => dialog.ApplySpeakerDataToDialogContainer(config);
 
     public virtual Coroutine Show(float speedMultiplier = 1f){
+        //Debug.Log("Requested to show character " + name);
         if(isRevealing)
             return revealingCoroutine;
 

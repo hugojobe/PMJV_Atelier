@@ -1,0 +1,63 @@
+$estAuRetour = true
+
+CreateCharacter(Visionnaire -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Visionnaire -x 0.25 -y 0 -i true)
+
+PlayMusic(Visionnaire -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Visionnaire)
+Wait(1)
+ShowDialog()
+
+narrator "La soeur quitte l'Underground à pied et se dirige vers son quartier."
+
+Visionnaire as ??? "Je vois qu’ils y ont pas été molo avec toi. Ils t’ont pris ton véhicule et sûrement ton argent avec. Hehe, c’est pas de chance."
+Show(Soeur)
+<soeur> "Et t’es qui au juste ? Tu me veux quoi ?"
+<soeur> "<i>Elle se fout clairement de ma gueule, celle-là."
+<soeur> "<i>Mais attends... Comment elle sait que je suis venue en véhicule ?"
+Hide(Soeur), Show(Visionnaire)
+Visionnaire "Pas besoin d’être autant sur la défensive petite. On m’appelle la visionnaire. Je t’ai vu passer avec ton véhicule."
+Visionnaire "Voir une gamine dans le coin m'avait intrigué."
+Hide(Visionnaire), Show(Soeur)
+<soeur> "<i>Ouais je vois. Encore une lunatique qui se prend pour quelqu’un d’important..."
+Hide(soeur), Show(Visionnaire)
+Visionnaire "Je peux t’aider pour ton retour, avec quelques informations qui peuvent t’être utiles..."
+Visionnaire "D’après ta tenue et ton teint de peau, tu viens du désert. Mes infos peuvent t’aider, et c’est gratuit, pour toi."
+Hide(visionnaire), Show(Soeur)
+<soeur> "<i>Elle est observatrice... ça peut-être dangereux. Je vais avoir c’est des problèmes avec elle dans le coin, mais d’un autre coté elle peut peut-être m’être utile..."
+<soeur> "Très bien. J’écoute ce que t’as à dire."
+Hide(Soeur), Show(Visionnaire)
+Visionnaire "Bon choix. J’ai entendu que les mafieux organisent une guerre de gang dans un quartier abandonné du désert."
+Visionnaire "Si c’est dans cette direction que tu comptais aller, sache que c’est risqué de passer par là."
+Hide(Visionnaire), Show(Soeur)
+<soeur> "<i>Sérieusement... Il fallait vraiment que ça tombe maintenant ! Pourquoi ça tombe sur nous ?"
+<soeur> "<i>Reste calme, ça sert à rien de trop réfléchir. Guerre ou pas, mon objectif reste le même. Et puis qu’est ce qui me dit qu’elle dit vrai ?"
+<soeur> "Comment je peux savoir que tu dis la vérité ? Pourquoi me donner ces informations ? Gratuites en plus. C’est louche."
+Hide(Soeur), Show(Visionnaire)
+SetSprite(Visionnaire -spr 2)
+Visionnaire "Comme tu l’as dit, je peux très bien te mentir pour te berner."
+Visionnaire "Tu as raison de te méfier de moi, tu devrais d'ailleurs..."
+Visionnaire "Mais en attendant, je suis la seule source d’aide que tu as. Donc tu devras faire avec...."
+Hide(Visionnaire), Show(Soeur)
+<soeur> "<i>Elle a pas tort dans un sens. Mais pourquoi m’aider gratuitement ?"
+<soeur> "Pourquoi tu fais tout ça ? Qu’est ce que ça t’apporte ?"
+Hide(Soeur), Show(Visionnaire)
+Visionnaire "Disons juste que ça m’aide à me sentir mieux... Maintenant part."
+Hide(Visionnaire), Show(Soeur)
+<soeur> "Ok, bon faut se décider maintenant. Là-bas il y a une guerre de gang mais au moins le chemin sera rapide. L’autre chemin est plus long mais plus sécurisé."
+
+SetSprite(Visionnaire -spr 1)
+
+choice "Quel chemin prendre ?"
+{
+	-Rapide
+		<soeur> "<i>Je peux pas prendre de risque. J’ai enfin tout ce qui faut pour sauver mon frère, je vais pas gâcher ça."
+		Load(BrasDroit)
+	-Long
+		<soeur> "<i>Ok, bon. Je dois faire attention où je vais aller, sinon c’est la mort assurée."
+		Load(Vieux)
+
+}

@@ -1,0 +1,23 @@
+choice "Quel chemin prendre ?"
+{
+	-Suivre l'indication
+		narrator "<frere> se dirige sans le savoir vers les quartiers en guerre."
+
+		Hide(Frere)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		Load(BrasDroitFrere)
+
+	-Continuer tout droit
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		Load(VieuxFrere)
+}
+

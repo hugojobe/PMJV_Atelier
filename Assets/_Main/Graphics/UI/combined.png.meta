@@ -136,7 +136,7 @@ TextureImporter:
         width: 483
         height: 511
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
         width: 465
         height: 511
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,6 +165,90 @@ TextureImporter:
       bones: []
       spriteID: 3019a6ccb37f17a46870879db5a8e8bf
       internalID: 2062124601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combined_2
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 0
+        width: 457
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 279bc70f4d03c454aa4bd0223eaf4061
+      internalID: 826031334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combined_3
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 0
+        width: 471
+        height: 511
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3115218da83ca9545a77554d6e401d83
+      internalID: -593698187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combined_4
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 0
+        width: 405
+        height: 488
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40f12a89fa69b7c4fa9bc9b12799d4e3
+      internalID: -31595628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combined_5
+      rect:
+        serializedVersion: 2
+        x: 2531
+        y: 0
+        width: 522
+        height: 511
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efee28c4bbe0e054596627a9f1af109d
+      internalID: 1892515999
       vertices: []
       indices: 
       edges: []

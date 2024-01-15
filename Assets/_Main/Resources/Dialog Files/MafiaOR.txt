@@ -1,0 +1,25 @@
+<soeur> "Très bien, j’accepte le marché... Voici les clés du véhicule. Maintenant donnez-moi la bouteille !"
+Hide(Soeur), Show(Mafieux)
+Mafieux as ??? "Comme promis, voilà. Deux bouteilles d’ox. Avec celle-ci tu tiendras longtemps."
+
+if($hasObjetRare == true)
+{
+	Mafieux as ??? "Oh et avant de partir je t’en donne une 3ème, comme tu m’as apporté un objet rare."
+}
+
+Hide(Mafieux), Show(Soeur)
+<soeur> "Merci Monsieur pour votre générosité."
+Hide(Soeur), Show(Mafieux)
+Mafieux as ??? "Allez, du vent."
+Hide(Mafieux), Show(Soeur)
+<soeur> "<i>Générosité tu parles... Il vient juste de me voler tout ce que j’avais. Mais bon, je ne vais rien dire, sinon ça va mal finir."
+
+Hide(Mafieux), Hide(Soeur)
+
+HideDialog()
+Wait(1)
+ClearBackground()
+Wait(1)
+HideAll()
+
+Load(Visionnaire)

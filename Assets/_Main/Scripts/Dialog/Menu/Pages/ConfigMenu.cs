@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class ConfigMenu : MenuPage {
     public UI_ITEMS ui;
-    public Colorblindness colorblindnessManager;
 
     [SerializeField] private AnimationCurve audioFalloffCurve;
 
@@ -73,7 +72,9 @@ public class ConfigMenu : MenuPage {
         ui.colorblindMode.value = config.colorblindSettings;
         ui.colorblindMode.captionText.text = ((ColorblindTypes)config.colorblindSettings).ToString();
         Debug.Log("Set value to " + config.colorblindSettings);
-        colorblindnessManager.SetMode(config.colorblindSettings);
+        try{
+            FindObjectOfType<Colorblindness>().SetMode(config.colorblindSettings);
+        } catch {}
     }
 
 

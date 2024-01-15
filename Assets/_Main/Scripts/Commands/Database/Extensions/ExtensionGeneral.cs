@@ -30,8 +30,12 @@ public class ExtensionGeneral : CommandDatabaseExtension
         database.AddCommand("showall", new Func<string[], IEnumerator>(ShowBG));
         database.AddCommand("switchtovesselmode", new Func<string[], IEnumerator>(SwitchToVesselMode));
         database.AddCommand("hidevessel", new Action(HideVessel));
-
         database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
+        database.AddCommand("debug", new Action<string>(DebugToConsole));
+        database.AddCommand("kill", new Action(Kill));
+        database.AddCommand("end", new Action<string>(Win));
+        database.AddCommand("blockinteraction", new Action(BlockInteraction));
+        database.AddCommand("resumeinteraction", new Action(ResumeInteraction));
     }
 
     public static void LoadNewDialogueFile(string[] data){
@@ -138,8 +142,9 @@ public class ExtensionGeneral : CommandDatabaseExtension
 
         CommandParameters parameters = ConvertDataToParameters(data);
         parameters.TryGetValue(PARAM_FILEPATH, out exitFile);
-        parameters.TryGetValue(PARAM_TIME, out  phaseDuration);
+        parameters.TryGetValue(PARAM_TIME, out phaseDuration, 60f);
 
+        AudioManager.instance.StopTrack(0);
         AudioManager.instance.StopTrack(1);
         AudioManager.instance.PlayTrack(FilePaths.resourcesMusic + "Vessel", channel: 0);
 
@@ -147,7 +152,42 @@ public class ExtensionGeneral : CommandDatabaseExtension
     }
 
     private static void HideVessel() {
-        VesselManager.instance.animator.SetTrigger("VN");
-        VesselManager.instance.Reset();
+        VesselManager.instance?.animator.SetTrigger("Reset");
+        VesselManager.instance?.Reset();
+    }
+
+    private static void DebugToConsole(string data) {
+        Debug.Log(data);
+    }
+
+    private static void Kill() {
+        VNManager.Kill();
+    }
+
+    private static void Win(string data) {
+        int endNumber = int.Parse(data);
+
+        switch (endNumber) {
+            case 1:
+                VNManager.Win("Votre frère sera fier de vous", false);
+                break;
+            case 2:
+                VNManager.Win("Votre soeur s'est sacrifiée pour vous sauver", false);
+                break;
+            case 3:
+                VNManager.Win("Votre soeur n'a pas pu vous sauver", true);
+                break;
+            case 4:
+                VNManager.Win("Vous serez séparés à jamais", true);
+                break;
+        }
+    }
+
+    private static void BlockInteraction() {
+        PlayerInputManager.instance.canUserPromptNext = false;
+    }
+
+    private static void ResumeInteraction() {
+        PlayerInputManager.instance.canUserPromptNext = true;
     }
 }

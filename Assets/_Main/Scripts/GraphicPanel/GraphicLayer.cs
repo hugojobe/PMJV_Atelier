@@ -38,17 +38,17 @@ public class GraphicLayer
         return SetVideo(clip, transitionSpeed, useAudio, blendingTexture, filePath, immediate);
     }
 
-    public Coroutine SetVideo(VideoClip clip, float transitionSpeed = 1, bool useAudio = false, Texture blendingTexture = null, string filePath = "", bool immediate = false){
-        return CreateGraphic(clip, transitionSpeed, filePath, blendingTexture, useAudio, immediate: immediate);
+    public Coroutine SetVideo(VideoClip clip, float transitionSpeed = 1, bool useAudio = false, Texture blendingTexture = null, string filePath = "", bool immediate = false, bool loop = true){
+        return CreateGraphic(clip, transitionSpeed, filePath, blendingTexture, useAudio, immediate: immediate, loop);
     }
 
-    private Coroutine CreateGraphic<T>(T graphicData, float transitionSpeed, string filePath, Texture blendingTexture = null, bool useAudio = false, bool immediate = false){
+    private Coroutine CreateGraphic<T>(T graphicData, float transitionSpeed, string filePath, Texture blendingTexture = null, bool useAudio = false, bool immediate = false, bool loop = true){
         GraphicObject newGraphic = null;
 
         if(graphicData is Texture)
             newGraphic = new GraphicObject(this, filePath, graphicData as Texture, immediate);
         else if(graphicData is VideoClip)
-            newGraphic = new GraphicObject(this, filePath, graphicData as VideoClip, useAudio, immediate);
+            newGraphic = new GraphicObject(this, filePath, graphicData as VideoClip, useAudio, immediate, loop);
 
         if(currentGraphic != null && !oldGraphics.Contains(currentGraphic))
             oldGraphics.Add(currentGraphic);

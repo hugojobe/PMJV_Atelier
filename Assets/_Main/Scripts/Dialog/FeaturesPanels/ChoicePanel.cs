@@ -32,6 +32,7 @@ public class ChoicePanel : MonoBehaviour
 
     public bool isWaitingOnUserChoice = false;
 
+
     private void Awake() {
         if(instance == null) instance = this;
     }

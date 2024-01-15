@@ -1,0 +1,8 @@
+HideDialog()
+HideVessel()
+ClearBackground()
+HideAll()
+HideAllChar()
+StopMusic(0)
+StopMusic(1)
+PlayMusic("Death" -ch 0 -l true)

@@ -1,0 +1,59 @@
+CreateCharacter(Guide -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Guide -x 0.25 -y 0 -i true)
+
+PlayMusic(Guide -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Guide)
+Wait(1)
+ShowDialog()
+
+Show(Soeur)
+<soeur> "<i>Je suis entouré de gens cinglés... Une fois tout ça finit, on pensera à partir loin d’ici mon frère et moi."
+<soeur> "Je suis un peu paumée maintenant. Où est-ce que je dois aller ?"
+<soeur> "<i>Ah super une personne."
+<soeur> "S’il vous plait ? Vous pouvez m’indiquer le chemin pour se rendre à l’Underground ?"
+Hide(Soeur), Show(Guide)
+SetSprite(Guide -spr 3)
+Guide "<wave a=0.1 f=0.1>Oh bonjour toi..."
+SetSprite(Guide -spr 2)
+Guide "<wave a=0.1 f=0.1>Oui, je peux te proposer 2 chemins. La route de gauche, et tu continues tout droit jusqu’à voir le panneau \"Underground\"."
+Guide "<wave a=0.1 f=0.1>Ou la route de droite, mais il y aura plusieurs détours et tu risques de perdre du temps."
+Guide "<wave a=0.1 f=0.1>Dans tous les cas tu perdra de l'ox."
+Hide(Guide), Show(Soeur)
+<soeur> "Ok, très bien merci. Je vous dois combien ?"
+Hide(Soeur), Show(Guide)
+SetSprite(Guide -spr 3)
+Guide "<wave a=0.1 f=0.1>Pas besoin d’argent petite, ça me fait plaisir de t’aider."
+Hide(Guide), Show(Soeur)
+<soeur> "<i>C’est louche pourquoi m’aider sans rien demander en retour. Il y a une chose qui va pas."
+<soeur> "Merci des indications."
+
+SetSprite(Guide -spr 1)
+
+choice "Je prends quel chemin ?"
+{
+	- A gauche
+		Hide(Soeur)
+		narrator "Vous perdez 1 <ox>"
+		$playerOx -= 1
+		<soeur> "On dirait bien qu’elle disait la vérité. Il n'y a pas eu de piège ou autre en plus mon niveau d’ox n’a pas des masses diminuées."
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		SwitchToVesselMode(-f Charlatan -d 60)
+	- A droite
+		Hide(Soeur)
+		narrator "Vous perdez 2 <ox>"
+		$playerOx -= 2
+		<soeur> "J’aurai dû prendre l’autre chemin, c’est pas vrai j’ai perdu du temps avec ça."
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		SwitchToVesselMode(-f Charlatan -d 60)
+}

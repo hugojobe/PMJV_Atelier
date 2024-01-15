@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -37,11 +38,21 @@ public class AudioManager : MonoBehaviour
     }
 
     public AudioSource PlaySoundEffect(string filePath, float volume = 1, float pitch = 1, bool loop = false){
-        AudioClip clip = Resources.Load<AudioClip>(filePath);
+        string path = filePath;
+        
+        AudioClip clip = Resources.Load<AudioClip>(path);
+        
 
         if(clip == null){
-            Debug.LogError("Can't find sfx at path " + filePath);
-            return null;
+            path = FilePaths.resourcesSFX + filePath;
+        
+            clip = Resources.Load<AudioClip>(path);
+
+            if(clip == null){
+
+                Debug.LogError("Can't find sfx at path " + path);
+                return null;
+            }
         }
 
         return PlaySoundEffect(clip, volume, pitch, loop);

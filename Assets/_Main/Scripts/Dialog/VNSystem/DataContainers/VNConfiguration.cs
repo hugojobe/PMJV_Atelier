@@ -30,7 +30,7 @@ public class VNConfiguration
         
         ui.colorblindMode.SetValueWithoutNotify(colorblindSettings);
         ui.colorblindMode.captionText.text = ((ColorblindTypes)colorblindSettings).ToString();
-        ConfigMenu.instance.colorblindnessManager.SetMode(colorblindSettings);
+        ConfigMenu.FindObjectOfType<Colorblindness>().SetMode(colorblindSettings);
     }
 
     public void Save() {

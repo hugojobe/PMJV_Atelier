@@ -13,6 +13,7 @@ public class Throttle : MiniGame
     public float lastSliderValue;
     public float timeSinceLastTouched;
     public float timeRequiredWithoutValueChange;
+    public bool playedSFX;
 
 
     private void Start() {
@@ -52,6 +53,10 @@ public class Throttle : MiniGame
 
                 if(throttleslider.value == targetValue){
                     throttleslider.interactable = false;
+                    if(!playedSFX){
+                        AudioManager.instance.PlaySoundEffect("Throttle", 0.8f);
+                        playedSFX = true;
+                    }
                     SolveProblem();
                 }
             }

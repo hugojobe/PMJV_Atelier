@@ -1,0 +1,37 @@
+if($hasWeapon){
+	narrator "La soeur sort le pistolet de sa veste et, dans la panique, tire sur le vieux."
+	Show(Soeur)
+	<soeur> "MERDE, pourquoi t’es pas rester tranquille. On aurait pu éviter tout ça !"
+	<soeur> "<i>J’imagine qu’il n’a plus besoin du peu d’ox qu’il a sur lui maintenant..."
+	<soeur> "Tu peux t’en prendre qu’à toi-même..."
+	Hide(Soeur)
+	$playerOx += 1
+	narrator "Vous gagnez 1 <ox>."
+
+	HideDialog()
+	Wait(1)
+	ClearBackground()
+	Wait(1)
+	HideAll()
+	
+	Load(End1)
+}
+else
+{
+	narrator "La soeur s'écarte et le vieux s'écrase au sol dans un ultime soupir."
+	Show(Soeur)
+	<soeur> "Oh..."
+	<soeur> "<i>J’imagine qu’il n’aura plus besoin du peu d’ox qu’il a sur lui maintenant..."
+	<soeur> "Tu peux t’en prendre qu’à toi-même..."
+	Hide(Soeur)
+	$playerOx += 1
+	narrator "Vous gagnez 1 <ox>."
+
+	HideDialog()
+	Wait(1)
+	ClearBackground()
+	Wait(1)
+	HideAll()
+		
+	Load(End1)
+}

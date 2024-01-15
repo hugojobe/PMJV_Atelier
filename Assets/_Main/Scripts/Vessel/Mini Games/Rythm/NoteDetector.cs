@@ -26,6 +26,7 @@ public class NoteDetector : MonoBehaviour
         buttonClicked = false;
 
         if(hasNoteInDetector) {
+            AudioManager.instance.PlaySoundEffect("Rythm");
             DestroyNote(noteInDetector);
         } else {
             manager.Lose(0);

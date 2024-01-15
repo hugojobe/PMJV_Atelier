@@ -43,7 +43,7 @@ public class GraphicObject
         renderer.material.SetTexture(MATERIAL_MAINTEX, tex);
     }
 
-    public GraphicObject(GraphicLayer layer, string graphicPath, VideoClip clip, bool useAudio, bool immediate){
+    public GraphicObject(GraphicLayer layer, string graphicPath, VideoClip clip, bool useAudio, bool immediate, bool loop = true){
         this.graphicPath = graphicPath;
         this.layer = layer;
 
@@ -65,7 +65,7 @@ public class GraphicObject
         video.clip = clip;
         video.renderMode = VideoRenderMode.RenderTexture;
         video.targetTexture = tex;
-        video.isLooping = true;
+        video.isLooping = loop;
 
         video.audioOutputMode = VideoAudioOutputMode.AudioSource;
         audio = video.gameObject.AddComponent<AudioSource>();

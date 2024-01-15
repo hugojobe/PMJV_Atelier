@@ -45,7 +45,7 @@ public class ExtensionCharacters : CommandDatabaseExtension
 
     }
 
-    private static IEnumerator MoveCharacter(string[] data){
+    public static IEnumerator MoveCharacter(string[] data){
         string characterName = data[0];
         Character character = CharacterManager.instance.GetCharacter(characterName);
 
@@ -194,9 +194,13 @@ public class ExtensionCharacters : CommandDatabaseExtension
         CommandParameters parameters = ConvertDataToParameters(data);
         parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
         parameters.TryGetValue(PARAM_SPEED, out speed, defaultValue: 1f);
-        parameters.TryGetValue(PARAM_SPRITE, out spriteName, defaultValue: "");
+        parameters.TryGetValue(PARAM_SPRITE, out spriteName, defaultValue: data[2]);
+
+        //Debug.Log($"Setting sprite to '{spriteName}' for character '{characterName}'");
 
         Sprite sprite = character.GetSprite(spriteName);
+
+        //Debug.Log($"Get sprite '{sprite.name}' successfully");
 
         if(immediate)
             character.TransitionSprite(sprite, 10000);

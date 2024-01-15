@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class VesselManager : MonoBehaviour
 {
@@ -40,12 +41,15 @@ public class VesselManager : MonoBehaviour
     public bool canLoseGame;
 
     public Coroutine vesselModeCoroutine;
+    public Slider timerSlider;
 
     private void Awake() {
         if(instance == null) instance = this;
         ChangeState(VesselState.VN);
 
         originalPos = transform.localPosition;
+
+        timerSlider.gameObject.SetActive(false);
     }
 
     private void Update() {
@@ -111,9 +115,16 @@ public class VesselManager : MonoBehaviour
         ChangeState(VesselState.VN);
         animator.SetTrigger("VN");
 
+        AudioManager.instance.StopTrack(0);
+
+        //AudioManager.instance.PlaySoundEffect("VesselDown1", 2f);
+        AudioManager.instance.PlaySoundEffect("VesselDown2", 2f);
+
         foreach(var obj in objectsToDisableInVesselMode) {
             obj.SetActive(true);
         }
+
+        yield return new WaitForSecondsRealtime(2f);
 
         ExtensionGeneral.LoadNewDialogueFile(new string[]{exitFilePath});
     }

@@ -10,6 +10,7 @@ public class DecoReco : MiniGame
 
     public float timeToWait;
     public float currrentTime;
+    public bool playedSFX;
 
     public MovingConnectorUnspeed toRemove => GetComponentsInChildren<MovingConnectorUnspeed>().FirstOrDefault(c => c.type == MovingConnectorUnspeed.ConnectorType.starting);
     public MovingConnectorUnspeed toReplace => GetComponentsInChildren<MovingConnectorUnspeed>().FirstOrDefault(c => c.type == MovingConnectorUnspeed.ConnectorType.replace);
@@ -19,12 +20,19 @@ public class DecoReco : MiniGame
     }
 
     private void Update() {
-        if(finished)
+        if(finished){
             currrentTime += Time.deltaTime;
-        else
+            if(!playedSFX) PlaySFX();
+        } else
             currrentTime = 0;
 
-        if(currrentTime >= timeToWait)
+        if(currrentTime >= timeToWait){
             SolveProblem();
+        }
+    }
+
+    public void PlaySFX() {
+        playedSFX = true;
+        AudioManager.instance.PlaySoundEffect("Connection", 0.8f);
     }
 }

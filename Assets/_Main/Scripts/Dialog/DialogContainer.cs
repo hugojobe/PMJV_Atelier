@@ -25,6 +25,8 @@ public class DialogContainer
     public void SetDialogSize(float fontSize) => dialogText.fontSize = fontSize;
 
     public Coroutine Show(){
+        rootCG.interactable = true;
+        rootCG.blocksRaycasts = true;
         if(isShowing) return showingCoroutine;
 
         if(isHiding){
@@ -38,6 +40,8 @@ public class DialogContainer
     }
 
     public Coroutine Hide(){
+        rootCG.interactable = false;
+        rootCG.blocksRaycasts = false;
         if(isHiding) return hidingCoroutine;
 
         if(isShowing){

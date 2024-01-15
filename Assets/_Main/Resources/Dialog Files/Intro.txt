@@ -1,15 +1,21 @@
 HideDialog()
+BlockInteraction()
 
 wait(1)
 
 CreateCharacter(Soeur -e false -i true)
 CreateCharacter(Frere -e false -i true)
-Move(Soeur -x 0.85 -y 0 -i true)
-Move(Frere -x 0.15 -y 0 -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Frere -x 0.25 -y 0 -i true)
+
+SetBackground("VoiceoverVideo" -ll false)
+
+wait(68)
 
 ShowDialog()
+ResumeInteraction()
 
-PlayMusic(House -l true -ch 1)
+PlayMusic(House -l true -ch 0)
 
 Show(Soeur)
 SetBackground(-img Intro)
@@ -24,20 +30,26 @@ Hide(Soeur), Show(Frere)
 Hide(Frere), Show(Soeur)
 <soeur> "Écoute je te fais une proposition, donne-moi les clés du véhicule je fais une descente dans l’<incr a=0.5 f=-1><size=32><color=#F7281E>undergound</color></size></incr> et je récupère les bouteilles dont t’as besoin."
 Hide(Soeur), Show(Frere)
+SetSprite(Frere -spr 2)
 <frere> "<shake a=0.5>NON !</shake> C’est trop dangereux on trouvera une solution le moment venu."
 Hide(Frere), Show(Soeur)
+SetSprite(Frere -spr 1)
 <soeur> "On n’aura peut-être pas cette chance..."
-Move(Soeur -x 1.35 -i false)
-(wait)HideDialog()
+Hide(Soeur)
+HideDialog()
+Hide(Soeur -i true)
+Wait(1)
+ClearBackground()
 
 Wait(1.75)
-Hide(Soeur -i true)
 
 Wait(1)
 ShowDialog()
 narrator "Le lendemain..."
 HideDialog()
 Wait(1)
+
+SetBackground(-img Intro)
 
 ShowDialog(), Show(Soeur)
 <soeur> "Où est-ce qu’il les a planqués... {a}Les voilà enfin, ne t’en fais pas frangin si tu n’agis pas alors je le ferai."

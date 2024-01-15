@@ -1,0 +1,110 @@
+CreateCharacter(Noble -e false -i true)
+Move(Soeur -x 0.75 -y 0 -i true)
+Move(Noble -x 0.25 -y 0 -i true)
+
+PlayMusic(Noble -ch 0 -l true)
+
+ShowAll()
+SetBackground(-img Charlatan)
+Wait(1)
+ShowDialog()
+
+narrator "Après sa rencontre particulière avec un soldat de la milice, <soeur> continue son chemin et arrive à l'entrée d’une ville qui est assez bien réputée."
+
+Show(Soeur)
+<soeur> "<i>Punaise, j’y pense à peine mais je suis partie sans argent."
+
+if($hasArgentMilicien == true)
+{
+	<soeur> "<i>Le peu que j’ai emprunté au milicien ne suffira pas..."
+}
+
+<soeur> "<i>Oh cette personne à l’air fortunée. Sûrement une proie facile."
+<soeur> "<i>Allez, prends ton plus beau sourire et ça va fonctionner hehe..."
+<soeur> "<wave a=0.5 f=0.6>Bonjour Madame</wave>, je peux vous déposer quelque part si vous voulez, vous m’avez l’air paumée."
+Hide(Soeur), Show(Noble)
+Noble "Oh c’est pas vrai, qu’est-ce que tu me veux ?"
+Hide(Noble), Show(Soeur)
+<soeur> "Quoi ? Non, je propose simplement..."
+Hide(Soeur), Show(Noble)
+Noble "Ne fais pas l’idiote. Si tu me proposes ton aide c’est que tu veux quelque chose en retour."
+Noble "Donc ce sera quoi ? Argent, drogue, informations ?"
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Elle va vite me saouler "
+<soeur> "Argent."
+Hide(Soeur), Show(Noble)
+Noble "Tu vois quand tu veux. C’était pas compliqué de parler."
+Hide(Noble), Show(Soeur)
+<soeur> "Bon alors, où est-ce que vous allez ? Je vous déposerai rapidement."
+Hide(Soeur), Show(Noble)
+Noble "Ne sois pas ridicule. Je n’ai pas besoin de ton aide pour aller où je veux aller."
+Noble "Et puis tu penses vraiment que je vais monter dans cette poubelle qui sert de vaisseau ?"
+Noble "Pathétique."
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Je vais péter un câble..."
+Hide(Soeur), Show(Noble)
+Noble "J’ai un chauffeur qui arrive me chercher. Si tu tiens tant que ça à mon argent je peux t’en donner contre un petit service..."
+Hide(Noble), Show(Soeur)
+<soeur> "<i>Je le sens mal..."
+Hide(Soeur), Show(Noble)
+Noble "Vient dans mon bureau, à cette adresse et tu auras toutes les infos qu’il te faut pour cet argent."
+Hide(Soeur), Hide(Noble)
+narrator "La sœur la voit monter dans son véhicule. Après un certain moment d’hésitation elle décide de la suivre à son bureau."
+
+Show(Soeur)
+<soeur> "Bon j’ai besoin de cet argent… Autant la suivre… Et puis si c’est un coup foireux je peux toujours partir."
+Hide(Soeur)
+
+SetBackground(Bureau)
+
+Show(Soeur)
+<soeur> "Bon maintenant qu’on y est, je dois faire quoi pour avoir cet argent ?"
+<soeur> "<i>Je le sens mal..."
+Hide(Soeur), Show(Noble)
+SetSprite(Noble -spr 2)
+Noble "Si tu veux vraiment cet argent tu devra..."
+Noble "Me lécher les pieds <shake>hahaha"
+Hide(Noble), Show(Soeur)
+<soeur> "Ca y est je sens que je vais la tuer. Elle m’a vraiment fait venir jusqu’ici pour un truc pareil... Elle est folle..."
+<soeur> "<i>Réfléchis. J’ai besoin de cet argent mais j'ai pas envie de lécher des pieds..."
+
+choice "Que faire ?"
+{
+	-Accepter
+		<soeur> "<i>J’arrive pas à croire que je vais faire ça, à croire qu’on me veut du mal..."
+		<soeur> "Très bien, j’accepte."
+		Hide(Soeur)
+		wait(1)
+		Show(Noble)
+		Noble "Pathétique de voir que tu es prête à faire ça pour de l’argent. Mais une promesse est une promesse. Tiens ton argent."
+		$playerMoney += 5
+		Hide(Noble)
+		narrator "Vous gagnez 5 <money>"
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		SetSprite(Noble -spr 1)
+
+		Load(Guide)
+	-Refuser
+		<soeur> "Faut vraiment avoir un problème pour accepter ça ! Donc merci, mais non merci."
+		Hide(Soeur), Show(Noble)
+		Noble "Je vois que malgré ta situation tu as encore de l’estime pour toi-même."
+		Noble "Très bien. Tu n’auras pas d’agent."
+
+		Hide(Noble)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+
+		SetSprite(Noble -spr 1)
+
+		Load(Guide)
+}

@@ -11,6 +11,8 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
     private static string[] PARAM_IMAGE => new string[]{"-img", "-image"};
     private static string[] PARAM_BLENDTEX => new string[]{"-bt", "-blendtex"};
     private static string[] PARAM_PANEL => new string[]{"-p", "-panel"};
+    private static string[] PARAM_LAYER => new string[]{"-l", "-layer"};
+    private static string[] PARAM_LOOP => new string[]{"-ll", "-loop"};
 
 
     new public static void Extend(CommandDatabase database){
@@ -24,11 +26,14 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
         bool immediate = false;
         string panelName = "";
 
+        int layerIndex = 0;
+
         string blendTexName = "";
         string pathToGraphic = "";
         Object graphic = null;
         Texture blendTex = null;
         GraphicLayer layer = null;
+        bool loop;
 
         CommandParameters parameters = ConvertDataToParameters(data);
 
@@ -37,6 +42,9 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
         parameters.TryGetValue(PARAM_IMAGE, out imageName);
         parameters.TryGetValue(PARAM_BLENDTEX, out blendTexName);
         parameters.TryGetValue(PARAM_PANEL, out panelName, defaultValue: "Background");
+        parameters.TryGetValue(PARAM_LAYER, out layerIndex, defaultValue: 0);
+        parameters.TryGetValue(PARAM_LOOP, out loop, defaultValue: true);
+
 
         GraphicPanel panel = GraphicPanelManager.instance.GetPanel(panelName);
         if(panel == null) yield break;
@@ -57,16 +65,16 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
             blendTex = Resources.Load<Texture>(FilePaths.blendTexs + blendTexName);
         }
 
-        layer = panel.GetLayer(0, true);
+        layer = panel.GetLayer(layerIndex, true);
 
         if (blendTex != null){
             yield return graphic is Texture
                 ? layer.SetTexture(graphic as Texture, transitionSpeed, blendTex, pathToGraphic, immediate)
-                : layer.SetVideo(graphic as VideoClip, transitionSpeed, false, blendTex, pathToGraphic, immediate);
+                : layer.SetVideo(graphic as VideoClip, transitionSpeed, true, blendTex, pathToGraphic, immediate, loop);
         } else {
             yield return graphic is Texture
                 ? layer.SetTexture(graphic as Texture, transitionSpeed, filePath: pathToGraphic, immediate: immediate)
-                : layer.SetVideo(graphic as VideoClip, transitionSpeed, false, filePath: pathToGraphic, immediate: immediate);
+                : layer.SetVideo(graphic as VideoClip, transitionSpeed, true, filePath: pathToGraphic, immediate: immediate, loop:loop);
         }
     }
 
@@ -76,6 +84,8 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
         bool immediate = false;
         string blendTexName = "";
 
+        int layerIndex = 0;
+
         Texture blendTex = null;
         GraphicLayer layer = null;
 
@@ -84,11 +94,12 @@ public class ExtensionGraphicPanels : CommandDatabaseExtension
         parameters.TryGetValue(PARAM_SPEED, out transitionSpeed, defaultValue: 1f);
         parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue : false);
         parameters.TryGetValue(PARAM_BLENDTEX, out blendTexName);
+        parameters.TryGetValue(PARAM_LAYER, out layerIndex, defaultValue: 0);
 
         GraphicPanel panel = GraphicPanelManager.instance.GetPanel(panelName);
         if(panel == null) yield break;
         
-        layer = panel.GetLayer(0, false);
+        layer = panel.GetLayer(layerIndex, false);
         if(layer == null) yield break;
 
         if(!immediate && blendTexName != string.Empty){

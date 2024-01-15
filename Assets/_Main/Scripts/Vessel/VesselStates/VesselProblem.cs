@@ -12,6 +12,8 @@ public class VesselProblem : VesselNode {
         ChooseRoom().RequestProblem().SpawnProblem();
         VesselManager.instance.OnProblemSolved += OnProblemSolved;
 
+        VesselManager.instance.timerSlider.gameObject.SetActive(true);
+
         currentProblemTimer = 0;
     }
 
@@ -20,8 +22,9 @@ public class VesselProblem : VesselNode {
     }
 
     public override void OnStateUpdate() {
-        if(VesselManager.instance.canLoseGame)
-        currentProblemTimer += Time.deltaTime;
+        VesselManager.instance.timerSlider.value = (problemTimer - currentProblemTimer) / problemTimer;
+        if(VesselManager.instance.canLoseGame && VesselManager.instance.isInMinigame)
+            currentProblemTimer += Time.deltaTime;
 
         if(currentProblemTimer >= problemTimer && VesselManager.instance.canLoseGame) {
             currentProblemTimer = 0;
@@ -34,6 +37,7 @@ public class VesselProblem : VesselNode {
     }
 
     public void OnProblemSolved() {
+        VesselManager.instance.timerSlider.gameObject.SetActive(false);
         VesselManager.instance.ChangeState(VesselState.IDLE);
     }
 

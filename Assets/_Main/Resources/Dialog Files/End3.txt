@@ -1,0 +1,14 @@
+PlayMusic(House -ch 0 -l true)
+
+HideDialog()
+
+SetBackground(End3-1)
+wait(2)
+SetBackground(End3-2)
+wait(2)
+SetBackground(End3-3)
+wait(2)
+SetBackground(End3-4)
+wait(4)
+
+End(3)

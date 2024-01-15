@@ -1,7 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class CharacterSprite : Character
 {
     private const string SPRITE_RENDERER_PARENT_NAME = "Renderers";
@@ -15,6 +19,7 @@ public class CharacterSprite : Character
     private CanvasGroup oldRenderer = null;
     private const float defaultTransitionspeed = 3f;
     private float transitionSpeedMultiplier = 1f;
+    public Vector2 position {get {return targetPosition;} set {targetPosition = value;} }
 
     public override bool isVisible { 
         get{return isRevealing || rootCG.alpha == 1;}
@@ -54,10 +59,22 @@ public class CharacterSprite : Character
     }
 
     public Sprite GetSprite(string spriteName){
+        //Debug.Log($"Loading config '{config.name}'");
         if(config.sprites.Count > 0){
+            /*StringBuilder sb = new StringBuilder();
+            foreach(KeyValuePair<string, Sprite> pair in config.sprites) {
+                sb.AppendLine($"Key : '{pair.Key}' -> Type : {pair.Key.GetType()}");
+                sb.AppendLine($"Value : '{pair.Value.name}' -> Type : {pair.Value.GetType()}");
+                sb.AppendLine("---");
+            }
+            Debug.Log(sb.ToString());*/
+
             if(config.sprites.TryGetValue(spriteName, out Sprite sprite))
                 return sprite;
         }
+
+        Debug.Log("Sprite '" + spriteName + "' not found in dictionary '" + config.name + "'");
+        //return null;
 
         return Resources.Load<Sprite>($"{artAssetsDirectory}/{spriteName}");  
     }
@@ -69,8 +86,10 @@ public class CharacterSprite : Character
             return null;
         }
 
-        if(isTransitioningLayer)
+        if(isTransitioningLayer){
+            Debug.Log("<color=red>Stop transitionning</color>");
             manager.StopCoroutine(transitionning);
+        }
 
         transitionning = manager.StartCoroutine(TransitionningSprite(sprite, speed));
 
@@ -80,6 +99,7 @@ public class CharacterSprite : Character
     private IEnumerator TransitionningSprite(Sprite sprite, float speed){
         transitionSpeedMultiplier = speed;
         CanvasGroup newRenderer = CreateNewRenderer(spriteImage.transform.parent);
+        Debug.Log("Created a new renderer");
         Image newImage = newRenderer.transform.GetChild(0).GetComponent<Image>();
         newImage.sprite = sprite;
 
@@ -89,8 +109,11 @@ public class CharacterSprite : Character
     }
 
     private Coroutine TryStartLevelingAlphas(){
-        if(isLeveling)
-            return levelingAlpha;
+        //Debug.Log("Entered TrySartLevelingAlphasCoroutine");
+        if(isLeveling){
+            //Debug.Log("<color=red>Was leveling. Aborted</color>");
+            return levelingAlpha; 
+        }
 
         levelingAlpha = manager.StartCoroutine(RunAlphaLeveling());
 
@@ -98,14 +121,19 @@ public class CharacterSprite : Character
     }
 
     private IEnumerator RunAlphaLeveling(){
+        //Debug.Log("Started leveling alphas");
         while(rendererCG.alpha < 1 || oldRenderer.alpha > 0){
             float speed = defaultTransitionspeed * transitionSpeedMultiplier * Time.deltaTime;
 
             rendererCG.alpha = Mathf.MoveTowards(rendererCG.alpha, 1, speed);
+            //Debug.Log($"RendererCG alpha is now equal to {rendererCG.alpha}");
 
             oldRenderer.alpha = Mathf.MoveTowards(oldRenderer.alpha, 0, speed);
+            //Debug.Log($"OldRenderer alpha is no equal to {oldRenderer.alpha}");
 
             if(oldRenderer.alpha <= 0){
+                //Debug.Log("<color=red>Old renderer is less or equal 0</color>");
+                //Debug.Log($"Should destroy '{oldRenderer.name}'");
                 Object.Destroy(oldRenderer.gameObject);
                 break;
             }
@@ -113,6 +141,8 @@ public class CharacterSprite : Character
             yield return null;
         }
 
+        //Debug.Log("End of transition");
+        levelingAlpha = null;
         transitionning = null;
     }
 

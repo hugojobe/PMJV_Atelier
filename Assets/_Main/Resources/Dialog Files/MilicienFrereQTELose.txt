@@ -1,0 +1,21 @@
+Show(Milicien)
+SetSprite(Milicien -spr 3)
+Milicien "Non, désolé. Je n’ai croisé aucune gamine. Maintenant partez d’ici avant que je euh... je... vous arrête... oui."
+Hide(Milicien), Show(Frere)
+<frere> "Vous êtes sûr de vous ? Vous l’avez peut-être vue sans le savoir."
+Hide(Frere) Show(Milicien)
+Milicien "Non je n’ai croisé personne. Arrêtez de me poser des questions, vous êtes louche. Mettez-vous sur le côté que... que je vous contrôle."
+Hide(Milicien),Show(Frere)
+<frere> "<i>Il panique beaucoup, il me ment sûrement..."
+<frere> "<i>Il est pas sur ses appuis, et son arme est exposée. Je pourrais lui prendre, mais dans mes conditions ça risque d’être dur."
+Hide(Frere)
+SetSprite(Milicien -spr 1)
+
+QTE "9"
+{
+	-W
+		Load(MilicienFrereQTELoseQTEWin)
+	-L
+		Load(MilicienFrereQTELoseQTELose)
+}
+

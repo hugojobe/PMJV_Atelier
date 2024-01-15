@@ -1,0 +1,26 @@
+QTE "10"
+{
+	- W
+		Hide(Soeur), Show(Mafieux)
+		Mafieux as ??? "T’as du cran. Ca me plait bien ça. Baissez vos armes."
+		Mafieux as ??? "Écoute-moin gamine. Ton cran vient de te sauver la vie. Tu m’impressionnes. Prends tes bouteilles et part."
+		Mafieux as ??? "Ah et au fait, je garde quand même le vaisseau, haha."
+		
+		Hide(Mafieux)
+
+		HideDialog()
+		Wait(1)
+		ClearBackground()
+		Wait(1)
+		HideAll()
+		
+		Load(Visionnaire)
+	- L
+		Hide(Soeur), Show(Mafieux)
+		SetSprite(Mafieux -spr 2)
+		Mafieux as ??? "T’es pas prête à aller jusqu’au bout pour sauver ton frère. Ca se voit dans ton regard. T’es pas prête à te salir les mains."
+		Hide(Mafieux)
+		narrator "La soeur, touchée en plein coeur par un sbire du chef mafieux, succombe instantanément.{a}Son corps est jeté dans la ruelle voisine."
+		SetSprite(Mafieux -spr 1)
+		Kill()
+}
