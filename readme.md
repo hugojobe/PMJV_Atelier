@@ -5,6 +5,9 @@ Here is the code for a project I developed for an exam during my studies. We wer
 > The production time being very short, forgive me any optimization errors that may have crept in here.</br>
 > I would like to point out that although I used tutorials to write the code, I understand what I wrote here.
 
+> [!CAUTION]
+> Due to the size of the project, only part of the code is explained below. Feel free to explore or contact me for more information.
+
 The dialog system works by using custom plain text dialog files that will be interpreted by the code.
 <details>
 <summary>You can find an example file here</summary>
@@ -106,7 +109,7 @@ choice "Que faire ?"
 |[CommandManager](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/CommandManager.cs)|This script is used to locate and execute commands within dialog files (e.g. hiding characters, changing dialog, changing sprite, etc.). For convenience, the commands have been divided into categories (“Extensions”) which are described below.|
 
 ### Interpreters
-|<nobr>![#C9DAF8](https://placehold.co/15x15/EAD1DB/EAD1DB.png) Logical Lines</nobr>||
+|![#C9DAF8](https://placehold.co/15x15/EAD1DB/EAD1DB.png) Logical Lines||
 |:------------------------|:------------------------------|
 |[ILogicalLine](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/LogicalLines/ILogicalLine.cs)|Parent class of all logical lines. It does not contain any code but only a few variables used to identify the logical lines.|
 |[LL_Choice](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/LogicalLines/Types/LL_Choice.cs)|This line is used to trigger a choice during a dialog and to display the corresponding buttons. The rest of the dialogue is determined by the player's choice.|
@@ -114,7 +117,28 @@ choice "Que faire ?"
 |[LL_Conditions](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/LogicalLines/Types/LL_Condition.cs)|These lines serve as “if/else”. They can do almost everything an “if” can do (compare bool, string, float, int values). These lines can communicate with the VariableStore or TagManager to test the values.|
 |[LL_Operator](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/LogicalLines/Types/LL_Operator.cs)|These lines are used to perform operations on variables (addition, subtraction, multiplication, division, changing the values of bool, string).|
 
+### Commands
+|![#C9DAF8](https://placehold.co/15x15/EAD1DB/EAD1DB.png) Commands||
+|:------------------------|:------------------------------|
+|[CommandDatabase](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/Database/CommandDatabase.cs)|This script contains all available commands.|
+|[ExtensionGeneral](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/Database/Extensions/ExtensionGeneral.cs)|This script contains “uncategorized” commands that are used in several contexts (wait, hide dialog, change dialog file, etc.).|
+|[ExtensionAudio](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/Database/Extensions/ExtensionAudio.cs)|This script contains audio commands (play sfx, music, etc.).|
+|[ExtensionCharacters](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/Database/Extensions/ExtensionCharacters.cs)|This script contains character-specific commands (show, hide, move, etc.).|
+|[ExtensionGraphicPanel](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Commands/Database/Extensions/ExtensionGraphicPanels.cs)|This script contains commands specific to backgrounds (change background, clear background).|
 
+### Game Save
+|![#D9E9D3](https://placehold.co/15x15/D9E9D3/D9E9D3.png) Game Save||
+|:------------------------|:------------------------------|
+|[VNGameSave](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/VNSystem/VNGameSave.cs)|This script contains all the data to be saved. It is serialized into JSON when saved, before being encrypted using an XOR algorithm, making it unreadable and immutable by players. It is also capable of decrypting save files and loading them when requested by the player.|
 
+### Database
+|![#C9DAF8](https://placehold.co/15x15/FFF2CC/FFF2CC.png) Database||
+|:------------------------|:------------------------------|
+|[VNDatabaseLinkSetup](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/VNSystem/VNDatabaseLinksSetup.cs)|This script is used to link Variable Store variables to keywords so that they can be accessed in dialog files. To call a variable in a dialog file, use “$” in front of the defined keyword. The whole will then be replaced by the value of this variable.|
+|[VariableStore](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/Dialog/LogicalLines/VariableStore.cs)|This script contains all the game variables. This is where they are stored when a dialog file needs to create a new one for example.|
 
-
+### Configs
+|![#C9DAF8](https://placehold.co/15x15/FCE5CD/FCE5CD.png) Logical Lines||
+|:------------------------|:------------------------------|
+|[DialogueConfig](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/ScriptableObjects/DialogConfig.cs)|This scriptableObject contains variables that can be modified by the user in order to personalize their experience.|
+|[CharacterConfig](https://github.com/hugojobe/PMJV_Atelier/blob/main/Assets/_Main/Scripts/ScriptableObjects/CharacterConfig.cs)|This scriptableObject contains all character-related data (dialog color, name, sprites, etc.).|
